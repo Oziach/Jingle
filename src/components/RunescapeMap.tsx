@@ -26,6 +26,8 @@ import {
   toOurPixelCoordinates,
 } from '../utils/map-utils';
 import { basemaps} from '../data/basemaps';
+import { groupedLinks } from '../data/GroupedLinks';
+import LinkClickboxes from './LinkClickboxes';
 
 
 
@@ -46,9 +48,13 @@ interface RunescapeMapPropsInner { //lazy solution for now for
   className?: string;
   confirmedGuess: boolean; 
   setShowConfirmGuess: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentMapId?: React.Dispatch<React.SetStateAction<number>> | null;
-  currentMapId?: number | null;
+  setCurrentMapId: React.Dispatch<React.SetStateAction<number>>;
+  setMapCenter: React.Dispatch<React.SetStateAction<number[]>>;
+  currentMapId: number;
+  zoom: number;
+  setZoom:  React.Dispatch<React.SetStateAction<number>>;
 }
+;
 
 export default function RunescapeMapWrapper({
   className,
@@ -57,6 +63,8 @@ export default function RunescapeMapWrapper({
 
   const [currentMapId, setCurrentMapId] = useState(0);
   const currentMap = basemaps[currentMapId];
+  const [zoom, setZoom] = useState(1); 
+  const [mapCenter, setMapCenter] = useState([currentMap.center[1], currentMap.center[0]]);
   const mapRef = useRef<L.Map>(null);
 
 
@@ -66,8 +74,8 @@ export default function RunescapeMapWrapper({
       crs={CRS.Simple}
       key={currentMapId}
       ref={mapRef}
-      center={[currentMap.center[1], currentMap.center[0]]}
-      zoom={1}
+      center={[mapCenter[1], mapCenter[0]]}
+      zoom={zoom}
       maxZoom={3}
       minZoom={-3}
       style={{ height: "100vh", width: "100%", background: "black" }}
@@ -80,7 +88,11 @@ export default function RunescapeMapWrapper({
     >
       {/* Map Selector */}
       <select
-        onChange={(e) => setCurrentMapId!(Number.parseInt(e.target.value))}
+        onChange={(e) => {
+          const newMapId = Number.parseInt(e.target.value);
+          setCurrentMapId!(newMapId);
+          setMapCenter([basemaps[newMapId].center[1], basemaps[newMapId].center[0]]);
+        }}
         value={currentMapId!}
         className="map-select"
       >
@@ -91,15 +103,18 @@ export default function RunescapeMapWrapper({
         ))}
       </select>
 
-      <RunescapeMap {...props} currentMapId={currentMapId} setCurrentMapId={setCurrentMapId} />
+      <RunescapeMap {...props} currentMapId={currentMapId} setCurrentMapId={setCurrentMapId} 
+      setMapCenter={setMapCenter} zoom={zoom} setZoom={setZoom}/>
+
     </MapContainer>
   );
 }
 
-function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess, currentMapId}: RunescapeMapPropsInner) {
+function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess, currentMapId, setCurrentMapId, 
+  setMapCenter, zoom, setZoom}: RunescapeMapPropsInner) {
   
   const currentSong = gameState.songs[gameState.round];
-
+  const currentMap = basemaps[currentMapId!];
   const [markerPosition, setMarkerPosition] = useState<L.LatLng | null>(null);
 
   const map = useMap(); // Get Leaflet map instance
@@ -113,7 +128,6 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
         const { x, y, z } = coords;
         
         //leaflet's tms DOESN'T GODDAMN WORK.
-        const maxY = Math.pow(2, z) - 1;
         const tmsY = -y - 1;
 
         return `/rsmap-tiles/mapIdTiles/${currentMapId}/${z}/0_${x}_${tmsY}.png`;
@@ -129,12 +143,28 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
 
     tileLayer.addTo(map);
 
+
     return () => {
       if (map) {
         map.removeLayer(tileLayer);
       }
     };
   }, [map])
+
+
+  //override map zoom, to not reset when changing mapIds
+  useEffect(()=>{
+
+    const updateZoom = () => setZoom(map.getZoom());
+    map.on("zoomend", updateZoom);
+
+    return () => {
+      if (map) {
+        map.off("zoomend", updateZoom);
+      }
+    };
+  },[zoom])
+  
 
   useMapEvents({
     click: async (e) => { //handle marker position on map clicks
@@ -163,6 +193,9 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
               })
             }
           />}
+        
+      <LinkClickboxes mapIdLinks={groupedLinks[currentMap.name]}
+       setCurrentMapId={setCurrentMapId} setMapCenter={setMapCenter}/>
       
       {gameState.status === GameStatus.AnswerRevealed && (
         <>
