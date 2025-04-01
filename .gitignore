@@ -35,3 +35,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#ignore the 200k images as well (now 60k)
+public/rsmap-tiles

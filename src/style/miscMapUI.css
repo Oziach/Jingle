@@ -1,0 +1,10 @@
+.map-select {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    z-index: 999;
+    background-color : rgba(88,76,60,1);
+    border: 0.1rem solid rgba(57, 48, 35, 1);
+    border-radius: 0.2rem;
+    color: rgb(238, 223, 223);
+}

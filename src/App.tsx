@@ -45,7 +45,7 @@ function App() {
             dailyChallenge && <DailyJingle dailyChallenge={dailyChallenge} />,
         )
         .with(Screen.Practice, () => <Practice />)
-        .exhaustive()}
+        .exhaustive()} 
     </div>
   );
 }

@@ -29,6 +29,7 @@ import HomeButton from './buttons/HomeButton';
 import NewsModalButton from './buttons/NewsModalButton';
 import SettingsModalButton from './buttons/SettingsModalButton';
 import StatsModalButton from './buttons/StatsModalButton';
+const confirmGuess = true; //remove this and load through settings instead
 
 interface DailyJingleProps {
   dailyChallenge: DailyChallenge;
@@ -45,6 +46,9 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
       return null;
     }
   };
+  //put this in gameState maybe?
+  const [confirmedGuess, setConfirmedGuess] = useState(false); 
+  const [showConfirmGuess, setShowConfirmGuess] = useState(false);
 
   const [openModalId, setOpenModalId] = useState<ModalType | null>(null);
   const handleModalClick = (id: ModalType) => {
@@ -94,6 +98,9 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
       incrementSongFailureCount(currentSong);
     }
 
+    setConfirmedGuess(false);
+    setShowConfirmGuess(false);
+
     const isLastRound = gameState.round === gameState.songs.length - 1;
     if (isLastRound) {
       // submit daily challenge
@@ -137,6 +144,28 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
   return (
     <>
       <div className='App-inner'>
+
+        {/* temp button styling coz i can't bear to see the deafult. Add to .css n clean.*/}
+        {confirmGuess && showConfirmGuess && <div style={{
+            display:"inline-block",
+            position: "fixed",
+            top: "15px",
+            zIndex: 999,
+            backgroundColor: "rgba(88,76,60,1)",
+            border: "0.1rem solid rgba(57, 48, 35, 1)",
+            borderRadius: "0.2rem"
+          }}>
+            <button 
+            onClick={()=>setConfirmedGuess(true)}
+            style={{
+              color: "rgb(255, 239, 91)", 
+              width:"100%", height:"100%", 
+              padding: "0.5rem 1rem 0.1rem 1rem",
+             }}>
+              <h5>Confirm Guess</h5>
+            </button>
+        </div>}
+
         <div className='ui-box'>
           <HomeButton />
           <SettingsModalButton
@@ -195,6 +224,8 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
       <RunescapeMap
         gameState={gameState}
         onGuess={guess}
+        confirmedGuess={confirmedGuess}
+        setShowConfirmGuess={setShowConfirmGuess}
       />
 
       <RoundResult gameState={gameState} />
