@@ -22,6 +22,7 @@ import {
   closePolygon,
   featureMatchesSong,
   getCenterOfPolygon,
+  GetClosestMapIdPolys,
   getDistanceToPolygon,
   toOurPixelCoordinates,
 } from '../utils/map-utils';
@@ -72,7 +73,7 @@ export default function RunescapeMapWrapper({
   return (
     <MapContainer
       crs={CRS.Simple}
-      key={currentMapId}
+      key={currentMapId} //lazy, maybe its doable through functions instead
       ref={mapRef}
       center={[mapCenter[1], mapCenter[0]]}
       zoom={zoom}
@@ -127,7 +128,7 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
       getTileUrl(coords: L.Coords): string {
         const { x, y, z } = coords;
         
-        //leaflet's tms DOESN'T GODDAMN WORK.
+        //leaflet's tms param DOESN'T GODDAMN WORK.
         const tmsY = -y - 1;
 
         return `/rsmap-tiles/mapIdTiles/${currentMapId}/${z}/0_${x}_${tmsY}.png`;
@@ -142,7 +143,6 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
     });
 
     tileLayer.addTo(map);
-
 
     return () => {
       if (map) {
@@ -177,7 +177,8 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
 
   useEffect(()=>{
     if(!confirmedGuess){return;}
-    OnConfirmGuess(map, markerPosition, setMarkerPosition, currentSong, onGuess);
+    OnConfirmGuess(setMapCenter, map, markerPosition, setMarkerPosition, currentSong, onGuess, currentMapId, setCurrentMapId);
+    console.log("Correct poly: ", gameState.correctPolygon);
   },[confirmedGuess]) 
 
   return (
@@ -222,31 +223,26 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
           />
         </>
       )}
-      {/* <TileLayer
-        attribution='offline'
-        url={`/rsmap-tiles/mapIdTiles/0/{z}/{x}/{y}.png`}
-      /> */}
     </>
   );
 }
 
-function OnConfirmGuess(map: L.Map, markerPosition: L.LatLng | null, setMarkerPosition: React.Dispatch<React.SetStateAction<L.LatLng | null>>,
-  currentSong: string, onGuess: (guess: Guess) => void) {
-  if(!markerPosition){return;} //TEMP SOL. TODO: MAKE IT SO CONFIRM GUESS BUTTON IS ONLY VISIBLE IF MARKER IS PLACED.
+function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number[]>> ,map: L.Map, markerPosition: L.LatLng | null, setMarkerPosition: React.Dispatch<React.SetStateAction<L.LatLng | null>>,
+  currentSong: string, onGuess: (guess: Guess) => void, currentMapId: number, setCurrentMapId: React.Dispatch<React.SetStateAction<number>>) {
+  if(!markerPosition){return;}
   const zoom = map.getMaxZoom();
-  const { x, y } = map.project(markerPosition, zoom);
-  console.log(markerPosition);
-  const ourPixelCoordsClickedPoint = [x, y] as Point;
-
+  const ourPixelCoordsClickedPoint = [markerPosition.lng, markerPosition.lat] as Point
+  console.log(ourPixelCoordsClickedPoint);
 
   const correctFeature = geojsondata.features.find(
     featureMatchesSong(currentSong)
   )!;
 
-  //all closed polys for current song
-  const repairedPolygons = correctFeature.geometry.coordinates.map(closePolygon);
-
-  // Create a GeoJSON feature for the nearest correct polygon
+  //all polys for for current song in the mapId closest to marker pos - needed to identify with donut polys.
+  //all the best making this function later dumass c:
+  //const repairedPolygons = correctFeature.geometry.coordinates.map(closePolygon);
+  const [repairedPolygons, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition,currentMapId)
+  // Create a GeoJSON feature for the nearest correct polygon -- TEMP, won't work for diff mapIds
   const correctPolygon = correctFeature.geometry.coordinates.sort(
     (polygon1, polygon2) => {
       const c1 = getCenterOfPolygon(polygon1.map(toOurPixelCoordinates));
@@ -278,6 +274,7 @@ function OnConfirmGuess(map: L.Map, markerPosition: L.LatLng | null, setMarkerPo
   );
 
   const correctPolygons = [outerPolygon, ...gaps];
+  console.log(outerPolygon);
 
   //check user click is right or wrong:
   //for checking aginst click, convert everything to our coords
@@ -298,8 +295,8 @@ function OnConfirmGuess(map: L.Map, markerPosition: L.LatLng | null, setMarkerPo
   const convertedCoordinates = correctPolygons.map(
     (polygon) => polygon //their pixel coords
       .map(toOurPixelCoordinates) // 2.our pixel coords
-      .map((coordinate) => map.unproject(coordinate, zoom)) // 3. leaflet { latlng }
-      .map(({ lat, lng }) => [lng, lat])
+      .map((coordinate) => (coordinate) // 3. leaflet { latlng }
+  )
   );
 
   const correctPolygonData = {
@@ -335,15 +332,12 @@ function OnConfirmGuess(map: L.Map, markerPosition: L.LatLng | null, setMarkerPo
     });
   }
 
-  map.panTo(
-    map.unproject(
-      getCenterOfPolygon(
-        ourOuterPolygon
-      ),
-      zoom
-    )
-  );
 
+  const outerPolyCenter = getCenterOfPolygon(ourOuterPolygon);
+  setCurrentMapId(songMapId);
+  songMapId == currentMapId ? 
+  map.panTo([outerPolyCenter[1], outerPolyCenter[0]]):
+  setMapCenter([outerPolyCenter[1], outerPolyCenter[0]]);
   //finally, clear marker for the next song
   setMarkerPosition(null);
 }

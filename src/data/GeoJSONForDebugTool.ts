@@ -1,11 +1,4 @@
 import { Feature, Polygon } from 'geojson';
-export interface ConvertedFeature extends Feature<Polygon> {
-    convertedGeometry: {
-      mapName: string;
-      mapId: number;
-      coordinates: number[][]; // A single polygon with coordinate pairs
-    }[];
-  }
 
 const geojsondata = {
     "features": [
@@ -34084,7 +34077,7 @@ const geojsondata = {
                 }
             ]
         }
-    ] as ConvertedFeature[],
+    ],
       type: 'FeatureCollection',
 };
 export default geojsondata;

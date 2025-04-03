@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Circle } from "react-leaflet";
 interface LinkPoint{
     x: number,
     y: number;
-    z: number,
     name: string;
     mapId: number
 }

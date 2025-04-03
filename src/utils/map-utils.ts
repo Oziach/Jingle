@@ -1,12 +1,15 @@
 import { Feature, Polygon, Position } from 'geojson';
 import { Line, Point } from '../types/geometry';
 import { decodeHTML } from './string-utils';
+import { ConvertedFeature } from '../data/GeoJSON';
+import { LatLng } from 'leaflet';
 
 const scaleFactor = 3;
 // Ours refers to the pixel coordinates of the map grid we're using
 // Theirs refers to the pixel coordinates taken from osrs wiki music info GeoJSON
 export const toOurPixelCoordinates = ([x, y]: Position) =>
-  [x * scaleFactor - 3152, -(y * scaleFactor) + 12400] as Point;
+[x, y] as Point;
+  // [x * scaleFactor - 3152, -(y * scaleFactor) + 12400] as Point;
 
 export const closePolygon = (coordinates: number[][]) => {
   const repairedPolygon = [...coordinates];
@@ -19,7 +22,7 @@ export const closePolygon = (coordinates: number[][]) => {
   return repairedPolygon;
 };
 
-export const featureMatchesSong = (songName: string) => (feature: Feature) => {
+export const featureMatchesSong = (songName: string) => (feature: ConvertedFeature) => { //create a type for CustomFeature if 'any' won't do. 
   const featureSongName = decodeHTML(
     feature.properties?.title.match(/>(.*?)</)[1],
   );
@@ -85,10 +88,24 @@ export const getDistanceToLine = (point: [number, number], line: Line) => {
   return Math.sqrt(dx * dx + dy * dy);
 };
 
-export const isFeatureVisibleOnMap = (feature: Feature<Polygon>) =>
-  feature.geometry.coordinates.some((polygon) =>
-    polygon.every((point) => {
-      const [, y] = toOurPixelCoordinates(point);
-      return y > 0;
-    }),
+export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
+  //should work, all undefined and debug map regions have negative mapIds. I don't know about instances tho.
+  return feature.convertedGeometry.some((polyData) =>
+    polyData.mapId >= 0
   );
+}
+
+//placeholder, not implemeted correctly yet. for now just returns for the first mapId it can find.
+export const GetClosestMapIdPolys = (correctFeature: ConvertedFeature, 
+  markerPosition : LatLng, currentMapId: number) : [number[][][], number]=> {
+    
+    const firstValidPolyData = correctFeature.convertedGeometry.find(entry => entry.mapId >= 0);
+    const coordinates = firstValidPolyData
+      ? correctFeature.convertedGeometry
+          .filter(polyData => polyData.mapId === firstValidPolyData.mapId)
+          .map(entry => entry.coordinates)
+      : [];
+    
+    return [coordinates, firstValidPolyData?.mapId ?? -666];
+
+}

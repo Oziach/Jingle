@@ -36,7 +36,6 @@ export default function Practice() {
     correctPolygon: null,
   });
   
-  //put this in gameState maybe?
   const [confirmedGuess, setConfirmedGuess] = useState(false); 
   const [showConfirmGuess, setShowConfirmGuess] = useState(false);
 
@@ -122,7 +121,7 @@ export default function Practice() {
   return (
     <>
       <div className='App-inner'>
-        {/* temp button styling coz i can't bear to see the deafult. Add to .css n clean.*/}
+        {/* temp button styling coz i can't bear to see the deafult. Work your css magic here*/}
         {confirmGuess && showConfirmGuess && <div style={{
             display:"inline-block",
             position: "fixed",
