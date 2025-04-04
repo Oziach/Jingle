@@ -1,11 +1,13 @@
 export type LinkData = {
-  start: { x: number; y: number; name: string; mapId: number};
-  end: { x: number; y: number; name: string; mapId: number };
+  start: MapPoint;
+  end: MapPoint;
 };
 
 export type GroupedLinks = {
   [key: string]: LinkData[];
 };
+
+export type MapPoint = { x: number; y: number; mapId: number; name: string };
 
 export const groupedLinks : GroupedLinks ={
   "Kebos Underground": [

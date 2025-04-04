@@ -24,6 +24,7 @@ import {
   getCenterOfPolygon,
   GetClosestMapIdPolys,
   getDistanceToPolygon,
+  GetTotalDistanceToPoly,
   toOurPixelCoordinates,
 } from '../utils/map-utils';
 import { basemaps} from '../data/basemaps';
@@ -65,9 +66,9 @@ export default function RunescapeMapWrapper({
   const [currentMapId, setCurrentMapId] = useState(0);
   const currentMap = basemaps[currentMapId];
   const [zoom, setZoom] = useState(1); 
-  const [mapCenter, setMapCenter] = useState([currentMap.center[1], currentMap.center[0]]);
+  const [mapCenter, setMapCenter] = useState([3222, 3218]); //lumby
   const mapRef = useRef<L.Map>(null);
-
+  const mapIdPadding = currentMapId == 0 ? -64 : 256; //in game tiles. 64 tiles per square.
 
 
   return (
@@ -78,11 +79,11 @@ export default function RunescapeMapWrapper({
       center={[mapCenter[1], mapCenter[0]]}
       zoom={zoom}
       maxZoom={3}
-      minZoom={-3}
+      minZoom={0}
       style={{ height: "100vh", width: "100%", background: "black" }}
       maxBounds={[
-        [currentMap.bounds[0][1], currentMap.bounds[0][0]],
-        [currentMap.bounds[1][1], currentMap.bounds[1][0]],
+        [currentMap.bounds[0][1] - mapIdPadding, currentMap.bounds[0][0] - mapIdPadding],
+        [currentMap.bounds[1][1] + mapIdPadding, currentMap.bounds[1][0] + mapIdPadding],
       ]}
       maxBoundsViscosity={0.5}
       className={className}
@@ -239,23 +240,21 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
   )!;
 
   //all polys for for current song in the mapId closest to marker pos - needed to identify with donut polys.
-  //all the best making this function later dumass c:
   //const repairedPolygons = correctFeature.geometry.coordinates.map(closePolygon);
-  const [repairedPolygons, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition,currentMapId)
-  // Create a GeoJSON feature for the nearest correct polygon -- TEMP, won't work for diff mapIds
-  const correctPolygon = correctFeature.geometry.coordinates.sort(
+  const [musicPolys, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition,currentMapId);
+  const repairedPolygons = musicPolys.map((musicPoly)=>closePolygon(musicPoly));
+
+  // Create a GeoJSON feature for the nearest correct polygon
+  const correctPolygon = repairedPolygons.sort(
     (polygon1, polygon2) => {
-      const c1 = getCenterOfPolygon(polygon1.map(toOurPixelCoordinates));
-      const c2 = getCenterOfPolygon(polygon2.map(toOurPixelCoordinates));
-      const d1 = calculateDistance(ourPixelCoordsClickedPoint, c1);
-      const d2 = calculateDistance(ourPixelCoordsClickedPoint, c2);
+      const d1 = getDistanceToPolygon(ourPixelCoordsClickedPoint, polygon1 as Point[]);
+      const d2 = getDistanceToPolygon(ourPixelCoordsClickedPoint, polygon2 as Point[]);
       return d1 - d2;
     }
   )[0];
 
   //if closest correct polgy is a gap, set outerPolygon to the actual parent poly, else iteself.
-  const repairedCorrectPolygon = closePolygon(correctPolygon);
-
+  const repairedCorrectPolygon = correctPolygon; 
   const outerPolygon = repairedPolygons.find((repairedPolygon) => {
     if (JSON.stringify(repairedPolygon) !==
       JSON.stringify(repairedCorrectPolygon)) {
@@ -274,7 +273,6 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
   );
 
   const correctPolygons = [outerPolygon, ...gaps];
-  console.log(outerPolygon);
 
   //check user click is right or wrong:
   //for checking aginst click, convert everything to our coords
@@ -315,15 +313,9 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
       correctPolygon: correctPolygonData,
     });
   } else {
-    //restored border distance calcs
-    const closestDistance = Math.min(
-      ...correctFeature.geometry.coordinates.map((polygon) => getDistanceToPolygon(
-        ourPixelCoordsClickedPoint,
-        polygon.map(toOurPixelCoordinates)
-      )
-      )
-    );
-
+    //restored border distance calcs. TODO: SAVE MAP ID WHERE MARKER IS PLACED
+    const closestDistance = GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], currentMapId, correctPolygon as Point[], songMapId)
+    console.log(closestDistance);
     onGuess({
       correct: false,
       distance: closestDistance,
@@ -334,10 +326,15 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
 
 
   const outerPolyCenter = getCenterOfPolygon(ourOuterPolygon);
-  setCurrentMapId(songMapId);
-  songMapId == currentMapId ? 
-  map.panTo([outerPolyCenter[1], outerPolyCenter[0]]):
-  setMapCenter([outerPolyCenter[1], outerPolyCenter[0]]);
+  if(songMapId == currentMapId){
+    map.panTo([outerPolyCenter[1], outerPolyCenter[0]]);
+  }
+  else
+  {
+    setCurrentMapId(songMapId);
+    setMapCenter([outerPolyCenter[0], outerPolyCenter[1]]);
+  }
+
   //finally, clear marker for the next song
   setMarkerPosition(null);
 }
