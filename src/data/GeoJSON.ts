@@ -4,8 +4,11 @@ export interface ConvertedFeature extends Feature<Polygon> {
       mapName: string;
       mapId: number;
       coordinates: number[][]; // A single polygon with coordinate pairs
+      red? : boolean
     }[];
   }
+
+
 
 const geojsondata = {
     "features": [
@@ -359,7 +362,7 @@ const geojsondata = {
                     "mapId": -666,
                     "coordinates": [
                         [-64, -64],
-                        [0, -64],
+                        [0, -64],   
                         [0, -128],
                         [-64, -128],
                         [-64, -64]
