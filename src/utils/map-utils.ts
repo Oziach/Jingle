@@ -104,10 +104,7 @@ export const getDistanceToLine = (point: [number, number], line: Line) => {
 };
 
 export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
-  //should work, all undefined and debug map regions have negative mapIds. I don't know about instances tho.
-  return feature.convertedGeometry.some((polyData) =>
-    polyData.mapId >= 1
-  );
+  return feature.convertedGeometry.length > 0
 }
 
 export const GetClosestMapIdPolys = (correctFeature: ConvertedFeature, 

@@ -74,7 +74,7 @@ export default function RunescapeMapWrapper({
   return (
     <MapContainer
       crs={CRS.Simple}
-      key={currentMapId} //lazy, maybe its doable through functions instead
+      key={currentMapId} 
       ref={mapRef}
       center={[mapCenter[1], mapCenter[0]]}
       zoom={zoom}
@@ -93,7 +93,8 @@ export default function RunescapeMapWrapper({
         onChange={(e) => {
           const newMapId = Number.parseInt(e.target.value);
           setCurrentMapId!(newMapId);
-          setMapCenter([basemaps[newMapId].center[1], basemaps[newMapId].center[0]]);
+          setMapCenter([basemaps[newMapId].center[0], basemaps[newMapId].center[1]]);
+          console.log(basemaps[newMapId].name)
         }}
         value={currentMapId!}
         className="map-select"

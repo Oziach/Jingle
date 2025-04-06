@@ -1155,10 +1155,10 @@ export const groupedLinks : GroupedLinks ={
         "name": "Gielinor Surface"
       },
       "end": {
-        "x": -11,
-        "y": -10,
-        "mapId": -666,
-        "name": "undefined"
+        "x": 2805,
+        "y": 9590,
+        "mapId": 11 ,
+        "name": "Karamja Underground"
       }
     },
     {
@@ -2157,6 +2157,20 @@ export const groupedLinks : GroupedLinks ={
     },
     {
       "start": {
+        "x": 3358,
+        "y": 2711,
+        "mapId": 0,
+        "name": "Gielinor Surface"
+      },
+      "end": {
+        "x": 3359,
+        "y": 9257,
+        "mapId": 42,
+        "name": "Kharidian Desert Underground"
+      }
+    },
+    {
+      "start": {
         "x": 3361,
         "y": 3150,
         "mapId": 0,
@@ -2303,10 +2317,10 @@ export const groupedLinks : GroupedLinks ={
         "name": "Gielinor Surface"
       },
       "end": {
-        "x": -52,
-        "y": -12,
-        "mapId": -666,
-        "name": "undefined"
+        "x": 3596,
+        "y": 10292,
+        "mapId": 30,
+        "name": "Fossil Island Underground"
       }
     },
     {
@@ -2347,6 +2361,20 @@ export const groupedLinks : GroupedLinks ={
       "end": {
         "x": 3716,
         "y": 9707,
+        "mapId": 14,
+        "name": "Morytania Underground"
+      }
+    },
+    {
+      "start": {
+        "x": 3725,
+        "y": 3356,
+        "mapId": 0,
+        "name": "Gielinor Surface"
+      },
+      "end": {
+        "x": 3726,
+        "y": 9756,
         "mapId": 14,
         "name": "Morytania Underground"
       }
@@ -2877,34 +2905,6 @@ export const groupedLinks : GroupedLinks ={
         "y": 3806,
         "mapId": 0,
         "name": "Gielinor Surface"
-      }
-    },
-    {
-      "start": {
-        "x": 3358,
-        "y": 2711,
-        "mapId": -666,
-        "name": "undefined"
-      },
-      "end": {
-        "x": 3359,
-        "y": 9257,
-        "mapId": 42,
-        "name": "Kharidian Desert Underground"
-      }
-    },
-    {
-      "start": {
-        "x": 3725,
-        "y": 3356,
-        "mapId": -666,
-        "name": "undefined"
-      },
-      "end": {
-        "x": 3726,
-        "y": 9756,
-        "mapId": 14,
-        "name": "Morytania Underground"
       }
     }
   ],

@@ -1,13 +1,13 @@
 import { Feature, Polygon } from 'geojson';
 export interface ConvertedFeature extends Feature<Polygon> {
-  convertedGeometry: {
-    mapName: string;
-    mapId: number;
-    coordinates: number[][]; // A single polygon with coordinate pairs
-    red?: boolean
-  }[];
-}
-
+    convertedGeometry: {
+      mapName: string;
+      mapId: number;
+      coordinates: number[][]; // A single polygon with coordinate pairs
+      red? : boolean
+    }[];
+  }
+  
 const geojsondata = {
   "features": [
     {
@@ -3224,6 +3224,40 @@ const geojsondata = {
             ]
           ]
         },
+        {
+          "mapName": "Neypotzli",
+          "mapId": 45,
+          "coordinates": [
+            [
+              1392,
+              9472
+            ],
+            [
+              1392,
+              9600
+            ],
+            [
+              1496,
+              9600
+            ],
+            [
+              1496,
+              9560
+            ],
+            [
+              1536,
+              9560
+            ],
+            [
+              1536,
+              9472
+            ],
+            [
+              1392,
+              9472
+            ]
+          ]
+        }
       ]
     },
     {
@@ -6501,6 +6535,33 @@ const geojsondata = {
           ]
         },
         {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2624,
+              9472
+            ],
+            [
+              2624,
+              9600
+            ],
+            [
+              2688,
+              9600
+            ],
+            [
+              2688,
+              9472
+            ],
+            [
+              2624,
+              9472
+            ]
+          ],
+          "red": true
+        },
+        {
           "mapName": "Feldip Hills Underground",
           "mapId": 31,
           "coordinates": [
@@ -6522,6 +6583,28 @@ const geojsondata = {
             ]
           ]
         },
+        {
+          "mapName": "Feldip Hills Underground",
+          "mapId": 31,
+          "coordinates": [
+            [
+              1901,
+              9005
+            ],
+            [
+              1901,
+              9007
+            ],
+            [
+              1902,
+              9007
+            ],
+            [
+              1902,
+              9005
+            ]
+          ]
+        }
       ]
     },
     {
@@ -6713,6 +6796,71 @@ const geojsondata = {
               10281
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2304,
+              4416
+            ],
+            [
+              2304,
+              4480
+            ],
+            [
+              2368,
+              4480
+            ],
+            [
+              2368,
+              4416
+            ],
+            [
+              2304,
+              4416
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/All%27s_Fairy_in_Love_%26_War\" title=\"All&#39;s Fairy in Love &amp; War\">All's Fairy in Love &amp; War</a>",
+        "description": "<div><a href=\"/w/File:All%27s_Fairy_in_Love_%26_War.ogg\" title=\"File:All&#39;s Fairy in Love &amp; War.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Zanaris",
+          "mapId": 28,
+          "coordinates": [
+            [
+              2304,
+              4416
+            ],
+            [
+              2304,
+              4480
+            ],
+            [
+              2368,
+              4480
+            ],
+            [
+              2368,
+              4416
+            ],
+            [
+              2304,
+              4416
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -7461,6 +7609,33 @@ const geojsondata = {
           "mapId": 7,
           "coordinates": [
             [
+              2824,
+              5216
+            ],
+            [
+              2917,
+              5216
+            ],
+            [
+              2917,
+              5152
+            ],
+            [
+              2824,
+              5152
+            ],
+            [
+              2824,
+              5216
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "God Wars Dungeon",
+          "mapId": 7,
+          "coordinates": [
+            [
               2816,
               5216
             ],
@@ -7520,6 +7695,33 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "God Wars Dungeon",
+          "mapId": 7,
+          "coordinates": [
+            [
+              2917,
+              5216
+            ],
+            [
+              2952,
+              5216
+            ],
+            [
+              2952,
+              5152
+            ],
+            [
+              2917,
+              5152
+            ],
+            [
+              2917,
+              5216
+            ]
+          ],
+          "red": true
+        },
         {
           "mapName": "God Wars Dungeon",
           "mapId": 7,
@@ -9440,6 +9642,60 @@ const geojsondata = {
               9620
             ]
           ]
+        },
+        {
+          "mapName": "Taverley Underground",
+          "mapId": 20,
+          "coordinates": [
+            [
+              2846,
+              9620
+            ],
+            [
+              2846,
+              9664
+            ],
+            [
+              2880,
+              9664
+            ],
+            [
+              2880,
+              9620
+            ],
+            [
+              2846,
+              9620
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              2846,
+              9620
+            ],
+            [
+              2846,
+              9664
+            ],
+            [
+              2880,
+              9664
+            ],
+            [
+              2880,
+              9620
+            ],
+            [
+              2846,
+              9620
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -9618,6 +9874,33 @@ const geojsondata = {
           "mapId": 27,
           "coordinates": [
             [
+              2560,
+              9408
+            ],
+            [
+              2560,
+              9472
+            ],
+            [
+              2624,
+              9472
+            ],
+            [
+              2624,
+              9408
+            ],
+            [
+              2560,
+              9408
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Yanille Underground",
+          "mapId": 27,
+          "coordinates": [
+            [
               2520,
               9416
             ],
@@ -9638,6 +9921,60 @@ const geojsondata = {
               9416
             ]
           ]
+        },
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2560,
+              9536
+            ],
+            [
+              2560,
+              9600
+            ],
+            [
+              2624,
+              9600
+            ],
+            [
+              2624,
+              9536
+            ],
+            [
+              2560,
+              9536
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2560,
+              9536
+            ],
+            [
+              2560,
+              9600
+            ],
+            [
+              2624,
+              9600
+            ],
+            [
+              2624,
+              9536
+            ],
+            [
+              2560,
+              9536
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -9682,6 +10019,33 @@ const geojsondata = {
           "mapId": 26,
           "coordinates": [
             [
+              3072,
+              10240
+            ],
+            [
+              3072,
+              10304
+            ],
+            [
+              3136,
+              10304
+            ],
+            [
+              3136,
+              10240
+            ],
+            [
+              3072,
+              10240
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Wilderness Dungeons",
+          "mapId": 26,
+          "coordinates": [
+            [
               3080,
               10240
             ],
@@ -9702,6 +10066,98 @@ const geojsondata = {
               10240
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2560,
+              9408
+            ],
+            [
+              2560,
+              9472
+            ],
+            [
+              2624,
+              9472
+            ],
+            [
+              2624,
+              9408
+            ],
+            [
+              2560,
+              9408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Attack_6\" title=\"Attack 6\">Attack 6</a>",
+        "description": "<div><a href=\"/w/File:Attack_6.ogg\" title=\"File:Attack 6.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Yanille Underground",
+          "mapId": 27,
+          "coordinates": [
+            [
+              2560,
+              9408
+            ],
+            [
+              2560,
+              9472
+            ],
+            [
+              2624,
+              9472
+            ],
+            [
+              2624,
+              9408
+            ],
+            [
+              2560,
+              9408
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2560,
+              9408
+            ],
+            [
+              2560,
+              9472
+            ],
+            [
+              2624,
+              9472
+            ],
+            [
+              2624,
+              9408
+            ],
+            [
+              2560,
+              9408
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -10035,6 +10491,33 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "God Wars Dungeon",
+          "mapId": 7,
+          "coordinates": [
+            [
+              2816,
+              5120
+            ],
+            [
+              2784,
+              5120
+            ],
+            [
+              2784,
+              5152
+            ],
+            [
+              2816,
+              5152
+            ],
+            [
+              2816,
+              5120
+            ]
+          ],
+          "red": true
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -10895,6 +11378,41 @@ const geojsondata = {
               9984
             ]
           ]
+        },
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1664,
+              9984
+            ],
+            [
+              1856,
+              9984
+            ],
+            [
+              1856,
+              10048
+            ],
+            [
+              1792,
+              10048
+            ],
+            [
+              1792,
+              10112
+            ],
+            [
+              1664,
+              10112
+            ],
+            [
+              1664,
+              9984
+            ]
+          ],
+          "red": true
         },
         {
           "mapName": "Kourend Underground",
@@ -12488,6 +13006,33 @@ const geojsondata = {
             ]
           ],
           "red": false
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3688,
+              9824
+            ],
+            [
+              3688,
+              9888
+            ],
+            [
+              3752,
+              9888
+            ],
+            [
+              3752,
+              9824
+            ],
+            [
+              3688,
+              9824
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -12896,6 +13441,33 @@ const geojsondata = {
               9600
             ]
           ]
+        },
+        {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2624,
+              9600
+            ],
+            [
+              2624,
+              9664
+            ],
+            [
+              2688,
+              9664
+            ],
+            [
+              2688,
+              9600
+            ],
+            [
+              2624,
+              9600
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -12952,6 +13524,49 @@ const geojsondata = {
       },
       "convertedGeometry": [
         {
+          "mapName": "Taverley Underground",
+          "mapId": 20,
+          "coordinates": [
+            [
+              2944,
+              9856
+            ],
+            [
+              2944,
+              9792
+            ],
+            [
+              3008,
+              9792
+            ],
+            [
+              3008,
+              9728
+            ],
+            [
+              3000,
+              9728
+            ],
+            [
+              3000,
+              9664
+            ],
+            [
+              3072,
+              9664
+            ],
+            [
+              3072,
+              9856
+            ],
+            [
+              2944,
+              9856
+            ]
+          ],
+          "red": true
+        },
+        {
           "mapName": "Dwarven Mines",
           "mapId": 6,
           "coordinates": [
@@ -12992,6 +13607,168 @@ const geojsondata = {
               9856
             ]
           ]
+        },
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              2944,
+              9856
+            ],
+            [
+              2944,
+              9792
+            ],
+            [
+              3008,
+              9792
+            ],
+            [
+              3008,
+              9728
+            ],
+            [
+              3000,
+              9728
+            ],
+            [
+              3000,
+              9664
+            ],
+            [
+              3072,
+              9664
+            ],
+            [
+              3072,
+              9856
+            ],
+            [
+              2944,
+              9856
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2752,
+              10048
+            ],
+            [
+              2752,
+              10112
+            ],
+            [
+              2816,
+              10112
+            ],
+            [
+              2816,
+              10048
+            ],
+            [
+              2752,
+              10048
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Cave_of_Beasts\" title=\"Cave of Beasts\">Cave of Beasts</a>",
+        "description": "<div><a href=\"/w/File:Cave_of_Beasts.ogg\" title=\"File:Cave of Beasts.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Keldagrim",
+          "mapId": 10,
+          "coordinates": [
+            [
+              2816,
+              9984
+            ],
+            [
+              2816,
+              10048
+            ],
+            [
+              2880,
+              10048
+            ],
+            [
+              2880,
+              9984
+            ],
+            [
+              2816,
+              9984
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Keldagrim",
+          "mapId": 10,
+          "coordinates": [
+            [
+              2752,
+              10048
+            ],
+            [
+              2752,
+              10112
+            ],
+            [
+              2816,
+              10112
+            ],
+            [
+              2816,
+              10048
+            ],
+            [
+              2752,
+              10048
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Troll Stronghold",
+          "mapId": 22,
+          "coordinates": [
+            [
+              2752,
+              10048
+            ],
+            [
+              2752,
+              10112
+            ],
+            [
+              2816,
+              10112
+            ],
+            [
+              2816,
+              10048
+            ],
+            [
+              2752,
+              10048
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -13078,6 +13855,33 @@ const geojsondata = {
               9536
             ]
           ]
+        },
+        {
+          "mapName": "Kharidian Desert Underground",
+          "mapId": 42,
+          "coordinates": [
+            [
+              3200,
+              9536
+            ],
+            [
+              3200,
+              9600
+            ],
+            [
+              3328,
+              9600
+            ],
+            [
+              3328,
+              9536
+            ],
+            [
+              3200,
+              9536
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -13190,6 +13994,60 @@ const geojsondata = {
               9472
             ]
           ]
+        },
+        {
+          "mapName": "Yanille Underground",
+          "mapId": 27,
+          "coordinates": [
+            [
+              2560,
+              9344
+            ],
+            [
+              2560,
+              9408
+            ],
+            [
+              2624,
+              9408
+            ],
+            [
+              2624,
+              9344
+            ],
+            [
+              2560,
+              9344
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2560,
+              9472
+            ],
+            [
+              2560,
+              9536
+            ],
+            [
+              2624,
+              9536
+            ],
+            [
+              2624,
+              9472
+            ],
+            [
+              2560,
+              9472
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -13377,6 +14235,136 @@ const geojsondata = {
           [
             [
               2624,
+              9728
+            ],
+            [
+              2624,
+              9920
+            ],
+            [
+              2688,
+              9920
+            ],
+            [
+              2688,
+              9728
+            ],
+            [
+              2624,
+              9728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Chain_of_Command\" title=\"Chain of Command\">Chain of Command</a>",
+        "description": "<div><a href=\"/w/File:Chain_of_Command.ogg\" title=\"File:Chain of Command.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2624,
+              9728
+            ],
+            [
+              2624,
+              9920
+            ],
+            [
+              2688,
+              9920
+            ],
+            [
+              2688,
+              9728
+            ],
+            [
+              2624,
+              9728
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2432,
+              4352
+            ],
+            [
+              2432,
+              4416
+            ],
+            [
+              2496,
+              4416
+            ],
+            [
+              2496,
+              4352
+            ],
+            [
+              2432,
+              4352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Chickened_Out\" title=\"Chickened Out\">Chickened Out</a>",
+        "description": "<div><a href=\"/w/File:Chickened_Out.ogg\" title=\"File:Chickened Out.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Zanaris",
+          "mapId": 28,
+          "coordinates": [
+            [
+              2432,
+              4352
+            ],
+            [
+              2432,
+              4416
+            ],
+            [
+              2496,
+              4416
+            ],
+            [
+              2496,
+              4352
+            ],
+            [
+              2432,
+              4352
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2624,
               9344
             ],
             [
@@ -13427,6 +14415,33 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2624,
+              9344
+            ],
+            [
+              2624,
+              9408
+            ],
+            [
+              2688,
+              9408
+            ],
+            [
+              2688,
+              9344
+            ],
+            [
+              2624,
+              9344
+            ]
+          ],
+          "red": true
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -13660,6 +14675,71 @@ const geojsondata = {
               3066
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3584,
+              9664
+            ],
+            [
+              3584,
+              9728
+            ],
+            [
+              3600,
+              9728
+            ],
+            [
+              3600,
+              9664
+            ],
+            [
+              3584,
+              9664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Conspiracy\" title=\"Conspiracy\">Conspiracy</a>",
+        "description": "<div><a href=\"/w/File:Conspiracy.ogg\" title=\"File:Conspiracy.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3648,
+              9600
+            ],
+            [
+              3648,
+              9664
+            ],
+            [
+              3664,
+              9664
+            ],
+            [
+              3664,
+              9600
+            ],
+            [
+              3648,
+              9600
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -14674,6 +15754,33 @@ const geojsondata = {
               10032
             ]
           ]
+        },
+        {
+          "mapName": "Kebos Underground",
+          "mapId": 33,
+          "coordinates": [
+            [
+              1216,
+              10048
+            ],
+            [
+              1216,
+              10112
+            ],
+            [
+              1280,
+              10112
+            ],
+            [
+              1280,
+              10048
+            ],
+            [
+              1216,
+              10048
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -14924,6 +16031,142 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2304,
+              4800
+            ],
+            [
+              2304,
+              4864
+            ],
+            [
+              2368,
+              4864
+            ],
+            [
+              2368,
+              4800
+            ],
+            [
+              2304,
+              4800
+            ]
+          ],
+          [
+            [
+              3264,
+              12608
+            ],
+            [
+              3328,
+              12608
+            ],
+            [
+              3328,
+              12544
+            ],
+            [
+              3264,
+              12544
+            ],
+            [
+              3264,
+              12608
+            ]
+          ],
+          [
+            [
+              2368,
+              9664
+            ],
+            [
+              2368,
+              9728
+            ],
+            [
+              2496,
+              9728
+            ],
+            [
+              2496,
+              9664
+            ],
+            [
+              2368,
+              9664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Cursed\" title=\"Cursed\">Cursed</a>",
+        "description": "<div><a href=\"/w/File:Cursed.ogg\" title=\"File:Cursed.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Stronghold Underground",
+          "mapId": 19,
+          "coordinates": [
+            [
+              2368,
+              9664
+            ],
+            [
+              2368,
+              9728
+            ],
+            [
+              2496,
+              9728
+            ],
+            [
+              2496,
+              9664
+            ],
+            [
+              2368,
+              9664
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2368,
+              9664
+            ],
+            [
+              2368,
+              9728
+            ],
+            [
+              2496,
+              9728
+            ],
+            [
+              2496,
+              9664
+            ],
+            [
+              2368,
+              9664
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               1920,
               4352
             ],
@@ -15000,6 +16243,33 @@ const geojsondata = {
               9728
             ]
           ]
+        },
+        {
+          "mapName": "Waterbirth Dungeon",
+          "mapId": 25,
+          "coordinates": [
+            [
+              2544,
+              9728
+            ],
+            [
+              2544,
+              9792
+            ],
+            [
+              2608,
+              9792
+            ],
+            [
+              2608,
+              9728
+            ],
+            [
+              2544,
+              9728
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -15384,6 +16654,106 @@ const geojsondata = {
               9536
             ]
           ]
+        },
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              2816,
+              9536
+            ],
+            [
+              2816,
+              9664
+            ],
+            [
+              2846,
+              9664
+            ],
+            [
+              2846,
+              9620
+            ],
+            [
+              2880,
+              9620
+            ],
+            [
+              2880,
+              9536
+            ],
+            [
+              2816,
+              9536
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3520,
+              9664
+            ],
+            [
+              3520,
+              9728
+            ],
+            [
+              3584,
+              9728
+            ],
+            [
+              3584,
+              9664
+            ],
+            [
+              3520,
+              9664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Dangerous_Way\" title=\"Dangerous Way\">Dangerous Way</a>",
+        "description": "<div><a href=\"/w/File:Dangerous_Way.ogg\" title=\"File:Dangerous Way.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3584,
+              9600
+            ],
+            [
+              3584,
+              9664
+            ],
+            [
+              3648,
+              9664
+            ],
+            [
+              3648,
+              9600
+            ],
+            [
+              3584,
+              9600
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -15448,6 +16818,71 @@ const geojsondata = {
               3648
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2944,
+              9472
+            ],
+            [
+              2944,
+              9536
+            ],
+            [
+              3008,
+              9536
+            ],
+            [
+              3008,
+              9472
+            ],
+            [
+              2944,
+              9472
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Davy_Jones%27_Locker\" title=\"Davy Jones&#39; Locker\">Davy Jones' Locker</a>",
+        "description": "<div><a href=\"/w/File:Davy_Jones%27_Locker.ogg\" title=\"File:Davy Jones&#39; Locker.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              2944,
+              9472
+            ],
+            [
+              2944,
+              9536
+            ],
+            [
+              3008,
+              9536
+            ],
+            [
+              3008,
+              9472
+            ],
+            [
+              2944,
+              9472
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -15683,6 +17118,33 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Mor Ul Rek",
+          "mapId": 23,
+          "coordinates": [
+            [
+              2368,
+              4992
+            ],
+            [
+              2368,
+              5056
+            ],
+            [
+              2432,
+              5056
+            ],
+            [
+              2432,
+              4992
+            ],
+            [
+              2368,
+              4992
+            ]
+          ],
+          "red": true
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -17116,6 +18578,71 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2688,
+              5184
+            ],
+            [
+              2688,
+              5248
+            ],
+            [
+              2752,
+              5248
+            ],
+            [
+              2752,
+              5184
+            ],
+            [
+              2688,
+              5184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Dorgeshuun_Deep\" title=\"Dorgeshuun Deep\">Dorgeshuun Deep</a>",
+        "description": "<div><a href=\"/w/File:Dorgeshuun_Deep.ogg\" title=\"File:Dorgeshuun Deep.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Dorgesh-Kaan",
+          "mapId": 5,
+          "coordinates": [
+            [
+              2688,
+              5184
+            ],
+            [
+              2688,
+              5248
+            ],
+            [
+              2752,
+              5248
+            ],
+            [
+              2752,
+              5184
+            ],
+            [
+              2688,
+              5184
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               3072,
               9600
             ],
@@ -17762,6 +19289,33 @@ const geojsondata = {
               9728
             ]
           ]
+        },
+        {
+          "mapName": "Dwarven Mines",
+          "mapId": 6,
+          "coordinates": [
+            [
+              2880,
+              9728
+            ],
+            [
+              2880,
+              9792
+            ],
+            [
+              3008,
+              9792
+            ],
+            [
+              3008,
+              9728
+            ],
+            [
+              2880,
+              9728
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -18350,6 +19904,60 @@ const geojsondata = {
               3136
             ]
           ]
+        },
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2496,
+              9536
+            ],
+            [
+              2496,
+              9600
+            ],
+            [
+              2560,
+              9600
+            ],
+            [
+              2560,
+              9536
+            ],
+            [
+              2496,
+              9536
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Yanille Underground",
+          "mapId": 27,
+          "coordinates": [
+            [
+              2496,
+              9408
+            ],
+            [
+              2496,
+              9472
+            ],
+            [
+              2560,
+              9472
+            ],
+            [
+              2560,
+              9408
+            ],
+            [
+              2496,
+              9408
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -18539,6 +20147,33 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Wilderness Dungeons",
+          "mapId": 26,
+          "coordinates": [
+            [
+              3136,
+              9984
+            ],
+            [
+              3136,
+              10048
+            ],
+            [
+              3200,
+              10048
+            ],
+            [
+              3200,
+              9984
+            ],
+            [
+              3136,
+              9984
+            ]
+          ],
+          "red": true
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -19314,6 +20949,33 @@ const geojsondata = {
       },
       "convertedGeometry": [
         {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2432,
+              9600
+            ],
+            [
+              2432,
+              9664
+            ],
+            [
+              2496,
+              9664
+            ],
+            [
+              2496,
+              9600
+            ],
+            [
+              2432,
+              9600
+            ]
+          ],
+          "red": true
+        },
+        {
           "mapName": "Gielinor Surface",
           "mapId": 0,
           "coordinates": [
@@ -19338,6 +21000,93 @@ const geojsondata = {
               3200
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2880,
+              9984
+            ],
+            [
+              2880,
+              10048
+            ],
+            [
+              2944,
+              10048
+            ],
+            [
+              2944,
+              9984
+            ],
+            [
+              2880,
+              9984
+            ]
+          ],
+          [
+            [
+              2304,
+              9344
+            ],
+            [
+              2304,
+              9408
+            ],
+            [
+              2368,
+              9408
+            ],
+            [
+              2368,
+              9344
+            ],
+            [
+              2304,
+              9344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Expedition\" title=\"Expedition\">Expedition</a>",
+        "description": "<div><a href=\"/w/File:Expedition.ogg\" title=\"File:Expedition.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Yanille Underground",
+          "mapId": 27,
+          "coordinates": [
+            [
+              2304,
+              9344
+            ],
+            [
+              2304,
+              9408
+            ],
+            [
+              2368,
+              9408
+            ],
+            [
+              2368,
+              9344
+            ],
+            [
+              2304,
+              9344
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -20026,6 +21775,120 @@ const geojsondata = {
               3732
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3040,
+              5216
+            ],
+            [
+              3040,
+              5248
+            ],
+            [
+              3072,
+              5248
+            ],
+            [
+              3072,
+              5216
+            ],
+            [
+              3040,
+              5216
+            ]
+          ],
+          [
+            [
+              3296,
+              9824
+            ],
+            [
+              3296,
+              9856
+            ],
+            [
+              3328,
+              9856
+            ],
+            [
+              3328,
+              9824
+            ],
+            [
+              3296,
+              9824
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Fear_and_Loathing\" title=\"Fear and Loathing\">Fear and Loathing</a>",
+        "description": "<div><a href=\"/w/File:Fear_and_Loathing.ogg\" title=\"File:Fear and Loathing.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Tolna's Rift",
+          "mapId": 21,
+          "coordinates": [
+            [
+              3040,
+              5216
+            ],
+            [
+              3040,
+              5248
+            ],
+            [
+              3072,
+              5248
+            ],
+            [
+              3072,
+              5216
+            ],
+            [
+              3040,
+              5216
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3296,
+              9824
+            ],
+            [
+              3296,
+              9856
+            ],
+            [
+              3328,
+              9856
+            ],
+            [
+              3328,
+              9824
+            ],
+            [
+              3296,
+              9824
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -22290,6 +24153,33 @@ const geojsondata = {
           ]
         },
         {
+          "mapName": "Wilderness Dungeons",
+          "mapId": 26,
+          "coordinates": [
+            [
+              3072,
+              9792
+            ],
+            [
+              3072,
+              10048
+            ],
+            [
+              3136,
+              10048
+            ],
+            [
+              3136,
+              9792
+            ],
+            [
+              3072,
+              9792
+            ]
+          ],
+          "red": true
+        },
+        {
           "mapName": "Gielinor Surface",
           "mapId": 0,
           "coordinates": [
@@ -23352,6 +25242,33 @@ const geojsondata = {
               3830
             ]
           ]
+        },
+        {
+          "mapName": "Kebos Underground",
+          "mapId": 33,
+          "coordinates": [
+            [
+              1368,
+              10240
+            ],
+            [
+              1400,
+              10240
+            ],
+            [
+              1400,
+              10208
+            ],
+            [
+              1368,
+              10208
+            ],
+            [
+              1368,
+              10240
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -23460,6 +25377,33 @@ const geojsondata = {
           "mapId": 42,
           "coordinates": [
             [
+              3456,
+              9600
+            ],
+            [
+              3456,
+              9664
+            ],
+            [
+              3520,
+              9664
+            ],
+            [
+              3520,
+              9600
+            ],
+            [
+              3456,
+              9600
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Kharidian Desert Underground",
+          "mapId": 42,
+          "coordinates": [
+            [
               3416,
               9552
             ],
@@ -23480,6 +25424,71 @@ const geojsondata = {
               9552
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3264,
+              5888
+            ],
+            [
+              3264,
+              5952
+            ],
+            [
+              3328,
+              5952
+            ],
+            [
+              3328,
+              5888
+            ],
+            [
+              3264,
+              5888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Fragment\" title=\"The Fragment\">The Fragment</a>",
+        "description": "<div><a href=\"/w/File:The_Fragment.ogg\" title=\"File:The Fragment.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Prifddinas",
+          "mapId": 29,
+          "coordinates": [
+            [
+              3264,
+              5888
+            ],
+            [
+              3264,
+              5952
+            ],
+            [
+              3328,
+              5952
+            ],
+            [
+              3328,
+              5888
+            ],
+            [
+              3264,
+              5888
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -23652,6 +25661,60 @@ const geojsondata = {
           "mapId": 33,
           "coordinates": [
             [
+              1072,
+              10096
+            ],
+            [
+              1072,
+              10200
+            ],
+            [
+              1176,
+              10200
+            ],
+            [
+              1176,
+              10096
+            ],
+            [
+              1072,
+              10096
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Kebos Underground",
+          "mapId": 33,
+          "coordinates": [
+            [
+              1072,
+              10160
+            ],
+            [
+              1072,
+              10264
+            ],
+            [
+              1176,
+              10264
+            ],
+            [
+              1176,
+              10160
+            ],
+            [
+              1072,
+              10160
+            ]
+          ],
+          "red": true
+        },
+        {
+          "mapName": "Kebos Underground",
+          "mapId": 33,
+          "coordinates": [
+            [
               1112,
               10120
             ],
@@ -23797,6 +25860,33 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Yanille Underground",
+          "mapId": 27,
+          "coordinates": [
+            [
+              2496,
+              9408
+            ],
+            [
+              2496,
+              9472
+            ],
+            [
+              2560,
+              9472
+            ],
+            [
+              2560,
+              9408
+            ],
+            [
+              2496,
+              9408
+            ]
+          ],
+          "red": true
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -24616,6 +26706,71 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              3392,
+              9728
+            ],
+            [
+              3392,
+              9792
+            ],
+            [
+              3456,
+              9792
+            ],
+            [
+              3456,
+              9728
+            ],
+            [
+              3392,
+              9728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Grotto_(music_track)\" title=\"Grotto (music track)\">Grotto</a>",
+        "description": "<div><a href=\"/w/File:Grotto.ogg\" title=\"File:Grotto.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3456,
+              9664
+            ],
+            [
+              3456,
+              9728
+            ],
+            [
+              3520,
+              9728
+            ],
+            [
+              3520,
+              9664
+            ],
+            [
+              3456,
+              9664
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               1251,
               3745
             ],
@@ -25232,6 +27387,71 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              1856,
+              5120
+            ],
+            [
+              1856,
+              5184
+            ],
+            [
+              1920,
+              5184
+            ],
+            [
+              1920,
+              5120
+            ],
+            [
+              1856,
+              5120
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Head_to_Head\" title=\"Head to Head\">Head to Head</a>",
+        "description": "<div><a href=\"/w/File:Head_to_Head.ogg\" title=\"File:Head to Head.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Stronghold of Security",
+          "mapId": 18,
+          "coordinates": [
+            [
+              1856,
+              5120
+            ],
+            [
+              1856,
+              5184
+            ],
+            [
+              1920,
+              5184
+            ],
+            [
+              1920,
+              5120
+            ],
+            [
+              1856,
+              5120
+            ]
+          ],
+          "red": true
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2752,
               3712
             ],
@@ -25772,6 +27992,71 @@ const geojsondata = {
               3392
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1536,
+              9984
+            ],
+            [
+              1600,
+              9984
+            ],
+            [
+              1600,
+              9920
+            ],
+            [
+              1536,
+              9920
+            ],
+            [
+              1536,
+              9984
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Houses_of_Kourend\" title=\"The Houses of Kourend\">The Houses of Kourend</a>",
+        "description": "<div><a href=\"/w/File:The_Houses_of_Kourend.ogg\" title=\"File:The Houses of Kourend.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1536,
+              9984
+            ],
+            [
+              1600,
+              9984
+            ],
+            [
+              1600,
+              9920
+            ],
+            [
+              1536,
+              9920
+            ],
+            [
+              1536,
+              9984
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -26554,6 +28839,41 @@ const geojsondata = {
       },
       "convertedGeometry": [
         {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3264,
+              9600
+            ],
+            [
+              3328,
+              9600
+            ],
+            [
+              3328,
+              9536
+            ],
+            [
+              3392,
+              9536
+            ],
+            [
+              3392,
+              9472
+            ],
+            [
+              3264,
+              9472
+            ],
+            [
+              3264,
+              9600
+            ]
+          ],
+          "red": true
+        },
+        {
           "mapName": "Kharidian Desert Underground",
           "mapId": 42,
           "coordinates": [
@@ -26948,6 +29268,71 @@ const geojsondata = {
               9280
             ]
           ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2304,
+              9792
+            ],
+            [
+              2304,
+              9920
+            ],
+            [
+              2368,
+              9920
+            ],
+            [
+              2368,
+              9792
+            ],
+            [
+              2304,
+              9792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Intrepid\" title=\"Intrepid\">Intrepid</a>",
+        "description": "<div><a href=\"/w/File:Intrepid.ogg\" title=\"File:Intrepid.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Stronghold Underground",
+          "mapId": 19,
+          "coordinates": [
+            [
+              2304,
+              9792
+            ],
+            [
+              2304,
+              9920
+            ],
+            [
+              2368,
+              9920
+            ],
+            [
+              2368,
+              9792
+            ],
+            [
+              2304,
+              9792
+            ]
+          ],
+          "red": true
         }
       ]
     },
@@ -27690,6 +30075,32 @@ const geojsondata = {
               2816
             ]
           ]
+        },
+        {
+          "mapName": "Feldip Hills Underground",
+          "mapId": 31,
+          "coordinates": [
+            [
+              1984,
+              9088
+            ],
+            [
+              1984,
+              9152
+            ],
+            [
+              2048,
+              9152
+            ],
+            [
+              2048,
+              9088
+            ],
+            [
+              1984,
+              9088
+            ]
+          ]
         }
       ]
     },
@@ -27928,6 +30339,32 @@ const geojsondata = {
       },
       "convertedGeometry": [
         {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2752,
+              9344
+            ],
+            [
+              2752,
+              9408
+            ],
+            [
+              2816,
+              9408
+            ],
+            [
+              2816,
+              9344
+            ],
+            [
+              2752,
+              9344
+            ]
+          ]
+        },
+        {
           "mapName": "Gielinor Surface",
           "mapId": 0,
           "coordinates": [
@@ -28141,6 +30578,58 @@ const geojsondata = {
             ],
             [
               1120,
+              10240
+            ]
+          ]
+        },
+        {
+          "mapName": "Kebos Underground",
+          "mapId": 33,
+          "coordinates": [
+            [
+              1056,
+              10240
+            ],
+            [
+              1056,
+              10304
+            ],
+            [
+              1177,
+              10304
+            ],
+            [
+              1177,
+              10240
+            ],
+            [
+              1056,
+              10240
+            ]
+          ]
+        },
+        {
+          "mapName": "Kebos Underground",
+          "mapId": 33,
+          "coordinates": [
+            [
+              1104,
+              10240
+            ],
+            [
+              1104,
+              10304
+            ],
+            [
+              1225,
+              10304
+            ],
+            [
+              1225,
+              10240
+            ],
+            [
+              1104,
               10240
             ]
           ]
@@ -28748,6 +31237,32 @@ const geojsondata = {
             [
               2558,
               3264
+            ]
+          ]
+        },
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2560,
+              9694
+            ],
+            [
+              2560,
+              9728
+            ],
+            [
+              2584,
+              9728
+            ],
+            [
+              2584,
+              9694
+            ],
+            [
+              2560,
+              9694
             ]
           ]
         }
@@ -30122,6 +32637,32 @@ const geojsondata = {
             [
               3456,
               9640
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3520,
+              9600
+            ],
+            [
+              3520,
+              9664
+            ],
+            [
+              3584,
+              9664
+            ],
+            [
+              3584,
+              9600
+            ],
+            [
+              3520,
+              9600
             ]
           ]
         }
@@ -31600,6 +34141,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              3264,
+              9408
+            ],
+            [
+              3264,
+              9472
+            ],
+            [
+              3328,
+              9472
+            ],
+            [
+              3328,
+              9408
+            ],
+            [
+              3264,
+              9408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Lonesome\" title=\"Lonesome\">Lonesome</a>",
+        "description": "<div><a href=\"/w/File:Lonesome.ogg\" title=\"File:Lonesome.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Kharidian Desert Underground",
+          "mapId": 42,
+          "coordinates": [
+            [
+              3328,
+              9408
+            ],
+            [
+              3328,
+              9472
+            ],
+            [
+              3392,
+              9472
+            ],
+            [
+              3392,
+              9408
+            ],
+            [
+              3328,
+              9408
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2624,
               3072
             ],
@@ -31974,6 +34579,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              3220,
+              9600
+            ],
+            [
+              3220,
+              9664
+            ],
+            [
+              3264,
+              9664
+            ],
+            [
+              3264,
+              9600
+            ],
+            [
+              3220,
+              9600
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Lost_Tribe_(music_track)\" title=\"The Lost Tribe (music track)\">The Lost Tribe</a>",
+        "description": "<div><a href=\"/w/File:The_Lost_Tribe.ogg\" title=\"File:The Lost Tribe.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3220,
+              9600
+            ],
+            [
+              3220,
+              9664
+            ],
+            [
+              3264,
+              9664
+            ],
+            [
+              3264,
+              9600
+            ],
+            [
+              3220,
+              9600
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               3328,
               3392
             ],
@@ -32294,6 +34963,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2880,
+              10048
+            ],
+            [
+              2880,
+              10112
+            ],
+            [
+              2944,
+              10112
+            ],
+            [
+              2944,
+              10048
+            ],
+            [
+              2880,
+              10048
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Mad_Eadgar\" title=\"Mad Eadgar\">Mad Eadgar</a>",
+        "description": "<div><a href=\"/w/File:Mad_Eadgar.ogg\" title=\"File:Mad Eadgar.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Keldagrim",
+          "mapId": 10,
+          "coordinates": [
+            [
+              2880,
+              10048
+            ],
+            [
+              2880,
+              10112
+            ],
+            [
+              2944,
+              10112
+            ],
+            [
+              2944,
+              10048
+            ],
+            [
+              2880,
+              10048
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               1728,
               5120
             ],
@@ -32602,6 +35335,70 @@ const geojsondata = {
             [
               2688,
               3392
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2368,
+              10176
+            ],
+            [
+              2368,
+              10240
+            ],
+            [
+              2432,
+              10240
+            ],
+            [
+              2432,
+              10176
+            ],
+            [
+              2368,
+              10176
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Major_Miner\" title=\"Major Miner\">Major Miner</a>",
+        "description": "<div><a href=\"/w/File:Major_Miner.ogg\" title=\"File:Major Miner.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Miscellania Underground",
+          "mapId": 11,
+          "coordinates": [
+            [
+              2368,
+              10176
+            ],
+            [
+              2368,
+              10240
+            ],
+            [
+              2432,
+              10240
+            ],
+            [
+              2432,
+              10176
+            ],
+            [
+              2368,
+              10176
             ]
           ]
         }
@@ -33753,6 +36550,58 @@ const geojsondata = {
             ],
             [
               2816,
+              10176
+            ],
+            [
+              2880,
+              10176
+            ],
+            [
+              2880,
+              10048
+            ],
+            [
+              2816,
+              10048
+            ]
+          ]
+        },
+        {
+          "mapName": "Keldagrim",
+          "mapId": 10,
+          "coordinates": [
+            [
+              2752,
+              10112
+            ],
+            [
+              2752,
+              10240
+            ],
+            [
+              2816,
+              10240
+            ],
+            [
+              2816,
+              10112
+            ],
+            [
+              2752,
+              10112
+            ]
+          ]
+        },
+        {
+          "mapName": "Keldagrim",
+          "mapId": 10,
+          "coordinates": [
+            [
+              2816,
+              10048
+            ],
+            [
+              2816,
               10112
             ],
             [
@@ -33920,6 +36769,58 @@ const geojsondata = {
             [
               3376,
               9848
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3392,
+              9856
+            ],
+            [
+              3392,
+              9920
+            ],
+            [
+              3456,
+              9920
+            ],
+            [
+              3456,
+              9856
+            ],
+            [
+              3392,
+              9856
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3456,
+              9728
+            ],
+            [
+              3456,
+              9792
+            ],
+            [
+              3520,
+              9792
+            ],
+            [
+              3520,
+              9728
+            ],
+            [
+              3456,
+              9728
             ]
           ]
         }
@@ -34136,6 +37037,32 @@ const geojsondata = {
           ]
         },
         {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2816,
+              9216
+            ],
+            [
+              2816,
+              9344
+            ],
+            [
+              2880,
+              9344
+            ],
+            [
+              2880,
+              9216
+            ],
+            [
+              2816,
+              9216
+            ]
+          ]
+        },
+        {
           "mapName": "Asgarnia Ice Cave",
           "mapId": 3,
           "coordinates": [
@@ -34159,8 +37086,59 @@ const geojsondata = {
               2880,
               9600
             ]
-          ],
-          "red": false
+          ]
+        },
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              2944,
+              9600
+            ],
+            [
+              2944,
+              9664
+            ],
+            [
+              3008,
+              9664
+            ],
+            [
+              3008,
+              9600
+            ],
+            [
+              2944,
+              9600
+            ]
+          ]
+        },
+        {
+          "mapName": "Taverley Underground",
+          "mapId": 20,
+          "coordinates": [
+            [
+              2880,
+              9600
+            ],
+            [
+              2880,
+              9664
+            ],
+            [
+              2944,
+              9664
+            ],
+            [
+              2944,
+              9600
+            ],
+            [
+              2880,
+              9600
+            ]
+          ]
         }
       ]
     },
@@ -35883,6 +38861,32 @@ const geojsondata = {
               3522
             ]
           ]
+        },
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1536,
+              9984
+            ],
+            [
+              1600,
+              9984
+            ],
+            [
+              1600,
+              9920
+            ],
+            [
+              1536,
+              9920
+            ],
+            [
+              1536,
+              9984
+            ]
+          ]
         }
       ]
     },
@@ -36267,6 +39271,32 @@ const geojsondata = {
         {
           "mapName": "Waterbirth Dungeon",
           "mapId": 25,
+          "coordinates": [
+            [
+              2432,
+              10112
+            ],
+            [
+              2432,
+              10176
+            ],
+            [
+              2496,
+              10176
+            ],
+            [
+              2496,
+              10112
+            ],
+            [
+              2432,
+              10112
+            ]
+          ]
+        },
+        {
+          "mapName": "Miscellania Underground",
+          "mapId": 11,
           "coordinates": [
             [
               2432,
@@ -37171,6 +40201,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              3008,
+              9920
+            ],
+            [
+              3008,
+              9984
+            ],
+            [
+              3072,
+              9984
+            ],
+            [
+              3072,
+              9920
+            ],
+            [
+              3008,
+              9920
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Museum_Medley\" title=\"Museum Medley\">Museum Medley</a>",
+        "description": "<div><a href=\"/w/File:Museum_Medley.ogg\" title=\"File:Museum Medley.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3008,
+              9920
+            ],
+            [
+              3008,
+              9984
+            ],
+            [
+              3072,
+              9984
+            ],
+            [
+              3072,
+              9920
+            ],
+            [
+              3008,
+              9920
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               1901,
               9005
             ],
@@ -37230,6 +40324,32 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Feldip Hills Underground",
+          "mapId": 31,
+          "coordinates": [
+            [
+              1901,
+              9005
+            ],
+            [
+              1901,
+              9007
+            ],
+            [
+              1902,
+              9007
+            ],
+            [
+              1902,
+              9005
+            ],
+            [
+              1901,
+              9005
+            ]
+          ]
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -37479,6 +40599,96 @@ const geojsondata = {
               3328
             ]
           ]
+        },
+        {
+          "mapName": "Mor Ul Rek",
+          "mapId": 23,
+          "coordinates": [
+            [
+              2336,
+              5024
+            ],
+            [
+              2336,
+              5056
+            ],
+            [
+              2368,
+              5056
+            ],
+            [
+              2368,
+              5024
+            ],
+            [
+              2336,
+              5024
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2624,
+              9984
+            ],
+            [
+              2624,
+              10048
+            ],
+            [
+              2688,
+              10048
+            ],
+            [
+              2688,
+              9984
+            ],
+            [
+              2624,
+              9984
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Navigator\" title=\"The Navigator\">The Navigator</a>",
+        "description": "<div><a href=\"/w/File:The_Navigator.ogg\" title=\"File:The Navigator.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Fremennik Slayer Cave",
+          "mapId": 17,
+          "coordinates": [
+            [
+              2624,
+              9984
+            ],
+            [
+              2624,
+              10048
+            ],
+            [
+              2688,
+              10048
+            ],
+            [
+              2688,
+              9984
+            ],
+            [
+              2624,
+              9984
+            ]
+          ]
         }
       ]
     },
@@ -37542,8 +40752,7 @@ const geojsondata = {
               2624,
               9408
             ]
-          ],
-          "red": false
+          ]
         }
       ]
     },
@@ -39480,6 +42689,92 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2496,
+              4608
+            ],
+            [
+              2496,
+              4672
+            ],
+            [
+              2560,
+              4672
+            ],
+            [
+              2560,
+              4608
+            ],
+            [
+              2496,
+              4608
+            ]
+          ],
+          [
+            [
+              2496,
+              9984
+            ],
+            [
+              2496,
+              10048
+            ],
+            [
+              2560,
+              10048
+            ],
+            [
+              2560,
+              9984
+            ],
+            [
+              2496,
+              9984
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Out_of_the_Deep\" title=\"Out of the Deep\">Out of the Deep</a>",
+        "description": "<div><a href=\"/w/File:Out_of_the_Deep.ogg\" title=\"File:Out of the Deep.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Wilderness Dungeons",
+          "mapId": 26,
+          "coordinates": [
+            [
+              3072,
+              10304
+            ],
+            [
+              3072,
+              10368
+            ],
+            [
+              3136,
+              10368
+            ],
+            [
+              3136,
+              10304
+            ],
+            [
+              3072,
+              10304
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               3520,
               2944
             ],
@@ -40028,6 +43323,32 @@ const geojsondata = {
               9856
             ]
           ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3712,
+              9792
+            ],
+            [
+              3712,
+              9856
+            ],
+            [
+              3776,
+              9856
+            ],
+            [
+              3776,
+              9792
+            ],
+            [
+              3712,
+              9792
+            ]
+          ]
         }
       ]
     },
@@ -40524,6 +43845,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              1920,
+              5120
+            ],
+            [
+              1920,
+              5184
+            ],
+            [
+              1984,
+              5184
+            ],
+            [
+              1984,
+              5120
+            ],
+            [
+              1920,
+              5120
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Prime_Time\" title=\"Prime Time\">Prime Time</a>",
+        "description": "<div><a href=\"/w/File:Prime_Time.ogg\" title=\"File:Prime Time.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Stronghold of Security",
+          "mapId": 18,
+          "coordinates": [
+            [
+              1824,
+              5024
+            ],
+            [
+              1824,
+              5088
+            ],
+            [
+              1888,
+              5088
+            ],
+            [
+              1888,
+              5024
+            ],
+            [
+              1824,
+              5024
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2880,
               3520
             ],
@@ -40780,6 +44165,114 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              3520,
+              10368
+            ],
+            [
+              3520,
+              10496
+            ],
+            [
+              3584,
+              10496
+            ],
+            [
+              3584,
+              10368
+            ],
+            [
+              3520,
+              10368
+            ]
+          ],
+          [
+            [
+              2816,
+              9664
+            ],
+            [
+              2816,
+              9728
+            ],
+            [
+              2880,
+              9728
+            ],
+            [
+              2880,
+              9664
+            ],
+            [
+              2816,
+              9664
+            ]
+          ],
+          [
+            [
+              2240,
+              10432
+            ],
+            [
+              2240,
+              10496
+            ],
+            [
+              2304,
+              10496
+            ],
+            [
+              2304,
+              10432
+            ],
+            [
+              2240,
+              10432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Relics_(music_track)\" title=\"Relics (music track)\">Relics</a>",
+        "description": "<div><a href=\"/w/File:Relics.ogg\" title=\"File:Relics.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Taverley Underground",
+          "mapId": 20,
+          "coordinates": [
+            [
+              2816,
+              9664
+            ],
+            [
+              2816,
+              9728
+            ],
+            [
+              2880,
+              9728
+            ],
+            [
+              2880,
+              9664
+            ],
+            [
+              2816,
+              9664
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2560,
               3712
             ],
@@ -40911,6 +44404,70 @@ const geojsondata = {
             ],
             [
               3136,
+              10048
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2688,
+              10112
+            ],
+            [
+              2688,
+              10176
+            ],
+            [
+              2752,
+              10176
+            ],
+            [
+              2752,
+              10112
+            ],
+            [
+              2688,
+              10112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Rising_Damp\" title=\"Rising Damp\">Rising Damp</a>",
+        "description": "<div><a href=\"/w/File:Rising_Damp.ogg\" title=\"File:Rising Damp.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Keldagrim",
+          "mapId": 10,
+          "coordinates": [
+            [
+              2752,
+              10048
+            ],
+            [
+              2752,
+              10112
+            ],
+            [
+              2816,
+              10112
+            ],
+            [
+              2816,
+              10048
+            ],
+            [
+              2752,
               10048
             ]
           ]
@@ -42702,6 +46259,58 @@ const geojsondata = {
               3727
             ]
           ]
+        },
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1728,
+              10048
+            ],
+            [
+              1728,
+              10112
+            ],
+            [
+              1792,
+              10112
+            ],
+            [
+              1792,
+              10048
+            ],
+            [
+              1728,
+              10048
+            ]
+          ]
+        },
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1792,
+              10048
+            ],
+            [
+              1792,
+              10112
+            ],
+            [
+              1856,
+              10112
+            ],
+            [
+              1856,
+              10048
+            ],
+            [
+              1792,
+              10048
+            ]
+          ]
         }
       ]
     },
@@ -42888,6 +46497,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2880,
+              4800
+            ],
+            [
+              2880,
+              4864
+            ],
+            [
+              2944,
+              4864
+            ],
+            [
+              2944,
+              4800
+            ],
+            [
+              2880,
+              4800
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Rune_Essence_(music_track)\" title=\"Rune Essence (music track)\">Rune Essence</a>",
+        "description": "<div><a href=\"/w/File:Rune_Essence.ogg\" title=\"File:Rune Essence.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "The Abyss",
+          "mapId": 40,
+          "coordinates": [
+            [
+              2880,
+              4800
+            ],
+            [
+              2880,
+              4864
+            ],
+            [
+              2944,
+              4864
+            ],
+            [
+              2944,
+              4800
+            ],
+            [
+              2880,
+              4800
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2528,
               9728
             ],
@@ -42963,6 +46636,32 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2528,
+              9728
+            ],
+            [
+              2528,
+              9760
+            ],
+            [
+              2560,
+              9760
+            ],
+            [
+              2560,
+              9728
+            ],
+            [
+              2528,
+              9728
+            ]
+          ]
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -43214,6 +46913,122 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2944,
+              9600
+            ],
+            [
+              2944,
+              9664
+            ],
+            [
+              3008,
+              9664
+            ],
+            [
+              3008,
+              9600
+            ],
+            [
+              2944,
+              9600
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Sarim%27s_Vermin\" title=\"Sarim&#39;s Vermin\">Sarim's Vermin</a>",
+        "description": "<div><a href=\"/w/File:Sarim%27s_Vermin.ogg\" title=\"File:Sarim&#39;s Vermin.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              3008,
+              9600
+            ],
+            [
+              3008,
+              9664
+            ],
+            [
+              3072,
+              9664
+            ],
+            [
+              3072,
+              9600
+            ],
+            [
+              3008,
+              9600
+            ]
+          ]
+        },
+        {
+          "mapName": "Taverley Underground",
+          "mapId": 20,
+          "coordinates": [
+            [
+              2944,
+              9600
+            ],
+            [
+              2944,
+              9664
+            ],
+            [
+              3008,
+              9664
+            ],
+            [
+              3008,
+              9600
+            ],
+            [
+              2944,
+              9600
+            ]
+          ]
+        },
+        {
+          "mapName": "Dwarven Mines",
+          "mapId": 6,
+          "coordinates": [
+            [
+              2944,
+              9600
+            ],
+            [
+              2944,
+              9664
+            ],
+            [
+              3008,
+              9664
+            ],
+            [
+              3008,
+              9600
+            ],
+            [
+              2944,
+              9600
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               3136,
               9856
             ],
@@ -43310,6 +47125,32 @@ const geojsondata = {
             [
               3136,
               9856
+            ]
+          ]
+        },
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3072,
+              9472
+            ],
+            [
+              3072,
+              9536
+            ],
+            [
+              3136,
+              9536
+            ],
+            [
+              3136,
+              9472
+            ],
+            [
+              3072,
+              9472
             ]
           ]
         },
@@ -44372,6 +48213,70 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2880,
+              10368
+            ],
+            [
+              2944,
+              10368
+            ],
+            [
+              2944,
+              10304
+            ],
+            [
+              2880,
+              10304
+            ],
+            [
+              2880,
+              10368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Secrets_of_the_North_(music_track)\" title=\"Secrets of the North (music track)\">Secrets of the North</a>",
+        "description": "<div><a href=\"/w/File:Secrets_of_the_North.ogg\" title=\"File:Secrets of the North.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Wilderness Dungeons",
+          "mapId": 26,
+          "coordinates": [
+            [
+              2880,
+              10368
+            ],
+            [
+              2944,
+              10368
+            ],
+            [
+              2944,
+              10304
+            ],
+            [
+              2880,
+              10304
+            ],
+            [
+              2880,
+              10368
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2368,
               3136
             ],
@@ -44952,6 +48857,32 @@ const geojsondata = {
               3200
             ]
           ]
+        },
+        {
+          "mapName": "Braindeath Island",
+          "mapId": 4,
+          "coordinates": [
+            [
+              2112,
+              4992
+            ],
+            [
+              2112,
+              5056
+            ],
+            [
+              2176,
+              5056
+            ],
+            [
+              2176,
+              4992
+            ],
+            [
+              2112,
+              4992
+            ]
+          ]
         }
       ]
     },
@@ -45432,6 +49363,32 @@ const geojsondata = {
               9984
             ]
           ]
+        },
+        {
+          "mapName": "Troll Stronghold",
+          "mapId": 22,
+          "coordinates": [
+            [
+              2752,
+              9984
+            ],
+            [
+              2752,
+              10048
+            ],
+            [
+              2816,
+              10048
+            ],
+            [
+              2816,
+              9984
+            ],
+            [
+              2752,
+              9984
+            ]
+          ]
         }
       ]
     },
@@ -45494,6 +49451,70 @@ const geojsondata = {
             [
               2608,
               10304
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2304,
+              5056
+            ],
+            [
+              2304,
+              5120
+            ],
+            [
+              2368,
+              5120
+            ],
+            [
+              2368,
+              5056
+            ],
+            [
+              2304,
+              5056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Slug_a_Bug_Ball\" title=\"Slug a Bug Ball\">Slug a Bug Ball</a>",
+        "description": "<div><a href=\"/w/File:Slug_a_Bug_Ball.ogg\" title=\"File:Slug a Bug Ball.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Mor Ul Rek",
+          "mapId": 23,
+          "coordinates": [
+            [
+              2304,
+              5056
+            ],
+            [
+              2304,
+              5120
+            ],
+            [
+              2368,
+              5120
+            ],
+            [
+              2368,
+              5056
+            ],
+            [
+              2304,
+              5056
             ]
           ]
         }
@@ -46380,6 +50401,32 @@ const geojsondata = {
       },
       "convertedGeometry": [
         {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              2880,
+              9472
+            ],
+            [
+              2880,
+              9536
+            ],
+            [
+              2944,
+              9536
+            ],
+            [
+              2944,
+              9472
+            ],
+            [
+              2880,
+              9472
+            ]
+          ]
+        },
+        {
           "mapName": "Gielinor Surface",
           "mapId": 0,
           "coordinates": [
@@ -46894,6 +50941,148 @@ const geojsondata = {
               9536
             ]
           ]
+        },
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              3082,
+              9536
+            ],
+            [
+              3082,
+              9568
+            ],
+            [
+              3101,
+              9568
+            ],
+            [
+              3102,
+              9569
+            ],
+            [
+              3102,
+              9570
+            ],
+            [
+              3101,
+              9571
+            ],
+            [
+              3101,
+              9573
+            ],
+            [
+              3102,
+              9574
+            ],
+            [
+              3103,
+              9574
+            ],
+            [
+              3104,
+              9575
+            ],
+            [
+              3105,
+              9575
+            ],
+            [
+              3106,
+              9574
+            ],
+            [
+              3107,
+              9574
+            ],
+            [
+              3110,
+              9571
+            ],
+            [
+              3110,
+              9569
+            ],
+            [
+              3115,
+              9564
+            ],
+            [
+              3117,
+              9564
+            ],
+            [
+              3119,
+              9562
+            ],
+            [
+              3122,
+              9562
+            ],
+            [
+              3125,
+              9565
+            ],
+            [
+              3126,
+              9565
+            ],
+            [
+              3128,
+              9567
+            ],
+            [
+              3128,
+              9568
+            ],
+            [
+              3131,
+              9571
+            ],
+            [
+              3131,
+              9574
+            ],
+            [
+              3133,
+              9576
+            ],
+            [
+              3133,
+              9580
+            ],
+            [
+              3132,
+              9581
+            ],
+            [
+              3132,
+              9585
+            ],
+            [
+              3128,
+              9589
+            ],
+            [
+              3128,
+              9600
+            ],
+            [
+              3008,
+              9600
+            ],
+            [
+              3008,
+              9536
+            ],
+            [
+              3082,
+              9536
+            ]
+          ]
         }
       ]
     },
@@ -47020,6 +51209,340 @@ const geojsondata = {
             [
               3264,
               3328
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3392,
+              9792
+            ],
+            [
+              3512,
+              9792
+            ],
+            [
+              3512,
+              9828
+            ],
+            [
+              3520,
+              9828
+            ],
+            [
+              3520,
+              9920
+            ],
+            [
+              3456,
+              9920
+            ],
+            [
+              3456,
+              9856
+            ],
+            [
+              3392,
+              9856
+            ],
+            [
+              3392,
+              9792
+            ]
+          ],
+          [
+            [
+              3648,
+              9728
+            ],
+            [
+              3648,
+              9792
+            ],
+            [
+              3712,
+              9792
+            ],
+            [
+              3712,
+              9728
+            ],
+            [
+              3648,
+              9728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Stillness\" title=\"Stillness\">Stillness</a>",
+        "description": "<div><a href=\"/w/File:Stillness.ogg\" title=\"File:Stillness.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3456,
+              9728
+            ],
+            [
+              3576,
+              9728
+            ],
+            [
+              3576,
+              9764
+            ],
+            [
+              3584,
+              9764
+            ],
+            [
+              3584,
+              9856
+            ],
+            [
+              3520,
+              9856
+            ],
+            [
+              3520,
+              9792
+            ],
+            [
+              3456,
+              9792
+            ],
+            [
+              3456,
+              9728
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3392,
+              9792
+            ],
+            [
+              3512,
+              9792
+            ],
+            [
+              3512,
+              9828
+            ],
+            [
+              3520,
+              9828
+            ],
+            [
+              3520,
+              9920
+            ],
+            [
+              3456,
+              9920
+            ],
+            [
+              3456,
+              9856
+            ],
+            [
+              3392,
+              9856
+            ],
+            [
+              3392,
+              9792
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3456,
+              9664
+            ],
+            [
+              3576,
+              9664
+            ],
+            [
+              3576,
+              9700
+            ],
+            [
+              3584,
+              9700
+            ],
+            [
+              3584,
+              9792
+            ],
+            [
+              3520,
+              9792
+            ],
+            [
+              3520,
+              9728
+            ],
+            [
+              3456,
+              9728
+            ],
+            [
+              3456,
+              9664
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3376,
+              9784
+            ],
+            [
+              3496,
+              9784
+            ],
+            [
+              3496,
+              9820
+            ],
+            [
+              3504,
+              9820
+            ],
+            [
+              3504,
+              9912
+            ],
+            [
+              3440,
+              9912
+            ],
+            [
+              3440,
+              9848
+            ],
+            [
+              3376,
+              9848
+            ],
+            [
+              3376,
+              9784
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3648,
+              9728
+            ],
+            [
+              3648,
+              9792
+            ],
+            [
+              3712,
+              9792
+            ],
+            [
+              3712,
+              9728
+            ],
+            [
+              3648,
+              9728
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2624,
+              5184
+            ],
+            [
+              2624,
+              5248
+            ],
+            [
+              2688,
+              5248
+            ],
+            [
+              2688,
+              5184
+            ],
+            [
+              2624,
+              5184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Storm_Brew\" title=\"Storm Brew\">Storm Brew</a>",
+        "description": "<div><a href=\"/w/File:Storm_Brew.ogg\" title=\"File:Storm Brew.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Dorgesh-Kaan",
+          "mapId": 5,
+          "coordinates": [
+            [
+              2624,
+              5184
+            ],
+            [
+              2624,
+              5248
+            ],
+            [
+              2688,
+              5248
+            ],
+            [
+              2688,
+              5184
+            ],
+            [
+              2624,
+              5184
             ]
           ]
         }
@@ -47212,6 +51735,144 @@ const geojsondata = {
             [
               1200,
               3456
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2912,
+              5312
+            ],
+            [
+              2944,
+              5312
+            ],
+            [
+              2944,
+              5248
+            ],
+            [
+              2880,
+              5248
+            ],
+            [
+              2880,
+              5280
+            ],
+            [
+              2904,
+              5280
+            ],
+            [
+              2904,
+              5288
+            ],
+            [
+              2912,
+              5288
+            ],
+            [
+              2912,
+              5312
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Strength_of_Saradomin\" title=\"Strength of Saradomin\">Strength of Saradomin</a>",
+        "description": "<div><a href=\"/w/File:Strength_of_Saradomin.ogg\" title=\"File:Strength of Saradomin.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "God Wars Dungeon",
+          "mapId": 7,
+          "coordinates": [
+            [
+              2976,
+              5312
+            ],
+            [
+              3008,
+              5312
+            ],
+            [
+              3008,
+              5248
+            ],
+            [
+              2944,
+              5248
+            ],
+            [
+              2944,
+              5280
+            ],
+            [
+              2968,
+              5280
+            ],
+            [
+              2968,
+              5288
+            ],
+            [
+              2976,
+              5288
+            ],
+            [
+              2976,
+              5312
+            ]
+          ]
+        },
+        {
+          "mapName": "God Wars Dungeon",
+          "mapId": 7,
+          "coordinates": [
+            [
+              2944,
+              5304
+            ],
+            [
+              2976,
+              5304
+            ],
+            [
+              2976,
+              5240
+            ],
+            [
+              2912,
+              5240
+            ],
+            [
+              2912,
+              5272
+            ],
+            [
+              2936,
+              5272
+            ],
+            [
+              2936,
+              5280
+            ],
+            [
+              2944,
+              5280
+            ],
+            [
+              2944,
+              5304
             ]
           ]
         }
@@ -47526,6 +52187,32 @@ const geojsondata = {
               10112
             ]
           ]
+        },
+        {
+          "mapName": "Miscellania Underground",
+          "mapId": 11,
+          "coordinates": [
+            [
+              2496,
+              10112
+            ],
+            [
+              2496,
+              10176
+            ],
+            [
+              2560,
+              10176
+            ],
+            [
+              2560,
+              10112
+            ],
+            [
+              2496,
+              10112
+            ]
+          ]
         }
       ]
     },
@@ -47648,6 +52335,100 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2752,
+              9280
+            ],
+            [
+              2752,
+              9344
+            ],
+            [
+              2816,
+              9344
+            ],
+            [
+              2816,
+              9280
+            ],
+            [
+              2752,
+              9280
+            ]
+          ],
+          [
+            [
+              1568,
+              10240
+            ],
+            [
+              1600,
+              10240
+            ],
+            [
+              1600,
+              10176
+            ],
+            [
+              1536,
+              10176
+            ],
+            [
+              1536,
+              10208
+            ],
+            [
+              1568,
+              10208
+            ],
+            [
+              1568,
+              10240
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Superstition\" title=\"Superstition\">Superstition</a>",
+        "description": "<div><a href=\"/w/File:Superstition.ogg\" title=\"File:Superstition.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Karamja Underground",
+          "mapId": 9,
+          "coordinates": [
+            [
+              2752,
+              9280
+            ],
+            [
+              2752,
+              9344
+            ],
+            [
+              2816,
+              9344
+            ],
+            [
+              2816,
+              9280
+            ],
+            [
+              2752,
+              9280
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2880,
               10112
             ],
@@ -47680,6 +52461,32 @@ const geojsondata = {
         {
           "mapName": "Keldagrim",
           "mapId": 10,
+          "coordinates": [
+            [
+              2880,
+              10112
+            ],
+            [
+              2880,
+              10240
+            ],
+            [
+              2944,
+              10240
+            ],
+            [
+              2944,
+              10112
+            ],
+            [
+              2880,
+              10112
+            ]
+          ]
+        },
+        {
+          "mapName": "Wilderness Dungeons",
+          "mapId": 26,
           "coordinates": [
             [
               2880,
@@ -47828,6 +52635,134 @@ const geojsondata = {
             [
               3200,
               9472
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2368,
+              9856
+            ],
+            [
+              2368,
+              9920
+            ],
+            [
+              2432,
+              9920
+            ],
+            [
+              2432,
+              9856
+            ],
+            [
+              2368,
+              9856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Technology\" title=\"Technology\">Technology</a>",
+        "description": "<div><a href=\"/w/File:Technology.ogg\" title=\"File:Technology.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Stronghold Underground",
+          "mapId": 19,
+          "coordinates": [
+            [
+              2368,
+              9856
+            ],
+            [
+              2368,
+              9920
+            ],
+            [
+              2432,
+              9920
+            ],
+            [
+              2432,
+              9856
+            ],
+            [
+              2368,
+              9856
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3520,
+              9536
+            ],
+            [
+              3712,
+              9536
+            ],
+            [
+              3712,
+              9408
+            ],
+            [
+              3520,
+              9408
+            ],
+            [
+              3520,
+              9536
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Temple_of_the_Eye_(music_track)\" title=\"Temple of the Eye (music track)\">Temple of the Eye</a>",
+        "description": "<div><a href=\"/w/File:Temple_of_the_Eye.ogg\" title=\"File:Temple of the Eye.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Mos Le'Harmless Cave",
+          "mapId": 15,
+          "coordinates": [
+            [
+              3520,
+              9536
+            ],
+            [
+              3712,
+              9536
+            ],
+            [
+              3712,
+              9408
+            ],
+            [
+              3520,
+              9408
+            ],
+            [
+              3520,
+              9536
             ]
           ]
         }
@@ -48004,6 +52939,192 @@ const geojsondata = {
             [
               3392,
               3520
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3512,
+              9828
+            ],
+            [
+              3584,
+              9828
+            ],
+            [
+              3584,
+              9792
+            ],
+            [
+              3648,
+              9792
+            ],
+            [
+              3648,
+              9728
+            ],
+            [
+              3616,
+              9728
+            ],
+            [
+              3616,
+              9681
+            ],
+            [
+              3648,
+              9681
+            ],
+            [
+              3648,
+              9664
+            ],
+            [
+              3600,
+              9664
+            ],
+            [
+              3600,
+              9728
+            ],
+            [
+              3512,
+              9728
+            ],
+            [
+              3512,
+              9828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Terrible_Tunnels\" title=\"The Terrible Tunnels\">The Terrible Tunnels</a>",
+        "description": "<div><a href=\"/w/File:The_Terrible_Tunnels.ogg\" title=\"File:The Terrible Tunnels.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3512,
+              9828
+            ],
+            [
+              3584,
+              9828
+            ],
+            [
+              3584,
+              9792
+            ],
+            [
+              3648,
+              9792
+            ],
+            [
+              3648,
+              9728
+            ],
+            [
+              3616,
+              9728
+            ],
+            [
+              3616,
+              9681
+            ],
+            [
+              3648,
+              9681
+            ],
+            [
+              3648,
+              9664
+            ],
+            [
+              3600,
+              9664
+            ],
+            [
+              3600,
+              9728
+            ],
+            [
+              3512,
+              9728
+            ],
+            [
+              3512,
+              9828
+            ]
+          ]
+        },
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3576,
+              9764
+            ],
+            [
+              3648,
+              9764
+            ],
+            [
+              3648,
+              9728
+            ],
+            [
+              3712,
+              9728
+            ],
+            [
+              3712,
+              9664
+            ],
+            [
+              3680,
+              9664
+            ],
+            [
+              3680,
+              9617
+            ],
+            [
+              3712,
+              9617
+            ],
+            [
+              3712,
+              9600
+            ],
+            [
+              3664,
+              9600
+            ],
+            [
+              3664,
+              9664
+            ],
+            [
+              3576,
+              9664
+            ],
+            [
+              3576,
+              9764
             ]
           ]
         }
@@ -48494,6 +53615,48 @@ const geojsondata = {
         {
           "mapName": "Ardougne Underground",
           "mapId": 2,
+          "coordinates": [
+            [
+              2496,
+              9728
+            ],
+            [
+              2528,
+              9728
+            ],
+            [
+              2528,
+              9760
+            ],
+            [
+              2560,
+              9760
+            ],
+            [
+              2560,
+              9728
+            ],
+            [
+              2624,
+              9728
+            ],
+            [
+              2624,
+              9792
+            ],
+            [
+              2496,
+              9792
+            ],
+            [
+              2496,
+              9728
+            ]
+          ]
+        },
+        {
+          "mapName": "Stronghold Underground",
+          "mapId": 19,
           "coordinates": [
             [
               2496,
@@ -49146,6 +54309,32 @@ const geojsondata = {
               9472
             ]
           ]
+        },
+        {
+          "mapName": "Asgarnia Ice Cave",
+          "mapId": 3,
+          "coordinates": [
+            [
+              2816,
+              9472
+            ],
+            [
+              2816,
+              9536
+            ],
+            [
+              2880,
+              9536
+            ],
+            [
+              2880,
+              9472
+            ],
+            [
+              2816,
+              9472
+            ]
+          ]
         }
       ]
     },
@@ -49236,6 +54425,32 @@ const geojsondata = {
         {
           "mapName": "Ardougne Underground",
           "mapId": 2,
+          "coordinates": [
+            [
+              2688,
+              9728
+            ],
+            [
+              2688,
+              9792
+            ],
+            [
+              2752,
+              9792
+            ],
+            [
+              2752,
+              9728
+            ],
+            [
+              2688,
+              9728
+            ]
+          ]
+        },
+        {
+          "mapName": "Taverley Underground",
+          "mapId": 20,
           "coordinates": [
             [
               2688,
@@ -49512,6 +54727,96 @@ const geojsondata = {
             [
               2368,
               5056
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3136,
+              4544
+            ],
+            [
+              3136,
+              4672
+            ],
+            [
+              3200,
+              4672
+            ],
+            [
+              3200,
+              4544
+            ],
+            [
+              3136,
+              4544
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Undead_Dungeon\" title=\"Undead Dungeon\">Undead Dungeon</a>",
+        "description": "<div><a href=\"/w/File:Undead_Dungeon.ogg\" title=\"File:Undead Dungeon.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Lair of Tarn Razorlor",
+          "mapId": 24,
+          "coordinates": [
+            [
+              3136,
+              4544
+            ],
+            [
+              3136,
+              4672
+            ],
+            [
+              3200,
+              4672
+            ],
+            [
+              3200,
+              4544
+            ],
+            [
+              3136,
+              4544
+            ]
+          ]
+        },
+        {
+          "mapName": "Lair of Tarn Razorlor",
+          "mapId": 24,
+          "coordinates": [
+            [
+              3200,
+              4544
+            ],
+            [
+              3200,
+              4672
+            ],
+            [
+              3264,
+              4672
+            ],
+            [
+              3264,
+              4544
+            ],
+            [
+              3200,
+              4544
             ]
           ]
         }
@@ -50118,6 +55423,70 @@ const geojsondata = {
             [
               3328,
               3328
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3328,
+              9728
+            ],
+            [
+              3328,
+              9856
+            ],
+            [
+              3392,
+              9856
+            ],
+            [
+              3392,
+              9728
+            ],
+            [
+              3328,
+              9728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Venture_2\" title=\"Venture 2\">Venture 2</a>",
+        "description": "<div><a href=\"/w/File:Venture_2.ogg\" title=\"File:Venture 2.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3312,
+              9720
+            ],
+            [
+              3312,
+              9848
+            ],
+            [
+              3376,
+              9848
+            ],
+            [
+              3376,
+              9720
+            ],
+            [
+              3312,
+              9720
             ]
           ]
         }
@@ -51254,6 +56623,96 @@ const geojsondata = {
               3392
             ]
           ]
+        },
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1536,
+              9856
+            ],
+            [
+              1536,
+              9792
+            ],
+            [
+              1600,
+              9792
+            ],
+            [
+              1600,
+              9856
+            ],
+            [
+              1536,
+              9856
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1472,
+              9920
+            ],
+            [
+              1472,
+              9984
+            ],
+            [
+              1536,
+              9984
+            ],
+            [
+              1536,
+              9920
+            ],
+            [
+              1472,
+              9920
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Walking_Dead\" title=\"The Walking Dead\">The Walking Dead</a>",
+        "description": "<div><a href=\"/w/File:The_Walking_Dead.ogg\" title=\"File:The Walking Dead.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Kourend Underground",
+          "mapId": 32,
+          "coordinates": [
+            [
+              1472,
+              9920
+            ],
+            [
+              1472,
+              9984
+            ],
+            [
+              1536,
+              9984
+            ],
+            [
+              1536,
+              9920
+            ],
+            [
+              1472,
+              9920
+            ]
+          ]
         }
       ]
     },
@@ -51752,6 +57211,102 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              2176,
+              6080
+            ],
+            [
+              2368,
+              6080
+            ],
+            [
+              2368,
+              5952
+            ],
+            [
+              2432,
+              5952
+            ],
+            [
+              2432,
+              6080
+            ],
+            [
+              2624,
+              6080
+            ],
+            [
+              2624,
+              5760
+            ],
+            [
+              2176,
+              5760
+            ],
+            [
+              2176,
+              6080
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Watch_Your_Step\" title=\"Watch Your Step\">Watch Your Step</a>",
+        "description": "<div><a href=\"/w/File:Watch_Your_Step.ogg\" title=\"File:Watch Your Step.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Prifddinas Grand Library",
+          "mapId": 35,
+          "coordinates": [
+            [
+              2176,
+              6080
+            ],
+            [
+              2368,
+              6080
+            ],
+            [
+              2368,
+              5952
+            ],
+            [
+              2432,
+              5952
+            ],
+            [
+              2432,
+              6080
+            ],
+            [
+              2624,
+              6080
+            ],
+            [
+              2624,
+              5760
+            ],
+            [
+              2176,
+              5760
+            ],
+            [
+              2176,
+              6080
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2496,
               9792
             ],
@@ -51803,6 +57358,58 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Stronghold Underground",
+          "mapId": 19,
+          "coordinates": [
+            [
+              2496,
+              9792
+            ],
+            [
+              2496,
+              9856
+            ],
+            [
+              2560,
+              9856
+            ],
+            [
+              2560,
+              9792
+            ],
+            [
+              2496,
+              9792
+            ]
+          ]
+        },
+        {
+          "mapName": "Ardougne Underground",
+          "mapId": 2,
+          "coordinates": [
+            [
+              2496,
+              9792
+            ],
+            [
+              2496,
+              9856
+            ],
+            [
+              2560,
+              9856
+            ],
+            [
+              2560,
+              9792
+            ],
+            [
+              2496,
+              9792
+            ]
+          ]
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -51889,6 +57496,32 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "Braindeath Island",
+          "mapId": 4,
+          "coordinates": [
+            [
+              2056,
+              5024
+            ],
+            [
+              2056,
+              5056
+            ],
+            [
+              2112,
+              5056
+            ],
+            [
+              2112,
+              5024
+            ],
+            [
+              2056,
+              5024
+            ]
+          ]
+        },
         {
           "mapName": "Gielinor Surface",
           "mapId": 0,
@@ -53250,6 +58883,148 @@ const geojsondata = {
               9536
             ]
           ]
+        },
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3018,
+              9536
+            ],
+            [
+              3018,
+              9568
+            ],
+            [
+              3037,
+              9568
+            ],
+            [
+              3038,
+              9569
+            ],
+            [
+              3038,
+              9570
+            ],
+            [
+              3037,
+              9571
+            ],
+            [
+              3037,
+              9573
+            ],
+            [
+              3038,
+              9574
+            ],
+            [
+              3039,
+              9574
+            ],
+            [
+              3040,
+              9575
+            ],
+            [
+              3041,
+              9575
+            ],
+            [
+              3042,
+              9574
+            ],
+            [
+              3043,
+              9574
+            ],
+            [
+              3046,
+              9571
+            ],
+            [
+              3046,
+              9569
+            ],
+            [
+              3051,
+              9564
+            ],
+            [
+              3053,
+              9564
+            ],
+            [
+              3055,
+              9562
+            ],
+            [
+              3058,
+              9562
+            ],
+            [
+              3061,
+              9565
+            ],
+            [
+              3062,
+              9565
+            ],
+            [
+              3064,
+              9567
+            ],
+            [
+              3064,
+              9568
+            ],
+            [
+              3067,
+              9571
+            ],
+            [
+              3067,
+              9574
+            ],
+            [
+              3069,
+              9576
+            ],
+            [
+              3069,
+              9580
+            ],
+            [
+              3068,
+              9581
+            ],
+            [
+              3068,
+              9585
+            ],
+            [
+              3064,
+              9589
+            ],
+            [
+              3064,
+              9600
+            ],
+            [
+              3085,
+              9600
+            ],
+            [
+              3085,
+              9536
+            ],
+            [
+              3018,
+              9536
+            ]
+          ]
         }
       ]
     },
@@ -53612,6 +59387,100 @@ const geojsondata = {
         "coordinates": [
           [
             [
+              3264,
+              9856
+            ],
+            [
+              3296,
+              9856
+            ],
+            [
+              3296,
+              9824
+            ],
+            [
+              3264,
+              9824
+            ],
+            [
+              3264,
+              9856
+            ]
+          ],
+          [
+            [
+              2944,
+              5184
+            ],
+            [
+              2944,
+              5248
+            ],
+            [
+              3040,
+              5248
+            ],
+            [
+              3040,
+              5216
+            ],
+            [
+              3008,
+              5216
+            ],
+            [
+              3008,
+              5184
+            ],
+            [
+              2944,
+              5184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/Wrath_and_Ruin\" title=\"Wrath and Ruin\">Wrath and Ruin</a>",
+        "description": "<div><a href=\"/w/File:Wrath_and_Ruin.ogg\" title=\"File:Wrath and Ruin.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Misthalin Underground",
+          "mapId": 12,
+          "coordinates": [
+            [
+              3264,
+              9856
+            ],
+            [
+              3296,
+              9856
+            ],
+            [
+              3296,
+              9824
+            ],
+            [
+              3264,
+              9824
+            ],
+            [
+              3264,
+              9856
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               2880,
               4352
             ],
@@ -53939,6 +59808,32 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+        {
+          "mapName": "God Wars Dungeon",
+          "mapId": 7,
+          "coordinates": [
+            [
+              2917,
+              5216
+            ],
+            [
+              2952,
+              5216
+            ],
+            [
+              2952,
+              5152
+            ],
+            [
+              2917,
+              5152
+            ],
+            [
+              2917,
+              5216
+            ]
+          ]
+        },
         {
           "mapName": "God Wars Dungeon",
           "mapId": 7,
@@ -54768,6 +60663,80 @@ const geojsondata = {
             [
               3621,
               3365
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              1728,
+              5056
+            ],
+            [
+              1728,
+              5120
+            ],
+            [
+              1792,
+              5120
+            ],
+            [
+              1792,
+              5056
+            ]
+          ],
+          [
+            [
+              1744,
+              5072
+            ],
+            [
+              1744,
+              5104
+            ],
+            [
+              1776,
+              5104
+            ],
+            [
+              1776,
+              5072
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "description": "<div><a href=\"/w/File:Dreamstate.ogg\" title=\"File:Dreamstate.ogg\">Play track</a></div>",
+        "mapID": "-1",
+        "plane": 0,
+        "title": "<a href=\"/w/Dreamstate\" title=\"Dreamstate\">Dreamstate</a> <sup><a href=\"/w/Map:Dreamstate\" title=\"Map:Dreamstate\">(?)</a></sup>"
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Mole Hole",
+          "mapId": 13,
+          "coordinates": [
+            [
+              1728,
+              5056
+            ],
+            [
+              1728,
+              5120
+            ],
+            [
+              1792,
+              5120
+            ],
+            [
+              1792,
+              5056
             ]
           ]
         }
@@ -57531,6 +63500,70 @@ const geojsondata = {
           [
             [
               3200,
+              6016
+            ],
+            [
+              3200,
+              6144
+            ],
+            [
+              3328,
+              6144
+            ],
+            [
+              3328,
+              6016
+            ],
+            [
+              3200,
+              6016
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "description": "<div><a href=\"/w/File:Iorwerth%27s_Lament.ogg\" title=\"File:Iorwerth&#39;s Lament.ogg\">Iorwerth&#x27;s Lament</a></div><div><a href=\"/w/File:Dance_of_the_Meilyr.ogg\" title=\"File:Dance of the Meilyr.ogg\">Dance of the Meilyr</a></div><div><a href=\"/w/File:Mystics_of_Nature.ogg\" title=\"File:Mystics of Nature.ogg\">Mystics of Nature</a></div><div><a href=\"/w/File:Architects_of_Prifddinas.ogg\" title=\"File:Architects of Prifddinas.ogg\">Architects of Prifddinas</a></div><div><a href=\"/w/File:Elven_Guardians.ogg\" title=\"File:Elven Guardians.ogg\">Elven Guardians</a></div><div><a href=\"/w/File:Faith_of_the_Hefin.ogg\" title=\"File:Faith of the Hefin.ogg\">Faith of the Hefin</a></div><div><a href=\"/w/File:Trahaearn_Toil.ogg\" title=\"File:Trahaearn Toil.ogg\">Trahaearn Toil</a></div><div><a href=\"/w/File:The_Tower_of_Voices.ogg\" title=\"File:The Tower of Voices.ogg\">The Tower of Voices</a></div><div><a href=\"/w/File:The_Seed_of_Crwys.ogg\" title=\"File:The Seed of Crwys.ogg\">The Seed of Crwys</a></div>",
+        "mapID": "-1",
+        "plane": 0,
+        "title": "<a href=\"/w/Prifddinas\" title=\"Prifddinas\">Prifddinas</a> <sup><a href=\"/w/Map:Prifddinas_music\" title=\"Map:Prifddinas music\">(?)</a></sup>"
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Prifddinas",
+          "mapId": 29,
+          "coordinates": [
+            [
+              3200,
+              6016
+            ],
+            [
+              3200,
+              6144
+            ],
+            [
+              3328,
+              6144
+            ],
+            [
+              3328,
+              6016
+            ],
+            [
+              3200,
+              6016
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              3200,
               9728
             ],
             [
@@ -57860,7 +63893,7 @@ const geojsondata = {
         }
       ]
     }
-  ] as ConvertedFeature[],
-  type: 'FeatureCollection',
-};
-export default geojsondata;
+  ]as ConvertedFeature[],
+          type: 'FeatureCollection',
+      };
+  export default geojsondata;
