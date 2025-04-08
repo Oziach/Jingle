@@ -141,6 +141,20 @@ export const groupedLinks : GroupedLinks ={
     },
     {
       "start": {
+        "x": 3141,
+        "y": 3634,
+        "mapId": 0,
+        "name": "Gielinor Surface"
+      },
+      "end": {
+        "x": 3457,
+        "y": 5823,
+        "mapId": 36,
+        "name": "Desert Island"
+      }
+    },
+    {
+      "start": {
         "x": 1292,
         "y": 3657,
         "mapId": 0,
@@ -4795,6 +4809,36 @@ export const groupedLinks : GroupedLinks ={
         "y": 3327,
         "mapId": 0,
         "name": "Gielinor Surface"
+      }
+    },
+    {
+      "start": {
+        "x": 3263,
+        "y": 6082,
+        "mapId": 29,
+        "name": "Prifddinas"
+      },
+      "end": {
+        "x": 2622,
+        "y": 6098,
+        "mapId": 35,
+        "name": "Prifddinas Grand Library"
+      }
+    }
+  ],
+  "Prifddinas Grand Library": [
+    {
+      "start": {
+        "x": 2622,
+        "y": 6098,
+        "mapId": 35,
+        "name": "Prifddinas Grand Library"
+      },
+      "end": {
+        "x": 3263,
+        "y": 6082,
+        "mapId": 29,
+        "name": "Prifddinas"
       }
     }
   ],

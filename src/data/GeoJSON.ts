@@ -44561,23 +44561,23 @@ const geojsondata = {
           "coordinates": [
             [
               1280,
-              10048
+              10000
             ],
             [
               1280,
-              10112
+              10064
             ],
             [
               1344,
-              10112
+              10064
             ],
             [
               1344,
-              10048
+              10000
             ],
             [
               1280,
-              10048
+              10000
             ]
           ]
         },
@@ -45622,6 +45622,58 @@ const geojsondata = {
             [
               2560,
               6080
+            ]
+          ]
+        },
+        {
+          "mapName": "Prifddinas Grand Library",
+          "mapId": 35,
+          "coordinates": [
+            [
+              2750,
+              6080
+            ],
+            [
+              2750,
+              6208
+            ],
+            [
+              2878,
+              6208
+            ],
+            [
+              2878,
+              6080
+            ],
+            [
+              2750,
+              6080,
+            ]
+          ]
+        },
+        {
+          "mapName": "Prifddinas Grand Library",
+          "mapId": 35,
+          "coordinates": [
+            [
+              2940,
+              6080
+            ],
+            [
+              2940,
+              6208
+            ],
+            [
+              3068,
+              6208
+            ],
+            [
+              3068,
+              6080
+            ],
+            [
+              2940,
+              6080,
             ]
           ]
         }
@@ -48007,6 +48059,134 @@ const geojsondata = {
             ]
           ]
         }
+      ]
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3512,
+              9828
+            ],
+            [
+              3584,
+              9828
+            ],
+            [
+              3584,
+              9792
+            ],
+            [
+              3648,
+              9792
+            ],
+            [
+              3648,
+              9728
+            ],
+            [
+              3616,
+              9728
+            ],
+            [
+              3616,
+              9681
+            ],
+            [
+              3648,
+              9681
+            ],
+            [
+              3648,
+              9664
+            ],
+            [
+              3600,
+              9664
+            ],
+            [
+              3600,
+              9728
+            ],
+            [
+              3512,
+              9728
+            ],
+            [
+              3512,
+              9828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Terrible_Tunnels\" title=\"The Terrible Tunnels\">The Terrible Tunnels</a>",
+        "description": "<div><a href=\"/w/File:The_Terrible_Tunnels.ogg\" title=\"File:The Terrible Tunnels.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3512,
+              9828
+            ],
+            [
+              3584,
+              9828
+            ],
+            [
+              3584,
+              9792
+            ],
+            [
+              3648,
+              9792
+            ],
+            [
+              3648,
+              9728
+            ],
+            [
+              3616,
+              9728
+            ],
+            [
+              3616,
+              9681
+            ],
+            [
+              3648,
+              9681
+            ],
+            [
+              3648,
+              9664
+            ],
+            [
+              3600,
+              9664
+            ],
+            [
+              3600,
+              9728
+            ],
+            [
+              3512,
+              9728
+            ],
+            [
+              3512,
+              9828
+            ]
+          ]
+        },
       ]
     },
     {
@@ -53663,54 +53843,29 @@ const geojsondata = {
         "plane": 0
       },
       "convertedGeometry": [
+
         {
           "mapName": "Waterbirth Dungeon",
           "mapId": 25,
           "coordinates": [
             [
-              2688,
-              9664
-            ],
-            [
-              2688,
-              9792
-            ],
-            [
-              2752,
-              9792
-            ],
-            [
-              2752,
-              9664
-            ],
-            [
-              2688,
-              9664
-            ]
-          ]
-        },
-        {
-          "mapName": "Waterbirth Dungeon",
-          "mapId": 25,
-          "coordinates": [
-            [
-              2624,
+              2574,
               9600
             ],
             [
-              2624,
+              2574,
               9728
             ],
             [
-              2688,
+              2738,
               9728
             ],
             [
-              2688,
+              2738,
               9600
             ],
             [
-              2624,
+              2574,
               9600
             ]
           ]

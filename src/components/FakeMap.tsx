@@ -97,6 +97,7 @@ export default function RunescapeMapWrapper({
 
  const saveUpdatedGeoJSON = () => {
   const updatedData = JSON.parse(JSON.stringify(geojsondata)); // Deep copy
+  console.log(geojsondata.features[0])
   const folderPath = "./data/redded";
 
   const now = new Date();

@@ -3,12 +3,13 @@ import { useState } from 'react';
 import useSWR from 'swr';
 import { match } from 'ts-pattern';
 import './App.css';
-import DailyJingle from './components/DailyJingle';
+// import DailyJingle from './components/DailyJingle';
 import MainMenu from './components/MainMenu';
 import Practice from './components/Practice';
 import { getDailyChallenge } from './data/jingle-api';
 import './style/leaflet.css';
 import { getCurrentDateInBritain } from './utils/date-utils';
+import DebugPractice from './components/DebugPractice';
 
 enum Screen {
   MainMenu = 'main-menu',
@@ -31,21 +32,8 @@ function App() {
         backgroundSize: 'cover',
       }}
     >
-      {match(screen)
-        .with(Screen.MainMenu, () => (
-          <MainMenu
-            dailyChallenge={dailyChallenge}
-            onDailyJingleClick={() => setScreen(Screen.DailyJingle)}
-            onPracticeClick={() => setScreen(Screen.Practice)}
-          />
-        ))
-        .with(
-          Screen.DailyJingle,
-          () =>
-            dailyChallenge && <DailyJingle dailyChallenge={dailyChallenge} />,
-        )
-        .with(Screen.Practice, () => <Practice />)
-        .exhaustive()} 
+      {/* <DebugPractice/> */}
+      <Practice/>
     </div>
   );
 }

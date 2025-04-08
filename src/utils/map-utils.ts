@@ -6,16 +6,17 @@ import { LatLng, point, polygon } from 'leaflet';
 import {groupedLinks, LinkData} from '../data/GroupedLinks';
 import { mapNames } from '../data/MapNames';
 
-const scaleFactor = 3;
-
-enum MapIds{
+export enum MapIds{
   Surface = 0,
   DorgeshKaan = 5,
   KaramjaUnderground = 9,
   MisthalinUnderground = 12,
   MorUlRek = 23,
+  TarnsLair = 24,
   Prifddinas = 29,
   PrifddinasUnderground = 34,
+  LMSWildVarrock = 38,
+  LassarUndercity = 41,
   CamTorum = 44,
   Neypotzli = 45,
 }
@@ -104,39 +105,46 @@ export const getDistanceToLine = (point: [number, number], line: Line) => {
 };
 
 export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
-  return feature.convertedGeometry.length > 0
+const FORBIDDEN_MAP_IDS = [MapIds.LassarUndercity, MapIds.LMSWildVarrock, MapIds.TarnsLair]
+  return feature.convertedGeometry.some(polyData => FORBIDDEN_MAP_IDS.includes(polyData.mapId)) == false 
+  && feature.convertedGeometry.length > 0
 }
 
+//return polys, mapId.
 export const GetClosestMapIdPolys = (correctFeature: ConvertedFeature, 
-  markerPosition : LatLng, currentMapId: number) : [number[][][], number]=> {
+  markerPosition : LatLng, markerMapId: number, currentMapId: number) : [number[][][], number]=> {
   
   const calculateDistanceToPoly = (poly: Point[], mapId: number) => {
-    return GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], currentMapId, poly, mapId);
+    return GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], markerMapId, poly, mapId);
   };
 
-  const validPolygons = correctFeature.convertedGeometry.filter(
-      polyData => polyData.mapId >= 0
-  );  
+  const currentPolyDatas = correctFeature.convertedGeometry;
+  let validPolys = []; 
 
-  if (validPolygons.length === 0) {
-    return [[], -666];  
-  }
+  //first prioritize polys on same mapId as guess
+  const sameMapIdPolyDatas = currentPolyDatas.filter((polyData) => polyData.mapId == markerMapId)
+  if (sameMapIdPolyDatas.length > 0) {return [sameMapIdPolyDatas.map(polyData => polyData.coordinates), markerMapId]}
 
-  // Find poly with the shortest distance to markerPosition
-  let closestPolyData = validPolygons[0];
+
+  //next prioritize surface polys
+  const surfacePolys = currentPolyDatas.filter((polyData) => polyData.mapId == markerMapId)
+  if (surfacePolys.length > 0) {return [surfacePolys.map(polyData => polyData.coordinates), 0]}
+
+
+  //Otherwise, find poly with the shortest distance to markerPosition
+  let closestPolyData = currentPolyDatas[0];
   let minDistance = Infinity;
 
-  for (let polyData of validPolygons) {
+  for (let polyData of currentPolyDatas) {
     const distance = calculateDistanceToPoly(polyData.coordinates as Point[], polyData.mapId);
-    
+
     if (distance < minDistance) {
       minDistance = distance;
       closestPolyData = polyData;
     }
   }
 
-  // Filter all polygons that belong to the closest mapId
-  const closestPolygons = validPolygons.filter(
+  const closestPolygons = currentPolyDatas.filter(
     polyData => polyData.mapId === closestPolyData.mapId
   );
 
@@ -266,8 +274,6 @@ const GetNestedMinDistToSurfce = (origin : Point | Point[], mapId : number) : [n
 }
 
 
-//this is untested.
-//oh god prifdinas still sounds like a pain. 
 const HandleNestedDungeons = (point : Point, pointMapId : number, poly : Point[], polyMapId : number) : [boolean, number] => {
   
   if(pointMapId == polyMapId){return [false, Infinity];} // let the other function handle it
@@ -290,31 +296,6 @@ const HandleNestedDungeons = (point : Point, pointMapId : number, poly : Point[]
     const totalDist = pointExitDist + polyExitDist;
     return [true, totalDist];
   }
-
-  // //Clicked Mor Ul Rek - Poly in Karamja Underground
-  // if(pointMapId == MapIds.MorUlRek && polyMapId == MapIds.KaramjaUnderground) {
-  //   const [morUlRekExitDist, morUlRekExit] = GetMinDistToExit(point, pointMapId, MapIds.KaramjaUnderground);
-  //   const totalDist = morUlRekExitDist + DistanceOnMapId(morUlRekExit!, poly);
-  //   return [true, totalDist];
-  // }
-  // //Clicked Karamja Underground - Poly in Mor Ul Rek
-  // else if(pointMapId == MapIds.KaramjaUnderground && polyMapId == MapIds.MorUlRek){
-  //   const [morUlRekExitDist, morUlRekExit] = GetMinDistToExit(poly, polyMapId, MapIds.KaramjaUnderground);
-  //   const totalDist = morUlRekExitDist + DistanceOnMapId(morUlRekExit!, point);
-  //   return [true, totalDist]
-  // }
-  // //Clicked Dorgesh Kaan - Poly in Misthalin Underground
-  // else if(pointMapId == MapIds.DorgeshKaan && polyMapId == MapIds.MisthalinUnderground){
-  //   const [dorgeshKaanExitDist, dorgeshKaanExit] = GetMinDistToExit(point, pointMapId, MapIds.MisthalinUnderground);
-  //   const totalDist = dorgeshKaanExitDist + DistanceOnMapId(dorgeshKaanExit!, poly);
-  //   return [true, totalDist]
-  // }
-  // //Clicked Misthalin Underground - Poly in Dorgesh Kaan
-  // else if(pointMapId == MapIds.MisthalinUnderground && polyMapId == MapIds.DorgeshKaan){
-  //   const [dorgeshKaanExitDist, dorgeshKaanExit] = GetMinDistToExit(poly, polyMapId, MapIds.MisthalinUnderground);
-  //   const totalDist = dorgeshKaanExitDist + DistanceOnMapId(dorgeshKaanExit!, point);
-  //   return [true, totalDist]
-  // }
 
   //click and poly both nested
   else if(nestedMapIds.includes(polyMapId) && nestedMapIds.includes(pointMapId)){

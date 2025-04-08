@@ -9,7 +9,6 @@ import {
   GeoJSON,
   MapContainer,
   Marker,
-  TileLayer,
   useMap,
   useMapEvents,
 } from 'react-leaflet';
@@ -27,11 +26,11 @@ import {
   GetTotalDistanceToPoly,
   toOurPixelCoordinates,
 } from '../utils/map-utils';
+import { ConfigureMap, HandleMapZoom, InternalMapState } from '../utils/map-config-utils';
+
 import { basemaps} from '../data/basemaps';
 import { groupedLinks } from '../data/GroupedLinks';
 import LinkClickboxes from './LinkClickboxes';
-
-
 
 interface RunescapeMapProps {
   gameState: GameState;
@@ -39,50 +38,36 @@ interface RunescapeMapProps {
   className?: string;
   confirmedGuess: boolean; 
   setShowConfirmGuess: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentMapId?: React.Dispatch<React.SetStateAction<number>> | null;
-  currentMapId?: number | null;
 }
-
-
-interface RunescapeMapPropsInner { //lazy solution for now for
-  gameState: GameState;
-  onGuess: (guess: Guess) => void;
-  className?: string;
-  confirmedGuess: boolean; 
-  setShowConfirmGuess: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentMapId: React.Dispatch<React.SetStateAction<number>>;
-  setMapCenter: React.Dispatch<React.SetStateAction<number[]>>;
-  currentMapId: number;
-  zoom: number;
-  setZoom:  React.Dispatch<React.SetStateAction<number>>;
-}
-;
 
 export default function RunescapeMapWrapper({
   className,
   ...props
 }: RunescapeMapProps) {
+  
 
   const [currentMapId, setCurrentMapId] = useState(0);
   const currentMap = basemaps[currentMapId];
+
   const [zoom, setZoom] = useState(1); 
   const [mapCenter, setMapCenter] = useState([3222, 3218]); //lumby
-  const mapRef = useRef<L.Map>(null);
   const mapIdPadding = currentMapId == 0 ? -64 : 256; //in game tiles. 64 tiles per square.
-
+  const [markerState, setMarkerState] = useState({
+    markerPosition: null as L.LatLng | null,
+    markerMapId: 0,
+  });
 
   return (
     <MapContainer
       crs={CRS.Simple}
       key={currentMapId} 
-      ref={mapRef}
       center={[mapCenter[1], mapCenter[0]]}
       zoom={zoom}
       maxZoom={3}
-      minZoom={0}
+      minZoom={-1                                                                                                                                                                                     }
       style={{ height: "100vh", width: "100%", background: "black" }}
       maxBounds={[
-        [currentMap.bounds[0][1] - mapIdPadding, currentMap.bounds[0][0] - mapIdPadding],
+        [currentMap.bounds[0][1] - mapIdPadding, currentMap.bounds[0][0] - mapIdPadding],                                     
         [currentMap.bounds[1][1] + mapIdPadding, currentMap.bounds[1][0] + mapIdPadding],
       ]}
       maxBoundsViscosity={0.5}
@@ -107,99 +92,66 @@ export default function RunescapeMapWrapper({
       </select>
 
       <RunescapeMap {...props} currentMapId={currentMapId} setCurrentMapId={setCurrentMapId} 
-      setMapCenter={setMapCenter} zoom={zoom} setZoom={setZoom}/>
+      setMapCenter={setMapCenter} zoom={zoom} setZoom={setZoom} markerState={markerState} setMarkerState={setMarkerState}/>
 
     </MapContainer>
   );
 }
 
 function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess, currentMapId, setCurrentMapId, 
-  setMapCenter, zoom, setZoom}: RunescapeMapPropsInner) {
+  setMapCenter, zoom, setZoom, markerState, setMarkerState}: InternalMapState) {
   
   const currentSong = gameState.songs[gameState.round];
-  const currentMap = basemaps[currentMapId!];
-  const [markerPosition, setMarkerPosition] = useState<L.LatLng | null>(null);
+  const currentMap = basemaps[currentMapId];
+  const map = useMap();
 
-  const map = useMap(); // Get Leaflet map instance
-  
+
   useEffect(()=>{
-  
+
     if(!map){return;}
-  
-    class CustomTileLayer extends L.TileLayer {
-      getTileUrl(coords: L.Coords): string {
-        const { x, y, z } = coords;
-        
-        //leaflet's tms param DOESN'T GODDAMN WORK.
-        const tmsY = -y - 1;
+    ConfigureMap(map, currentMapId)
 
-        return `/rsmap-tiles/mapIdTiles/${currentMapId}/${z}/0_${x}_${tmsY}.png`;
-      }
-    }
-  
-    const tileLayer = new CustomTileLayer("", {
-      minZoom: -3,
-      maxZoom: 3,
-      tileSize: 256,
-      tms: true
-    });
-
-    tileLayer.addTo(map);
-
-    return () => {
-      if (map) {
-        map.removeLayer(tileLayer);
-      }
-    };
   }, [map])
-
 
   //override map zoom, to not reset when changing mapIds
   useEffect(()=>{
-
-    const updateZoom = () => setZoom(map.getZoom());
-    map.on("zoomend", updateZoom);
-
-    return () => {
-      if (map) {
-        map.off("zoomend", updateZoom);
-      }
-    };
+    HandleMapZoom(map, setZoom);
   },[zoom])
   
 
+
+  //handle marker state
   useMapEvents({
-    click: async (e) => { //handle marker position on map clicks
+    click: async (e) => { 
       if (gameState.status !== GameStatus.Guessing) return;
-      if(markerPosition === null){setShowConfirmGuess(true);}
-      setMarkerPosition(e.latlng);
+      if(markerState.markerPosition === null){setShowConfirmGuess(true);}
+      setMarkerState({markerPosition: e.latlng, markerMapId: currentMapId});
       console.log(e.latlng);
     },
   });
 
   useEffect(()=>{
     if(!confirmedGuess){return;}
-    OnConfirmGuess(setMapCenter, map, markerPosition, setMarkerPosition, currentSong, onGuess, currentMapId, setCurrentMapId);
-    console.log("Correct poly: ", gameState.correctPolygon);
+    OnConfirmGuess(setMapCenter, map, markerState, setMarkerState, currentSong, onGuess, currentMapId, setCurrentMapId);
   },[confirmedGuess]) 
 
   return (
     <>  
 
-       {markerPosition && < Marker
-            position={markerPosition}
-            icon={
-              new Icon({
-                iconUrl: markerIconPng,
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-              })
-            }
-          />}
-        
-      <LinkClickboxes mapIdLinks={groupedLinks[currentMap.name]}
+      <LinkClickboxes mapIdLinks={groupedLinks[currentMap.name]} map={map}
        setCurrentMapId={setCurrentMapId} setMapCenter={setMapCenter}/>
       
+      {markerState.markerPosition && markerState.markerMapId == currentMapId && < Marker
+        position={markerState.markerPosition}
+        icon={
+          new Icon({
+            iconUrl: markerIconPng,
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+          })
+        }
+      />}
+        
       {gameState.status === GameStatus.AnswerRevealed && (
         <>
           <Marker
@@ -229,10 +181,14 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
   );
 }
 
-function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number[]>> ,map: L.Map, markerPosition: L.LatLng | null, setMarkerPosition: React.Dispatch<React.SetStateAction<L.LatLng | null>>,
+function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number[]>> ,map: L.Map, markerState: {markerPosition: L.LatLng | null;markerMapId: number;}, 
+  setMarkerState: React.Dispatch<React.SetStateAction<{markerPosition: L.LatLng | null; markerMapId: number;}>>,
   currentSong: string, onGuess: (guess: Guess) => void, currentMapId: number, setCurrentMapId: React.Dispatch<React.SetStateAction<number>>) {
+
+  console.log(markerState);
+  const {markerPosition, markerMapId} = markerState;
   if(!markerPosition){return;}
-  const zoom = map.getMaxZoom();
+
   const ourPixelCoordsClickedPoint = [markerPosition.lng, markerPosition.lat] as Point
   console.log(ourPixelCoordsClickedPoint);
 
@@ -240,9 +196,9 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
     featureMatchesSong(currentSong)
   )!;
 
-  //all polys for for current song in the mapId closest to marker pos - needed to identify with donut polys.
+  //all polys for for current song as per our mapId priorities - needed for donut polys.
   //const repairedPolygons = correctFeature.geometry.coordinates.map(closePolygon);
-  const [musicPolys, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition,currentMapId);
+  const [musicPolys, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition, markerMapId, currentMapId);
   const repairedPolygons = musicPolys.map((musicPoly)=>closePolygon(musicPoly));
 
   // Create a GeoJSON feature for the nearest correct polygon
@@ -314,7 +270,7 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
       correctPolygon: correctPolygonData,
     });
   } else {
-    //restored border distance calcs. TODO: SAVE MAP ID WHERE MARKER IS PLACED
+    //restored border distance calcs.
     const closestDistance = GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], currentMapId, correctPolygon as Point[], songMapId)
     console.log(closestDistance);
     onGuess({
@@ -337,6 +293,6 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
   }
 
   //finally, clear marker for the next song
-  setMarkerPosition(null);
+  setMarkerState({markerPosition: null, markerMapId: 0});
 }
 

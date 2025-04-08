@@ -13,7 +13,9 @@ import {
   useMapEvents,
   GeoJSON
 } from 'react-leaflet';
-import geojsondata from '../data/GeoJSON';
+import truegeojsondata,{ConvertedFeature} from '../data/GeoJSON';
+const geojsondata = JSON.parse(JSON.stringify(truegeojsondata)) as {features: ConvertedFeature[], type: String};
+
 import { Guess } from '../hooks/useGameLogic';
 import { Point } from '../types/geometry';
 import { GameState, GameStatus } from '../types/jingle';

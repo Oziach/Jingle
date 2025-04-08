@@ -44,7 +44,7 @@ export async function generateDailyChallenge(date: string) {
 }
 
 export async function getDailyChallenge(formattedDate: string) {
-  return await get<DailyChallenge>(`/api/daily-challenges/${formattedDate}`);
+  //return await get<DailyChallenge>(`/api/daily-challenges/${formattedDate}`);
 }
 
 export async function getWeekStats() {
@@ -64,49 +64,49 @@ export async function getWeekStats() {
     songSuccessRates: Record<string, string>;
   }[] = [];
 
-  for (const date of weekDatesFormatted) {
-    const dailyChallenge = await getDailyChallenge(date);
-    const results = dailyChallenge?.results ?? [];
-    const average = results.reduce((a, b) => a + b, 0) / results.length;
+  // for (const date of weekDatesFormatted) {
+  //   const dailyChallenge = await getDailyChallenge(date);
+  //   //const results = dailyChallenge?.results ?? [];
+  //   //const average = results.reduce((a, b) => a + b, 0) / results.length;
 
-    const songSuccessRates: Record<string, string> = {};
-    for (const songName of dailyChallenge.songs) {
-      const song = await getSong(songName);
-      const songSuccessRate = (
-        (song.successCount / (song.successCount + song.failureCount)) *
-        100
-      ).toFixed(1);
-      songSuccessRates[song.name] = songSuccessRate;
-    }
+  //   const songSuccessRates: Record<string, string> = {};
+  //   for (const songName of dailyChallenge.songs) {
+  //     const song = await getSong(songName);
+  //     const songSuccessRate = (
+  //       (song.successCount / (song.successCount + song.failureCount)) *
+  //       100
+  //     ).toFixed(1);
+  //     songSuccessRates[song.name] = songSuccessRate;
+  //   }
 
-    weekStats.push({
-      date: date,
-      submissions: dailyChallenge.submissions,
-      average: average,
-      songSuccessRates,
-    });
-  }
+  //   weekStats.push({
+  //     date: date,
+  //     submissions: dailyChallenge.submissions,
+  //     average: average,
+  //     songSuccessRates,
+  //   });
+  // }
 
-  return weekStats;
+  //return weekStats;
 }
 
-export async function postDailyChallengeResult(result: number) {
-  // Returns the percentile
-  return await post<number>(`/api/daily-challenge/result`, { result });
-}
+// export async function postDailyChallengeResult(result: number) {
+//   // Returns the percentile
+//   return await post<number>(`/api/daily-challenge/result`, { result });
+// }
 
-export async function getStatistics() {
-  return await get<Statistics>("/api/statistics");
-}
+// export async function getStatistics() {
+//   return await get<Statistics>("/api/statistics");
+// }
 
-export async function incrementGlobalGuessCounter() {
-  await post("/statistics/increment", {});
-}
+// export async function incrementGlobalGuessCounter() {
+//   await post("/statistics/increment", {});
+// }
 
-export async function incrementSongSuccessCount(songName: string) {
-  await post(`/songs/${songName}/success`, {});
-}
+// export async function incrementSongSuccessCount(songName: string) {
+//   await post(`/songs/${songName}/success`, {});
+// }
 
-export async function incrementSongFailureCount(songName: string) {
-  await post(`/songs/${songName}/failure`, {});
-}
+// export async function incrementSongFailureCount(songName: string) {
+//   await post(`/songs/${songName}/failure`, {});
+// }

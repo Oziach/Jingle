@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { match } from 'ts-pattern';
 import { ASSETS } from '../constants/assets';
-import {
-  incrementGlobalGuessCounter,
-  incrementSongFailureCount,
-  incrementSongSuccessCount,
-} from '../data/jingle-api';
 import { Guess } from '../hooks/useGameLogic';
 import '../style/uiBox.css';
 import { GameState, GameStatus, ModalType, Settings } from '../types/jingle';
@@ -62,11 +57,6 @@ export default function Practice() {
       guess.correct ? 1000 : (1000 * 1) / Math.exp(0.0018 * guess.distance),
     );
 
-    // update statistics
-    incrementGlobalGuessCounter();
-    const currentSong = gameState.songs[gameState.round];
-    if (guess.correct) incrementSongSuccessCount(currentSong);
-    else incrementSongFailureCount(currentSong);
 
     setConfirmedGuess(false);
     setShowConfirmGuess(false);
@@ -121,7 +111,7 @@ export default function Practice() {
   return (
     <>
       <div className='App-inner'>
-        {/* temp button styling coz i can't bear to see the deafult. Work your css magic here*/}
+        {/* temp button styling*/}
         {confirmGuess && showConfirmGuess && <div style={{
             display:"inline-block",
             position: "fixed",
@@ -132,7 +122,7 @@ export default function Practice() {
             borderRadius: "0.2rem"
           }}>
             <button 
-            onClick={()=>setConfirmedGuess(true)}
+            onClick={()=>{setConfirmedGuess(true)}}
             style={{
               color: "rgb(255, 239, 91)", 
               width:"100%", height:"100%", 
@@ -194,6 +184,7 @@ export default function Practice() {
         confirmedGuess={confirmedGuess}
         setShowConfirmGuess={setShowConfirmGuess}
       />
+      
 
       <RoundResult gameState={gameState} />
     </>
