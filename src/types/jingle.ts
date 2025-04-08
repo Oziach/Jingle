@@ -22,7 +22,7 @@ export interface GameState {
   timeTaken: string | null;
 
   guessedPosition: L.LatLng | null;
-  correctPolygon: GeoJsonObject | null;
+  correctPolygons: GeoJsonObject[] | null;
 }
 
 export interface DailyChallenge {

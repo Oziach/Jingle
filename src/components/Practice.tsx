@@ -28,7 +28,7 @@ export default function Practice() {
     startTime: Date.now(),
     timeTaken: null,
     guessedPosition: null,
-    correctPolygon: null,
+    correctPolygons: null,
   });
   
   const [confirmedGuess, setConfirmedGuess] = useState(false); 
@@ -66,7 +66,7 @@ export default function Practice() {
       status: GameStatus.AnswerRevealed,
       scores: [...prev.scores, score],
       guessedPosition: guess.guessedPosition,
-      correctPolygon: guess.correctPolygon,
+      correctPolygons: guess.correctPolygons,
     }));
   };
 

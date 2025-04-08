@@ -8,7 +8,7 @@ export interface Guess {
   correct: boolean;
   distance: number;
   guessedPosition: LatLng;
-  correctPolygon: GeoJsonObject;
+  correctPolygons: GeoJsonObject[];
 }
 
 export default function useGameLogic(
@@ -28,7 +28,7 @@ export default function useGameLogic(
       startTime: Date.now(),
       timeTaken: null,
       guessedPosition: null,
-      correctPolygon: null,
+      correctPolygons: null,
     },
   );
 
@@ -41,7 +41,7 @@ export default function useGameLogic(
       status: GameStatus.AnswerRevealed,
       scores: [...gameState.scores, score],
       guessedPosition: guess.guessedPosition,
-      correctPolygon: guess.correctPolygon,
+      correctPolygons: guess.correctPolygons,
     };
     setGameState(newGameState);
 

@@ -29,8 +29,8 @@ export interface InternalMapState {
   }>>
 }
 
-//sorted, with Gielinor Surface at top
-export const basemaps = [
+//use for map selector
+export const mapSelectBaseMaps = [
     ...rawBasemaps.filter(m => m.name === "Gielinor Surface"),
     ...rawBasemaps
       .filter(m => m.name !== "Gielinor Surface")

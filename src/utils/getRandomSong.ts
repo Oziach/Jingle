@@ -6,7 +6,7 @@ const playedSongs = new Set();
 const playedSongsOrder: string[] = [];
 
 export const getRandomSong = () => {
-  //return getRandomSongByTitle("Everywhere");
+  return getRandomSongByTitle("Wilderness")!;
   let randomSongName: string | null = '';
   const visibleFeatures = geojsondata.features.filter(isFeatureVisibleOnMap);
   do {
@@ -21,6 +21,7 @@ export const getRandomSong = () => {
   return randomSongName!.trim();
 };
 
+//this is extremely useful for testing
 export const getRandomSongByTitle = (songName: string) => {
   const matchedFeature = geojsondata.features.find(feature => {
     const featureTitle = feature.properties?.title;

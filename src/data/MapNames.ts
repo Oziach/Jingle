@@ -1,4 +1,5 @@
-export const mapNames = ["Gielinor Surface" ,
+export const mapNames = [
+"Gielinor Surface" ,
 "Ancient Cavern" ,
 "Ardougne Underground" ,
 "Asgarnia Ice Cave" ,
@@ -44,3 +45,4 @@ export const mapNames = ["Gielinor Surface" ,
 "Varlamore Underground" ,
 "Cam Torum" ,
 "Neypotzli"]
+

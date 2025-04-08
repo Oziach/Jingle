@@ -424,4 +424,4 @@ const basemaps = [
   // }
 ]
 
-export default basemaps;
+export default basemaps

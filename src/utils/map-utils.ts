@@ -2,9 +2,10 @@ import { Feature, Polygon, Position } from 'geojson';
 import { Line, Point } from '../types/geometry';
 import { decodeHTML } from './string-utils';
 import { ConvertedFeature } from '../data/GeoJSON';
-import { LatLng, point, polygon } from 'leaflet';
+import { LatLng } from 'leaflet';
 import {groupedLinks, LinkData} from '../data/GroupedLinks';
 import { mapNames } from '../data/MapNames';
+import { booleanContains, booleanPointInPolygon, polygon } from '@turf/turf';
 
 export enum MapIds{
   Surface = 0,
@@ -115,6 +116,40 @@ export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
 const FORBIDDEN_MAP_IDS = [MapIds.LassarUndercity, MapIds.LMSWildVarrock, MapIds.TarnsLair]
   return feature.convertedGeometry.some(polyData => FORBIDDEN_MAP_IDS.includes(polyData.mapId)) == false 
   && feature.convertedGeometry.length > 0
+}
+
+
+const FindGaps = (repairedPolygons: Point[][]) => {
+   return repairedPolygons.filter(innerPolygon => 
+    repairedPolygons.find(outerPolygon =>
+      innerPolygon !== outerPolygon && booleanContains(polygon([outerPolygon]), polygon([innerPolygon]))
+    )
+   )
+}
+
+const FindOuters = (repairedPolygons: Point[][]): Point[][] => {
+  return repairedPolygons.filter(candidate =>
+    !repairedPolygons.some(other =>
+      candidate !== other &&
+      booleanContains(polygon([other]), polygon([candidate]))
+    )
+  );
+};
+
+export const FindPolyGroups = (repairedPolygons : Point[][]) => {
+  const groups : Point[][][] = [];
+
+  const gaps = FindGaps(repairedPolygons);
+  const outers = FindOuters(repairedPolygons);
+
+  outers.forEach(poly => {
+    const innerGaps = gaps.filter( (gap) => 
+      booleanContains(polygon([poly]), polygon([gap]))
+    )
+    groups.push([poly, ...innerGaps])
+  })
+
+  return groups;
 }
 
 //return polys, mapId.
