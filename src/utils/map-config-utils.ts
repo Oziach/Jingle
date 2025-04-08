@@ -1,5 +1,6 @@
 import { Guess } from "../hooks/useGameLogic";
 import { GameState } from "../types/jingle";
+import rawBasemaps from "../data/basemaps";
 import L from 'leaflet'
 
 export interface InternalMapState { 
@@ -28,7 +29,13 @@ export interface InternalMapState {
   }>>
 }
 
-
+//sorted, with Gielinor Surface at top
+export const basemaps = [
+    ...rawBasemaps.filter(m => m.name === "Gielinor Surface"),
+    ...rawBasemaps
+      .filter(m => m.name !== "Gielinor Surface")
+      .sort((a, b) => a.name.localeCompare(b.name))
+  ]
 
 export const ConfigureMap = (map: L.Map, currentMapId: number) => {
 
@@ -91,5 +98,3 @@ export const HandleMapZoom = (map: L.Map, setZoom: React.Dispatch<React.SetState
         }
     };
 }
-
-

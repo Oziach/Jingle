@@ -17,7 +17,6 @@ import { Guess } from '../hooks/useGameLogic';
 import { Point } from '../types/geometry';
 import { GameState, GameStatus } from '../types/jingle';
 import {
-  calculateDistance,
   closePolygon,
   featureMatchesSong,
   getCenterOfPolygon,
@@ -28,7 +27,7 @@ import {
 } from '../utils/map-utils';
 import { ConfigureMap, HandleMapZoom, InternalMapState } from '../utils/map-config-utils';
 
-import { basemaps} from '../data/basemaps';
+import { basemaps } from '../utils/map-config-utils';
 import { groupedLinks } from '../data/GroupedLinks';
 import LinkClickboxes from './LinkClickboxes';
 
@@ -45,7 +44,7 @@ export default function RunescapeMapWrapper({
   ...props
 }: RunescapeMapProps) {
   
-
+  //map state
   const [currentMapId, setCurrentMapId] = useState(0);
   const currentMap = basemaps[currentMapId];
 
@@ -57,6 +56,12 @@ export default function RunescapeMapWrapper({
     markerMapId: 0,
   });
 
+  const OnMapSelect = (e:React.ChangeEvent<HTMLSelectElement>) => {
+    const newMapId = Number.parseInt(e.target.value);
+    setCurrentMapId!(newMapId);
+    setMapCenter(basemaps[newMapId].center);
+  }
+
   return (
     <MapContainer
       crs={CRS.Simple}
@@ -66,21 +71,16 @@ export default function RunescapeMapWrapper({
       maxZoom={3}
       minZoom={-1                                                                                                                                                                                     }
       style={{ height: "100vh", width: "100%", background: "black" }}
+      maxBoundsViscosity={0.5}
+      className={className}
       maxBounds={[
         [currentMap.bounds[0][1] - mapIdPadding, currentMap.bounds[0][0] - mapIdPadding],                                     
         [currentMap.bounds[1][1] + mapIdPadding, currentMap.bounds[1][0] + mapIdPadding],
       ]}
-      maxBoundsViscosity={0.5}
-      className={className}
     >
       {/* Map Selector */}
       <select
-        onChange={(e) => {
-          const newMapId = Number.parseInt(e.target.value);
-          setCurrentMapId!(newMapId);
-          setMapCenter([basemaps[newMapId].center[0], basemaps[newMapId].center[1]]);
-          console.log(basemaps[newMapId].name)
-        }}
+        onChange = {(e) => OnMapSelect(e)} 
         value={currentMapId!}
         className="map-select"
       >
@@ -105,7 +105,7 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
   const currentMap = basemaps[currentMapId];
   const map = useMap();
 
-
+  //modified tile layer for bottom origin and 0_x_y.png format
   useEffect(()=>{
 
     if(!map){return;}

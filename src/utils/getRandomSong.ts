@@ -6,6 +6,7 @@ const playedSongs = new Set();
 const playedSongsOrder: string[] = [];
 
 export const getRandomSong = () => {
+  //return getRandomSongByTitle("Everywhere");
   let randomSongName: string | null = '';
   const visibleFeatures = geojsondata.features.filter(isFeatureVisibleOnMap);
   do {
@@ -19,6 +20,28 @@ export const getRandomSong = () => {
   updatePlayedSongs(randomSongName!);
   return randomSongName!.trim();
 };
+
+export const getRandomSongByTitle = (songName: string) => {
+  const matchedFeature = geojsondata.features.find(feature => {
+    const featureTitle = feature.properties?.title;
+    if (!featureTitle) return false;
+
+    const match = featureTitle.match(/>(.*?)</);
+    if (!match) return false;
+
+    const decodedTitle = decodeHTML(match[1]);
+    return decodedTitle === songName;
+  });
+
+  if (!matchedFeature) return null;
+
+  const rawTitle = matchedFeature.properties!.title;
+  const match = rawTitle.match(/>(.*?)</);
+  const randomSongName = decodeHTML(match![1]);
+
+  return randomSongName?.trim();
+};
+
 
 const updatePlayedSongs = (newSongName: string) => {
   playedSongsOrder.push(newSongName);

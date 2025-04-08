@@ -1,4 +1,4 @@
-export const basemaps = [
+const basemaps = [
   {
     "mapId": 0,
     "name": "Gielinor Surface",
@@ -423,3 +423,5 @@ export const basemaps = [
   //   "center": [2496, 3328]
   // }
 ]
+
+export default basemaps;

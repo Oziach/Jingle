@@ -1171,7 +1171,7 @@ export const groupedLinks : GroupedLinks ={
       "end": {
         "x": 2805,
         "y": 9590,
-        "mapId": 11 ,
+        "mapId": 9 ,
         "name": "Karamja Underground"
       }
     },
