@@ -21,15 +21,12 @@ import {
   featureMatchesSong,
   FindPolyGroups,
   getCenterOfPolygon,
-  GetClosestMapIdPolys,
-  getDistanceToPolygon,
-  GetTotalDistanceToPoly,
-  toOurPixelCoordinates,
 } from '../utils/map-utils';
 import { ConfigureMap, HandleMapZoom, InternalMapState, mapSelectBaseMaps} from '../utils/map-config';
 import basemaps from '../data/basemaps';
 import { groupedLinks } from '../data/GroupedLinks';
 import LinkClickboxes from './LinkClickboxes';
+import { GetClosestMapIdPolys, getDistanceToPolygon, GetTotalDistanceToPoly } from '../utils/score-dist-utils';
 
 interface RunescapeMapProps {
   gameState: GameState;
@@ -186,7 +183,6 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
   setMarkerState: React.Dispatch<React.SetStateAction<{markerPosition: L.LatLng | null; markerMapId: number;}>>,
   currentSong: string, onGuess: (guess: Guess) => void, currentMapId: number, setCurrentMapId: React.Dispatch<React.SetStateAction<number>>) {
 
-  console.log(markerState);
   const {markerPosition, markerMapId} = markerState;
   if(!markerPosition){return;}
 
@@ -201,16 +197,16 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
   //const repairedPolygons = correctFeature.geometry.coordinates.map(closePolygon);
   const [musicPolys, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition, markerMapId, currentMapId);
   const repairedPolygons = musicPolys.map((musicPoly)=>closePolygon(musicPoly)) as Point[][];
-
+  
   // Create a GeoJSON feature for the nearest correct polygon
   const correctPolygon = repairedPolygons.sort(
     (polygon1, polygon2) => {
-      const d1 = getDistanceToPolygon(ourPixelCoordsClickedPoint, polygon1);
-      const d2 = getDistanceToPolygon(ourPixelCoordsClickedPoint, polygon2);
+      const d1 = GetTotalDistanceToPoly(ourPixelCoordsClickedPoint, markerMapId, polygon1, songMapId);
+      const d2 = GetTotalDistanceToPoly(ourPixelCoordsClickedPoint, markerMapId, polygon2, songMapId);
       return d1 - d2;
     }
   )[0];
-
+  
   const polyGroups = FindPolyGroups(repairedPolygons);
   const [outerPolygon, ...gaps] = polyGroups.find(polyGroup => polyGroup.includes(correctPolygon)) ?? [correctPolygon]
 
@@ -235,7 +231,6 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
     },
   } as GeoJsonObject);})
 
-  console.log("Corect data:", correctPolygonsData);
   if (correctClickedFeature) {
     onGuess({
       correct: true,
