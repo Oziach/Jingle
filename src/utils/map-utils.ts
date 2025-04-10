@@ -18,6 +18,7 @@ export enum MapIds{
   PrifddinasUnderground = 34,
   PrifddinasGrandLibrary = 35,
   LMSWildVarrock = 38,
+  Abyss = 40,
   LassarUndercity = 41,
   CamTorum = 44,
   Neypotzli = 45,
@@ -55,7 +56,7 @@ export const getCenterOfPolygon = (points: Point[]) => {
 
 
 export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
-const FORBIDDEN_MAP_IDS = [MapIds.LassarUndercity, MapIds.LMSWildVarrock, MapIds.TarnsLair]
+const FORBIDDEN_MAP_IDS = [MapIds.LassarUndercity, MapIds.LMSWildVarrock, MapIds.TarnsLair, MapIds.Abyss]
   return feature.convertedGeometry.some(polyData => FORBIDDEN_MAP_IDS.includes(polyData.mapId)) == false 
   && feature.convertedGeometry.length > 0
 }

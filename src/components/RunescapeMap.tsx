@@ -43,21 +43,22 @@ export default function RunescapeMapWrapper({
   
   //map state
   const [currentMapId, setCurrentMapId] = useState(0);
-  const currentMap = basemaps[currentMapId];
-
   const [zoom, setZoom] = useState(1); 
   const [mapCenter, setMapCenter] = useState([3222, 3218]); //lumby
-  const mapIdPadding = currentMapId == 0 ? -64 : 256; //in game tiles. 64 tiles per square.
+  const mapIdPadding = currentMapId == 0 ? -64 : 256; //in game tiles
   const [markerState, setMarkerState] = useState({
     markerPosition: null as L.LatLng | null,
     markerMapId: 0,
   });
+
+  const currentMap = basemaps[currentMapId];
 
   const OnMapSelect = (e:React.ChangeEvent<HTMLSelectElement>) => {
     const newMapId = Number.parseInt(e.target.value);
     setCurrentMapId!(newMapId);
     setMapCenter(basemaps[newMapId].center);
   }
+
 
   return (
     <MapContainer
@@ -104,6 +105,9 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
   const currentMap = basemaps[currentMapId];
   const map = useMap();
 
+  //trigger. better solutions?
+  const linkClick = useRef(false); 
+
   //modified tile layer for bottom origin and 0_x_y.png format
   useEffect(()=>{
 
@@ -121,22 +125,26 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
   useMapEvents({
     click: async (e) => { 
       if (gameState.status !== GameStatus.Guessing) return;
+
+      //maplink consume click event
+      if(linkClick.current){linkClick.current = false; return; } 
+      
       if(markerState.markerPosition === null){setShowConfirmGuess(true);}
       setMarkerState({markerPosition: e.latlng, markerMapId: currentMapId});
-      console.log(e.latlng);
+      console.log(e.latlng, currentMapId);
     },
   });
 
   useEffect(()=>{
     if(!confirmedGuess){return;}
-    OnConfirmGuess(setMapCenter, map, markerState, setMarkerState, currentSong, onGuess, currentMapId, setCurrentMapId);
+    OnConfirmGuess({setMapCenter, map, markerState, setMarkerState, currentSong, onGuess, currentMapId, setCurrentMapId});
   },[confirmedGuess]) 
 
   return (
     <>  
 
       <LinkClickboxes mapIdLinks={groupedLinks[currentMap.name]} map={map}
-       setCurrentMapId={setCurrentMapId} setMapCenter={setMapCenter}/>
+       setCurrentMapId={setCurrentMapId} setMapCenter={setMapCenter} linkClick={linkClick}/>
       
       {markerState.markerPosition && markerState.markerMapId == currentMapId && < Marker
         position={markerState.markerPosition}
@@ -161,6 +169,7 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
               })
             }
           />
+
           {/* render all polys on current mapId */}
           {gameState.correctPolygons!.map(correctPolygon => {
           return <GeoJSON
@@ -172,16 +181,28 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
               fillOpacity: 0.5, // Opacity of fill
               transition: 'all 2000ms',
             })}
-          />})}
+          />
+          })}
         </>
       )}
     </>
   );
 }
 
-function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number[]>> ,map: L.Map, markerState: {markerPosition: L.LatLng | null;markerMapId: number;}, 
+
+interface OnConfirmGuessArgs{
   setMarkerState: React.Dispatch<React.SetStateAction<{markerPosition: L.LatLng | null; markerMapId: number;}>>,
-  currentSong: string, onGuess: (guess: Guess) => void, currentMapId: number, setCurrentMapId: React.Dispatch<React.SetStateAction<number>>) {
+  markerState: {markerPosition: L.LatLng | null;markerMapId: number;}, 
+  setMapCenter: React.Dispatch<React.SetStateAction<number[]>> ,
+  setCurrentMapId: React.Dispatch<React.SetStateAction<number>>
+  onGuess: (guess: Guess) => void, 
+  currentSong: string,
+  currentMapId: number, 
+  map: L.Map, 
+}
+
+
+function OnConfirmGuess({setMarkerState, markerState, setMapCenter, setCurrentMapId, onGuess, currentSong, currentMapId, map} : OnConfirmGuessArgs) {
 
   const {markerPosition, markerMapId} = markerState;
   if(!markerPosition){return;}
@@ -216,7 +237,7 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
     polygon([outerPolygon])
   );
   
-  // Check if the clicked point is inside any hole
+  // Check if the clicked point is inside any gap
   const isInsideGap = gaps.some((gap) => booleanPointInPolygon(ourPixelCoordsClickedPoint, polygon([gap]))
   );
   //merge the two
@@ -240,7 +261,7 @@ function OnConfirmGuess(setMapCenter: React.Dispatch<React.SetStateAction<number
     });
   } else {
     //restored border distance calcs.
-    const closestDistance = GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], currentMapId, correctPolygon as Point[], songMapId)
+    const closestDistance = GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], markerMapId, correctPolygon, songMapId)
     console.log(closestDistance);
     onGuess({
       correct: false,
