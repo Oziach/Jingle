@@ -27,8 +27,8 @@ export default function Practice() {
     scores: [],
     startTime: Date.now(),
     timeTaken: null,
-    guessedPosition: null,
-    correctPolygons: null,
+    guessedPosition: {mapId: -1, position: null},
+    correctPolygons: {mapId: -1 ,polygons: null},
   });
   
   const [confirmedGuess, setConfirmedGuess] = useState(false); 

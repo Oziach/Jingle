@@ -29,6 +29,49 @@ export interface InternalMapState {
   }>>
 }
 
+export enum MapIds{
+  Surface = 0,
+  DorgeshKaan = 5,
+  KaramjaUnderground = 9,
+  MisthalinUnderground = 12,
+  MorUlRek = 23,
+  TarnsLair = 24,
+  Prifddinas = 29,
+  PrifddinasUnderground = 34,
+  PrifddinasGrandLibrary = 35,
+  TutorialIsland = 37,
+  LMSWildVarrock = 38,
+  Abyss = 40,
+  LassarUndercity = 41,
+  CamTorum = 44,
+  Neypotzli = 45,
+}
+
+//separated for simplicity's sake.
+export const NESTED_MAP_IDS = [
+    MapIds.DorgeshKaan,
+    MapIds.MorUlRek,
+    MapIds.Neypotzli,
+    MapIds.PrifddinasGrandLibrary,
+    MapIds.PrifddinasUnderground
+
+];
+export const CHILD_PARENT_MAP_ID_PAIRS = [
+    [MapIds.DorgeshKaan, MapIds.MisthalinUnderground],
+    [MapIds.MorUlRek, MapIds.KaramjaUnderground],
+    [MapIds.Neypotzli, MapIds.CamTorum],
+    [MapIds.PrifddinasGrandLibrary,MapIds.Prifddinas],
+    [MapIds.PrifddinasUnderground, MapIds.Prifddinas]
+]
+
+export const LINKLESS_MAP_IDS = [
+    MapIds.LassarUndercity, 
+    MapIds.LMSWildVarrock,
+    MapIds.TarnsLair,
+    MapIds.Abyss, 
+    MapIds.TutorialIsland
+  ]
+
 //use for map selector
 export const mapSelectBaseMaps = [
     ...rawBasemaps.filter(m => m.name === "Gielinor Surface"),

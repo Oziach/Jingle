@@ -1,18 +1,9 @@
-import { LatLng } from "leaflet";
+import { LatLng, polygon } from "leaflet";
 import { Line, Point } from "../types/geometry";
 import { ConvertedFeature } from "../data/GeoJSON";
-import { MapIds } from "./map-utils";
+import { CHILD_PARENT_MAP_ID_PAIRS, MapIds, NESTED_MAP_IDS } from "./map-config";
 import { groupedLinks, LinkData } from "../data/GroupedLinks";
 import { mapNames } from "../data/MapNames";
-
-export const nestedMapIds = [MapIds.DorgeshKaan, MapIds.MorUlRek, MapIds.Neypotzli, MapIds.Prifddinas];
-export const childParentMapIdPairs = [
-    [MapIds.DorgeshKaan, MapIds.Surface],
-    [MapIds.MorUlRek, MapIds.KaramjaUnderground],
-    [MapIds.Neypotzli, MapIds.CamTorum],
-    [MapIds.Prifddinas, MapIds.PrifddinasGrandLibrary] //untested
-]
-
 
 export const getDistanceToPolygon = (
     point: [number, number] | Point,
@@ -60,7 +51,7 @@ export const getDistanceToLine = (point: [number, number], line: Line) => {
 
 //return polys, mapId.
 export const GetClosestMapIdPolys = (correctFeature: ConvertedFeature,
-    markerPosition: LatLng, markerMapId: number, currentMapId: number): [number[][][], number] => {
+    markerPosition: LatLng, markerMapId: number): [number[][][], number] => {
 
     const calculateDistanceToPoly = (poly: Point[], mapId: number) => {
         return GetTotalDistanceToPoly([markerPosition.lng, markerPosition.lat], markerMapId, poly, mapId);
@@ -98,10 +89,6 @@ export const GetClosestMapIdPolys = (correctFeature: ConvertedFeature,
 
 }
 
-const PrifMapIdCoordsToSurfaceCoords = (point: Point): Point => {
-    return [point[0] - 1024, point[1] - 2750.5]
-}
-
 const FindClosestLink = (origin: Point | Point[], isPoly: boolean, validLinks: LinkData[]) => {
 
     return validLinks.reduce(
@@ -117,32 +104,8 @@ const FindClosestLink = (origin: Point | Point[], isPoly: boolean, validLinks: L
     );
 }
 
-//this is cringe.
-const HandlePrif = (origin: Point | Point[], mapId: number, rawExitMapId: number): [number, Point | null] => {
-
-    const isPoly = Array.isArray(origin[0]);
-
-    //treat as if on geilinor surface
-    if (!isPoly && mapId == MapIds.Prifddinas) { return [0, PrifMapIdCoordsToSurfaceCoords(origin as Point)] }
-
-    const exitMapId = rawExitMapId == 0 ? MapIds.Prifddinas : rawExitMapId;
-    const mapName = mapNames[mapId];
-
-    const links = groupedLinks[mapName] ?? [];
-    const validLinks = links.filter(link => link.end.mapId === exitMapId);
-    if (validLinks.length === 0) return [Infinity, null];
-    const { closestLink, distance } = FindClosestLink(origin, isPoly, validLinks);
-
-    const exitPoint = [closestLink!.end.x, closestLink!.end.y] as Point;
-
-    return [mapId == MapIds.PrifddinasUnderground ? distance : 0,
-    mapId == MapIds.PrifddinasUnderground ? PrifMapIdCoordsToSurfaceCoords(exitPoint) : exitPoint];
-}
-
-
 export const GetMinDistToExit = (origin: Point | Point[], mapId: number, exitMapId = 0): [number, Point | Point[] | null] => {
 
-    if (mapId == MapIds.Prifddinas || mapId == MapIds.PrifddinasUnderground) { return HandlePrif(origin, mapId, exitMapId); }
     if (mapId == MapIds.Surface) { return [0, origin] }
 
     const isPoly = Array.isArray(origin[0]);
@@ -197,13 +160,14 @@ const DistanceOnMapId = (a: Point | Point[], b: Point | Point[]): number => {
 
 const GetNestedMinDistToSurfce = (origin: Point | Point[], childMapId: number): [number, Point | Point[] | null] => {
 
-    const childParentMapIdPair = childParentMapIdPairs.find(pair => pair[0] == childMapId);
-    if (!childParentMapIdPair) { return [Infinity, null]; }
-
+    const childParentMapIdPair = CHILD_PARENT_MAP_ID_PAIRS.find(pair => pair[0] == childMapId);
+    if (!childParentMapIdPair) {return [Infinity, null]; }
+    console.log(childParentMapIdPair);
     const parentMapId = childParentMapIdPair[1];
 
     const [childExitDist, childExit] = GetMinDistToExit(origin, childMapId, parentMapId);
     const [parentExitDist, parentExit] = GetMinDistToExit(childExit!, parentMapId, MapIds.Surface);
+    console.log(parentExit);
     const dist = childExitDist + parentExitDist;
     return [dist, parentExit];
 }
@@ -214,7 +178,7 @@ const HandleNestedDungeons = (point: Point, pointMapId: number, poly: Point[], p
     if (pointMapId == polyMapId) { return [false, Infinity]; } // let the other function handle it
 
     const AreInSameNestedRegion = (a: number, b: number) => {
-        return childParentMapIdPairs.some(pair => pair.includes(a) && pair.includes(b));
+        return CHILD_PARENT_MAP_ID_PAIRS.some(pair => pair.includes(a) && pair.includes(b));
     };
 
     //this only works because the inner mapIds only have one exit outside, and the outers have only one entrance inside.
@@ -225,14 +189,15 @@ const HandleNestedDungeons = (point: Point, pointMapId: number, poly: Point[], p
         const totalDist = pointExitDist + polyExitDist;
         return [true, totalDist];
     }
-
-    const pointNested = nestedMapIds.includes(pointMapId);
-    const polyNested = nestedMapIds.includes(polyMapId);
-    if (!pointNested && !polyNested) { return [false, Infinity] }
+    
+    //else if in different nested regions
+    const pointNested = NESTED_MAP_IDS.includes(pointMapId);
+    const polyNested = NESTED_MAP_IDS.includes(polyMapId);
+    if (!pointNested && !polyNested) {return [false, Infinity] }
 
     const [pointDist, pointSurfaceExit] = pointNested ? GetNestedMinDistToSurfce(point, pointMapId) : GetMinDistToExit(point, pointMapId);
     const [polyDist, polySurfaceExit] = polyNested ? GetNestedMinDistToSurfce(poly, polyMapId) : GetMinDistToExit(poly, polyMapId);
-    if (!pointSurfaceExit || !polySurfaceExit) { return [false, Infinity]; }
+    if (!pointSurfaceExit || !polySurfaceExit) {return [false, Infinity]; }
 
     const surfaceDist = DistanceOnMapId(pointSurfaceExit, polySurfaceExit);
     const dist = pointDist + surfaceDist + polyDist;
@@ -245,6 +210,10 @@ export const GetTotalDistanceToPoly = (point: Point, pointMapId: number, poly: P
     const [handledNested, dist] = HandleNestedDungeons(point, pointMapId, poly, polyMapId);
     if (handledNested) { return dist; }
 
+    //same map id
+    if(pointMapId == polyMapId){return getDistanceToPolygon(point, poly);}
+    
+    //diff map ids
     const [pointDistToSurface, pointSurfaceOrigin] = GetMinDistToExit(point, pointMapId);
     const [polyDistToSurface, polySurfaceOrigin] = GetMinDistToExit(poly, polyMapId);
     if (pointSurfaceOrigin == null || polySurfaceOrigin == null) { return Infinity; }

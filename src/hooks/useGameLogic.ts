@@ -7,8 +7,8 @@ import { calculateTimeDifference } from '../utils/date-utils';
 export interface Guess {
   correct: boolean;
   distance: number;
-  guessedPosition: LatLng;
-  correctPolygons: GeoJsonObject[];
+  guessedPosition: {mapId: number, position: LatLng};
+  correctPolygons: {mapId: number, polygons: GeoJsonObject[]};
 }
 
 export default function useGameLogic(
@@ -27,8 +27,8 @@ export default function useGameLogic(
       scores: [],
       startTime: Date.now(),
       timeTaken: null,
-      guessedPosition: null,
-      correctPolygons: null,
+      guessedPosition: {mapId: -1, position: null},
+      correctPolygons: {mapId:-1 ,polygons: null},
     },
   );
 

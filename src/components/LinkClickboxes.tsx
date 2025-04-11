@@ -8,7 +8,7 @@ interface LinkPoint{
     mapId: number
 }
 
-interface LinksData{
+export interface LinksData{
     mapIdLinks: {start: LinkPoint, end: LinkPoint}[];
     map: L.Map,
     setCurrentMapId: React.Dispatch<React.SetStateAction<number>>;
@@ -33,17 +33,18 @@ export default function LinkClickboxes ({mapIdLinks, map, setCurrentMapId, setMa
     }
   }
 
+  const zoom = map.getZoom();
 
   return mapIdLinks.map((link, index) => (
 
     <CircleMarker
       key={index}
-      center={[link.start.y+0.5, link.start.x-0.5]}
-      radius={8} 
-      //fillColor="cyan"
+      center={[link.start.y+0.65, link.start.x-0.5]} 
+      radius={zoom == 3 ? 16 : 8} 
+      fillColor="cyan"
       fillOpacity={0.0}
       stroke={false} 
-      //color="black"
+      color="red"
 
       eventHandlers={{
          click: () => OnClick(link)

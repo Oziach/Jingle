@@ -21,8 +21,8 @@ export interface GameState {
   startTime: number;
   timeTaken: string | null;
 
-  guessedPosition: L.LatLng | null;
-  correctPolygons: GeoJsonObject[] | null;
+  guessedPosition: {mapId:number, position: L.LatLng | null;}
+  correctPolygons: {mapId:number, polygons: GeoJsonObject[] | null;}
 }
 
 export interface DailyChallenge {

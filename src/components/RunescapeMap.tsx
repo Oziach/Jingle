@@ -1,5 +1,5 @@
 import '../style/miscMapUI.css'
-import { booleanContains, booleanPointInPolygon, polygon } from '@turf/turf';
+import {booleanPointInPolygon, polygon } from '@turf/turf';
 import { GeoJsonObject } from 'geojson';
 import L, { CRS, Icon, LatLng, tileLayer } from 'leaflet';
 import markerIconPng from 'leaflet/dist/images/marker-icon.png';
@@ -26,7 +26,7 @@ import { ConfigureMap, HandleMapZoom, InternalMapState, mapSelectBaseMaps} from 
 import basemaps from '../data/basemaps';
 import { groupedLinks } from '../data/GroupedLinks';
 import LinkClickboxes from './LinkClickboxes';
-import { GetClosestMapIdPolys, getDistanceToPolygon, GetTotalDistanceToPoly } from '../utils/score-dist-utils';
+import { GetClosestMapIdPolys, GetTotalDistanceToPoly } from '../utils/score-dist-utils';
 
 interface RunescapeMapProps {
   gameState: GameState;
@@ -41,7 +41,7 @@ export default function RunescapeMapWrapper({
   ...props
 }: RunescapeMapProps) {
   
-  //map state
+  //map state 
   const [currentMapId, setCurrentMapId] = useState(0);
   const [zoom, setZoom] = useState(1); 
   const [mapCenter, setMapCenter] = useState([3222, 3218]); //lumby
@@ -50,7 +50,6 @@ export default function RunescapeMapWrapper({
     markerPosition: null as L.LatLng | null,
     markerMapId: 0,
   });
-
   const currentMap = basemaps[currentMapId];
 
   const OnMapSelect = (e:React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,8 +90,13 @@ export default function RunescapeMapWrapper({
     })}
       </select>
 
-      <RunescapeMap {...props} currentMapId={currentMapId} setCurrentMapId={setCurrentMapId} 
-      setMapCenter={setMapCenter} zoom={zoom} setZoom={setZoom} markerState={markerState} setMarkerState={setMarkerState}/>
+      <RunescapeMap 
+        {...props}
+        setMapCenter={setMapCenter} 
+        zoom={zoom} setZoom={setZoom} 
+        markerState={markerState} setMarkerState={setMarkerState}
+        currentMapId={currentMapId} setCurrentMapId={setCurrentMapId}  
+      />
 
     </MapContainer>
   );
@@ -107,6 +111,16 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
 
   //trigger. better solutions?
   const linkClick = useRef(false); 
+
+  //map links
+  const linksData = {
+    mapIdLinks: groupedLinks[currentMap.name],
+    setCurrentMapId: setCurrentMapId,
+    setMapCenter: setMapCenter,
+    linkClick: linkClick,
+    map: map,
+  }
+  
 
   //modified tile layer for bottom origin and 0_x_y.png format
   useEffect(()=>{
@@ -143,8 +157,7 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
   return (
     <>  
 
-      <LinkClickboxes mapIdLinks={groupedLinks[currentMap.name]} map={map}
-       setCurrentMapId={setCurrentMapId} setMapCenter={setMapCenter} linkClick={linkClick}/>
+      <LinkClickboxes {...linksData}/>
       
       {markerState.markerPosition && markerState.markerMapId == currentMapId && < Marker
         position={markerState.markerPosition}
@@ -158,9 +171,9 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
       />}
         
       {gameState.status === GameStatus.AnswerRevealed && (
-        <>
+        <>{gameState.guessedPosition.mapId == currentMapId && 
           <Marker
-            position={gameState.guessedPosition!}
+            position={gameState.guessedPosition.position!}
             icon={
               new Icon({
                 iconUrl: markerIconPng,
@@ -168,12 +181,14 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
                 iconAnchor: [12, 41],
               })
             }
-          />
+          />}
 
           {/* render all polys on current mapId */}
-          {gameState.correctPolygons!.map(correctPolygon => {
+          {currentMapId == gameState.correctPolygons.mapId &&
+           gameState.correctPolygons.polygons!.map(correctPolygon => { 
           return <GeoJSON
             data={[correctPolygon]}
+            interactive={false}
             style={() => ({
               color: '#0d6efd', // Outline color
               fillColor: '#0d6efd', // Fill color
@@ -189,7 +204,7 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
   );
 }
 
-
+//bleh
 interface OnConfirmGuessArgs{
   setMarkerState: React.Dispatch<React.SetStateAction<{markerPosition: L.LatLng | null; markerMapId: number;}>>,
   markerState: {markerPosition: L.LatLng | null;markerMapId: number;}, 
@@ -200,7 +215,6 @@ interface OnConfirmGuessArgs{
   currentMapId: number, 
   map: L.Map, 
 }
-
 
 function OnConfirmGuess({setMarkerState, markerState, setMapCenter, setCurrentMapId, onGuess, currentSong, currentMapId, map} : OnConfirmGuessArgs) {
 
@@ -215,11 +229,10 @@ function OnConfirmGuess({setMarkerState, markerState, setMapCenter, setCurrentMa
   )!;
 
   //all polys for for current song as per our mapId priorities - needed for donut polys.
-  //const repairedPolygons = correctFeature.geometry.coordinates.map(closePolygon);
-  const [musicPolys, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition, markerMapId, currentMapId);
+  const [musicPolys, songMapId] = GetClosestMapIdPolys(correctFeature, markerPosition, markerMapId);
   const repairedPolygons = musicPolys.map((musicPoly)=>closePolygon(musicPoly)) as Point[][];
   
-  // Create a GeoJSON feature for the nearest correct polygon
+  //find nearest correct poly
   const correctPolygon = repairedPolygons.sort(
     (polygon1, polygon2) => {
       const d1 = GetTotalDistanceToPoly(ourPixelCoordsClickedPoint, markerMapId, polygon1, songMapId);
@@ -240,8 +253,8 @@ function OnConfirmGuess({setMarkerState, markerState, setMapCenter, setCurrentMa
   // Check if the clicked point is inside any gap
   const isInsideGap = gaps.some((gap) => booleanPointInPolygon(ourPixelCoordsClickedPoint, polygon([gap]))
   );
-  //merge the two
-  const correctClickedFeature = inOuterPoly && !isInsideGap;
+  //merge the two. mapId check needed to filter overlapping coords in diff mapIds.
+  const correctClickedFeature = inOuterPoly && !isInsideGap && markerMapId == songMapId;
   
   const correctPolygonsData = polyGroups.map((polyGroup)=> {
     return({
@@ -256,8 +269,8 @@ function OnConfirmGuess({setMarkerState, markerState, setMapCenter, setCurrentMa
     onGuess({
       correct: true,
       distance: 0,
-      guessedPosition: markerPosition,
-      correctPolygons: correctPolygonsData,
+      guessedPosition: {mapId: markerMapId, position: markerPosition},
+      correctPolygons: {mapId: songMapId , polygons: correctPolygonsData},
     });
   } else {
     //restored border distance calcs.
@@ -266,8 +279,8 @@ function OnConfirmGuess({setMarkerState, markerState, setMapCenter, setCurrentMa
     onGuess({
       correct: false,
       distance: closestDistance,
-      guessedPosition: markerPosition,
-      correctPolygons: correctPolygonsData,
+      guessedPosition: {mapId: markerMapId, position: markerPosition},
+      correctPolygons: {mapId: songMapId ,polygons: correctPolygonsData},
     });
   }
 

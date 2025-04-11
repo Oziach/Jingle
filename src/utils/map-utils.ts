@@ -6,23 +6,7 @@ import { LatLng } from 'leaflet';
 import {groupedLinks, LinkData} from '../data/GroupedLinks';
 import { mapNames } from '../data/MapNames';
 import { booleanContains, booleanPointInPolygon, polygon } from '@turf/turf';
-
-export enum MapIds{
-  Surface = 0,
-  DorgeshKaan = 5,
-  KaramjaUnderground = 9,
-  MisthalinUnderground = 12,
-  MorUlRek = 23,
-  TarnsLair = 24,
-  Prifddinas = 29,
-  PrifddinasUnderground = 34,
-  PrifddinasGrandLibrary = 35,
-  LMSWildVarrock = 38,
-  Abyss = 40,
-  LassarUndercity = 41,
-  CamTorum = 44,
-  Neypotzli = 45,
-}
+import { LINKLESS_MAP_IDS } from './map-config';
 
 // Ours refers to the pixel coordinates of the map grid we're using
 // Theirs refers to the pixel coordinates taken from osrs wiki music info GeoJSON
@@ -56,8 +40,8 @@ export const getCenterOfPolygon = (points: Point[]) => {
 
 
 export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
-const FORBIDDEN_MAP_IDS = [MapIds.LassarUndercity, MapIds.LMSWildVarrock, MapIds.TarnsLair, MapIds.Abyss]
-  return feature.convertedGeometry.some(polyData => FORBIDDEN_MAP_IDS.includes(polyData.mapId)) == false 
+
+  return feature.convertedGeometry.some(polyData => LINKLESS_MAP_IDS.includes(polyData.mapId)) == false 
   && feature.convertedGeometry.length > 0
 }
 
