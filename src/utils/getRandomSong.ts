@@ -6,7 +6,7 @@ const playedSongs = new Set();
 const playedSongsOrder: string[] = [];
 
 export const getRandomSong = () => {
-  return getRandomSongByTitle("Dorgeshuun City")!;
+  
   let randomSongName: string | null = '';
   const visibleFeatures = geojsondata.features.filter(isFeatureVisibleOnMap);
   do {

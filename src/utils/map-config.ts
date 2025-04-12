@@ -41,6 +41,7 @@ export enum MapIds{
   PrifddinasGrandLibrary = 35,
   TutorialIsland = 37,
   LMSWildVarrock = 38,
+  RuinsOfCamdozaal = 39,
   Abyss = 40,
   LassarUndercity = 41,
   CamTorum = 44,
@@ -53,7 +54,8 @@ export const NESTED_MAP_IDS = [
     MapIds.MorUlRek,
     MapIds.Neypotzli,
     MapIds.PrifddinasGrandLibrary,
-    MapIds.PrifddinasUnderground
+    MapIds.PrifddinasUnderground,
+    MapIds.LassarUndercity
 
 ];
 export const CHILD_PARENT_MAP_ID_PAIRS = [
@@ -61,12 +63,12 @@ export const CHILD_PARENT_MAP_ID_PAIRS = [
     [MapIds.MorUlRek, MapIds.KaramjaUnderground],
     [MapIds.Neypotzli, MapIds.CamTorum],
     [MapIds.PrifddinasGrandLibrary,MapIds.Prifddinas],
-    [MapIds.PrifddinasUnderground, MapIds.Prifddinas]
+    [MapIds.PrifddinasUnderground, MapIds.Prifddinas],
+    [MapIds.LassarUndercity, MapIds.RuinsOfCamdozaal]
 ]
 
 export const LINKLESS_MAP_IDS = [
-    MapIds.LassarUndercity, 
-    MapIds.LMSWildVarrock,
+    MapIds.LMSWildVarrock, //island map is more iconic.
     MapIds.TarnsLair,
     MapIds.Abyss, 
     MapIds.TutorialIsland

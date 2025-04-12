@@ -9,6 +9,8 @@ export type GroupedLinks = {
 
 export type MapPoint = { x: number; y: number; mapId: number; name: string };
 
+
+//THESE INCLUDE MANUALLY ADDED MAPLINKS FOR LASSAR UNDERCITY (more may be added)
 export const groupedLinks : GroupedLinks ={
   "Kebos Underground": [
     {
@@ -4026,8 +4028,45 @@ export const groupedLinks : GroupedLinks ={
         "mapId": 0,
         "name": "Gielinor Surface"
       }
+    },
+    //to Lassar undercity
+    {
+      "start": {
+        "x": 2921,
+        "y": 5826,
+        "mapId": 39,
+        "name": "Ruins of Camdozaal"
+      },
+      "end": {
+        "x": 2587,
+        "y": 6435,
+        "mapId": 41,
+        "name": "Lassar Undercity"
+      }
     }
   ],
+
+  "Lassar Undercity": [
+
+    //to Camdozaal
+    {
+      "start": {
+        "x": 2587,
+        "y": 6435,
+        "mapId": 41,
+        "name": "Lassar Undercity"
+      },
+      
+      "end": {
+        "x": 2921,
+        "y": 5826,
+        "mapId": 39,
+        "name": "Ruins of Camdozaal"
+      }
+
+    }
+  ],
+  
   "Wilderness Dungeons": [
     {
       "start": {

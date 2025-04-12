@@ -22,7 +22,7 @@ import {
   FindPolyGroups,
   getCenterOfPolygon,
 } from '../utils/map-utils';
-import { ConfigureMap, HandleMapZoom, InternalMapState, mapSelectBaseMaps} from '../utils/map-config';
+import { ConfigureMap, HandleMapZoom, InternalMapState, LINKLESS_MAP_IDS, mapSelectBaseMaps} from '../utils/map-config';
 import basemaps from '../data/basemaps';
 import { groupedLinks } from '../data/GroupedLinks';
 import LinkClickboxes from './LinkClickboxes';
@@ -66,7 +66,7 @@ export default function RunescapeMapWrapper({
       center={[mapCenter[1], mapCenter[0]]}
       zoom={zoom}
       maxZoom={3}
-      minZoom={-1                                                                                                                                                                                     }
+      minZoom={0}
       style={{ height: "100vh", width: "100%", background: "black" }}
       maxBoundsViscosity={0.5}
       className={className}
@@ -75,18 +75,19 @@ export default function RunescapeMapWrapper({
         [currentMap.bounds[1][1] + mapIdPadding, currentMap.bounds[1][0] + mapIdPadding],
       ]}
     >
-      {/* Map Selector */}
+      {/* Map Selector - Temp. This belongs outside.*/}
       <select
         onChange = {(e) => OnMapSelect(e)} 
         value={currentMapId!}
         className="map-select"
       >
         {mapSelectBaseMaps.map((map) => {
-          return(
-          <option key={map.mapId} value={map.mapId}>
-            {map.name}
-          </option>
-          )
+          if(!LINKLESS_MAP_IDS.includes(map.mapId)) {
+            return(
+              <option key={map.mapId} value={map.mapId}>
+                {map.name}
+              </option>
+          )}
     })}
       </select>
 
@@ -159,13 +160,16 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
 
       <LinkClickboxes {...linksData}/>
       
-      {markerState.markerPosition && markerState.markerMapId == currentMapId && < Marker
+      {markerState.markerPosition && markerState.markerMapId == currentMapId && 
+      < Marker
+        interactive={false}
         position={markerState.markerPosition}
         icon={
           new Icon({
             iconUrl: markerIconPng,
             iconSize: [25, 41],
             iconAnchor: [12, 41],
+            
           })
         }
       />}

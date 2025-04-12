@@ -191,7 +191,7 @@ function RunescapeMap({ gameState, onGuess, confirmedGuess, setShowConfirmGuess,
     }
   
     const tileLayer = new CustomTileLayer("", {
-      minZoom: -3,
+      minZoom: 0,
       maxZoom: 3,
       tileSize: 256,
       tms: true

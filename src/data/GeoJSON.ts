@@ -13119,70 +13119,7 @@ const geojsondata = {
         }
       ]
     },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              2624,
-              9600
-            ],
-            [
-              2624,
-              9664
-            ],
-            [
-              2688,
-              9664
-            ],
-            [
-              2688,
-              9600
-            ],
-            [
-              2624,
-              9600
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "mapID": "-1",
-        "title": "<a href=\"/w/Catch_Me_If_You_Can\" title=\"Catch Me If You Can\">Catch Me If You Can</a>",
-        "description": "<div><a href=\"/w/File:Catch_Me_If_You_Can.ogg\" title=\"File:Catch Me If You Can.ogg\">Play track</a></div>",
-        "plane": 0
-      },
-      "convertedGeometry": [
-        {
-          "mapName": "Ardougne Underground",
-          "mapId": 2,
-          "coordinates": [
-            [
-              2624,
-              9600
-            ],
-            [
-              2624,
-              9664
-            ],
-            [
-              2688,
-              9664
-            ],
-            [
-              2688,
-              9600
-            ],
-            [
-              2624,
-              9600
-            ]
-          ]
-        }
-      ]
-    },
+    
     {
       "type": "Feature",
       "geometry": {
@@ -48469,6 +48406,71 @@ const geojsondata = {
               3512,
               9828
             ]
+          ]
+        },
+      ]
+    },
+
+    //the terrible caverns is manually added, actual vs converted geometry may be slightly off by a game tile or two
+    //doesn't matter since the actual wiki ones are manually added too.
+    //this is one of the best tracks in the game. seriously. its such a shame you don't get to hear it much.
+    //this should've totally been the Grotesque Guardians theme, no hate to mod Ash's track (Tempest) but like cmon its the slayer tower
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3607,
+              9738
+            ],
+            [
+              3613,
+              9738
+            ],
+            [
+              3613,
+              9732
+            ],
+            [
+              3607,
+              9732
+            ],
+            [
+              3607,
+              9738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "mapID": "-1",
+        "title": "<a href=\"/w/The_Terrible_Caverns\" title=\"The Terrible Caverns\">The Terrible Caverns</a>",
+        "description": "<div><a href=\"/w/File:The_Terrible_Caverns.ogg\" title=\"File:The Terrible Caverns.ogg\">Play track</a></div>",
+        "plane": 0
+      },
+      "convertedGeometry": [
+        {
+          "mapName": "Morytania Underground",
+          "mapId": 14,
+          "coordinates": [
+            [
+              3671,
+              9674
+            ],
+            [
+              3671,
+              9668
+            ],
+            [
+              3677,
+              9668  
+            ],
+            [
+              3677,
+              9674
+            ],
           ]
         },
       ]
