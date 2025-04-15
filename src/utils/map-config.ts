@@ -1,11 +1,11 @@
-import React from 'react';
-import { GameState } from '../types/jingle';
-import mapMetadata from '../data/map-metadata';
-import L from 'leaflet';
+import { Guess } from "../types/jingle";
+import { GameState } from "../types/jingle";
+import rawBasemaps from "../data/basemaps";
+import L from 'leaflet'
 
-export interface InternalMapState {
+export interface InternalMapState { 
   gameState: GameState;
-  onMapClick: (clickedPosition: L.LatLng) => void;
+  onMapClick: (guess: Guess) => void;
   className?: string;
 
   setMapCenter: React.Dispatch<React.SetStateAction<number[]>>;
@@ -14,21 +14,19 @@ export interface InternalMapState {
   setCurrentMapId: React.Dispatch<React.SetStateAction<number>>;
 
   zoom: number;
-  setZoom: React.Dispatch<React.SetStateAction<number>>;
+  setZoom:  React.Dispatch<React.SetStateAction<number>>;
 
   markerState: {
     markerPosition: L.LatLng | null;
     markerMapId: number;
-  };
-  setMarkerState: React.Dispatch<
-    React.SetStateAction<{
-      markerPosition: L.LatLng | null;
-      markerMapId: number;
-    }>
-  >;
+  }
+  setMarkerState: React.Dispatch<React.SetStateAction<{
+    markerPosition: L.LatLng | null;
+    markerMapId: number;
+  }>>
 }
 
-export enum MapIds {
+export enum MapIds{
   Surface = 0,
   DorgeshKaan = 5,
   KaramjaUnderground = 9,
@@ -49,69 +47,74 @@ export enum MapIds {
 
 //separated for simplicity's sake.
 export const NESTED_MAP_IDS = [
-  MapIds.DorgeshKaan,
-  MapIds.MorUlRek,
-  MapIds.Neypotzli,
-  MapIds.PrifddinasGrandLibrary,
-  MapIds.PrifddinasUnderground,
-  MapIds.LassarUndercity,
+    MapIds.DorgeshKaan,
+    MapIds.MorUlRek,
+    MapIds.Neypotzli,
+    MapIds.PrifddinasGrandLibrary,
+    MapIds.PrifddinasUnderground,
+    MapIds.LassarUndercity
+
 ];
 export const CHILD_PARENT_MAP_ID_PAIRS = [
-  [MapIds.DorgeshKaan, MapIds.MisthalinUnderground],
-  [MapIds.MorUlRek, MapIds.KaramjaUnderground],
-  [MapIds.Neypotzli, MapIds.CamTorum],
-  [MapIds.PrifddinasGrandLibrary, MapIds.Prifddinas],
-  [MapIds.PrifddinasUnderground, MapIds.Prifddinas],
-  [MapIds.LassarUndercity, MapIds.RuinsOfCamdozaal],
-];
+    [MapIds.DorgeshKaan, MapIds.MisthalinUnderground],
+    [MapIds.MorUlRek, MapIds.KaramjaUnderground],
+    [MapIds.Neypotzli, MapIds.CamTorum],
+    [MapIds.PrifddinasGrandLibrary,MapIds.Prifddinas],
+    [MapIds.PrifddinasUnderground, MapIds.Prifddinas],
+    [MapIds.LassarUndercity, MapIds.RuinsOfCamdozaal]
+]
 
 export const LINKLESS_MAP_IDS = [
-  MapIds.LMSWildVarrock, //island map is more iconic.
-  MapIds.TarnsLair,
-  MapIds.Abyss,
-  MapIds.TutorialIsland,
-];
+    MapIds.LMSWildVarrock, //island map is more iconic.
+    MapIds.TarnsLair,
+    MapIds.Abyss, 
+    MapIds.TutorialIsland
+  ]
 
 //use for map selector
 export const mapSelectBaseMaps = [
-  ...mapMetadata.filter((m) => m.name === 'Gielinor Surface'),
-  ...mapMetadata
-    .filter((m) => m.name !== 'Gielinor Surface')
-    .sort((a, b) => a.name.localeCompare(b.name)),
-];
+    ...rawBasemaps.filter(m => m.name === "Gielinor Surface"),
+    ...rawBasemaps
+      .filter(m => m.name !== "Gielinor Surface")
+      .sort((a, b) => a.name.localeCompare(b.name))
+  ]
 
 export const ConfigureNearestNeighbor = (map: L.Map) => {
-  //crispy nearest neighbor scaling for high zoom levels.
-  const updateZoomClass = () => {
-    const zoom = map.getZoom();
-    const container = map.getContainer();
 
-    container.classList.remove('zoom-level-2', 'zoom-level-3');
-    if (zoom === 2) container.classList.add('zoom-level-2');
-    if (zoom === 3) container.classList.add('zoom-level-3');
-  };
+    //crispy nearest neighbor scaling for high zoom levels.
+    const updateZoomClass = () => {
 
-  map.on('zoomend', updateZoomClass);
-  updateZoomClass(); // Set initial
+        const zoom = map.getZoom();
+        const container = map.getContainer();
 
-  //cleanup
-  return () => {
-    if (map) {
-      map.off('zoomend', updateZoomClass);
-    }
-  };
-};
+        container.classList.remove("zoom-level-2", "zoom-level-3");
+        if (zoom === 2) container.classList.add("zoom-level-2");
+        if (zoom === 3) container.classList.add("zoom-level-3");
+    };
 
-export const HandleMapZoom = (
-  map: L.Map,
-  setZoom: React.Dispatch<React.SetStateAction<number>>,
-) => {
-  const updateZoom = () => setZoom(map.getZoom());
-  map.on('zoomend', updateZoom);
+    map.on("zoomend", updateZoomClass);
+    updateZoomClass(); // Set initial
 
-  return () => {
-    if (map) {
-      map.off('zoomend', updateZoom);
-    }
-  };
-};
+    //cleanup
+    return () => {
+        if (map) {
+            map.off("zoomend", updateZoomClass);
+        }
+    };
+
+}
+
+
+
+
+export const HandleMapZoom = (map: L.Map, setZoom: React.Dispatch<React.SetStateAction<number>>) => {
+
+    const updateZoom = () => setZoom(map.getZoom());
+    map.on("zoomend", updateZoom);
+
+    return () => {
+        if (map) {
+            map.off("zoomend", updateZoom);
+        }
+    };
+}

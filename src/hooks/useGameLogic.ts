@@ -1,37 +1,52 @@
 import { useState } from 'react';
 import {
-  ClickedPosition,
+  DailyChallenge,
   GameSettings,
   GameState,
   GameStatus,
+  Guess,
 } from '../types/jingle';
 import { calculateTimeDifference } from '../utils/date-utils';
 import { clone } from 'ramda';
-import { findNearestPolygonWhereSongPlays } from '../utils/map-utils';
 
-export default function useGameLogic(initialGameState: GameState) {
-  const [gameState, setGameState] = useState<GameState>(initialGameState);
+export default function useGameLogic(
+  dailyChallenge: DailyChallenge,
+  initialGameState?: GameState | null,
+) {
+  const [gameState, setGameState] = useState<GameState>(
+    initialGameState ?? {
+      status: GameStatus.Guessing,
+      settings: {
+        hardMode: false, // or whatever default value you want
+        oldAudio: false,
+      },
+      round: 0,
+      songs: dailyChallenge.songs,
+      scores: [],
+      startTime: Date.now(),
+      timeTaken: null,
+      guess: null,
+    },
+  );
 
-  const setClickedPosition = (clickedPosition: ClickedPosition): GameState => {
-    const newGameState = { ...gameState, clickedPosition };
+  const setGuess = (guess: Guess): GameState => {
+    const newGameState = { ...gameState, guess };
     setGameState(newGameState);
     return newGameState;
   };
 
-  // latestGameState is required when called immediately after setGuess
+  // latestGameState is required if called immediately after setGuess
   const confirmGuess = (latestGameState?: GameState): GameState => {
     const newGameState = latestGameState ?? gameState;
-    if (newGameState.clickedPosition === null) {
-      throw new Error('clickedPosition cannot be null');
+    if (newGameState.guess === null) {
+      throw new Error('guess cannot be null');
     }
 
-    const song = newGameState.songs[newGameState.round];
-    const { distance } = findNearestPolygonWhereSongPlays(
-      song,
-      newGameState.clickedPosition,
+    const score = Math.round(
+      newGameState.guess.correct
+        ? 1000
+        : (1000 * 1) / Math.exp(0.0018 * newGameState.guess.distance),
     );
-    const decayRate = 0.00544; // adjust scoring strictness (higher = more strict)
-    const score = Math.round(1000 / Math.exp(decayRate * distance));
     newGameState.status = GameStatus.AnswerRevealed;
     newGameState.scores.push(score);
     setGameState(clone(newGameState));
@@ -48,30 +63,17 @@ export default function useGameLogic(initialGameState: GameState) {
     return newGameState;
   };
 
-  // latestGameState is required when called immediately after addSong
-  const nextSong = (latestGameState?: GameState): GameState => {
-    const prev = latestGameState ?? gameState;
-    const newGameState = {
-      ...prev,
-      round: prev.round + 1,
-      status: GameStatus.Guessing,
-      clickedPosition: null,
-    };
-    setGameState(newGameState);
-    return newGameState;
-  };
-
-  // PRACTICE MODE ONLY
-  const addSong = (song: string): GameState => {
+  const nextSong = (): GameState => {
     const newGameState = {
       ...gameState,
-      songs: [...gameState.songs, song],
+      round: gameState.round + 1,
+      status: GameStatus.Guessing,
+      guess: null,
     };
     setGameState(newGameState);
     return newGameState;
   };
 
-  /// DAILY JINGLE MODE ONLY
   const endGame = (): GameState => {
     const newGameState = { ...gameState, status: GameStatus.GameOver };
     setGameState(newGameState);
@@ -90,9 +92,8 @@ export default function useGameLogic(initialGameState: GameState) {
 
   return {
     gameState,
-    setClickedPosition,
+    setGuess,
     confirmGuess,
-    addSong,
     nextSong,
     endGame,
     updateGameSettings,

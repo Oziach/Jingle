@@ -5,11 +5,6 @@ export interface ConvertedFeature extends Feature<Polygon> {
     mapId: number;
     coordinates: number[][]; // A single polygon with coordinate pairs
   }[];
-
-  /**
-   * @deprecated use convertedGeometry instead. you may use this for reference of the original data
-   */
-  geometry: Feature<Polygon>['geometry'];
 }
 
 const geojsondata = {
@@ -20751,30 +20746,7 @@ const geojsondata = {
               3136,
               3264
             ]
-          ],
-          // DELETE ME:
-          [
-            [
-              3436,
-              3264
-            ],
-            [
-              3436,
-              3328
-            ],
-            [
-              3500,
-              3328
-            ],
-            [
-              3500,
-              3264
-            ],
-            [
-              3436,
-              3264
-            ]
-          ],
+          ]
         ]
       },
       "properties": {

@@ -1,5 +1,5 @@
 import { sum } from 'ramda';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { match } from 'ts-pattern';
 import { DEFAULT_PREFERENCES } from '../constants/defaultPreferences';
 import { LOCAL_STORAGE } from '../constants/localStorage';
@@ -15,6 +15,7 @@ import {
   GameSettings,
   GameState,
   GameStatus,
+  Guess,
   Screen,
   UserPreferences,
 } from '../types/jingle';
@@ -45,32 +46,22 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
   const currentPreferences =
     loadPreferencesFromBrowser() || DEFAULT_PREFERENCES;
 
-  // this is to prevent loading the game state from localstorage multiple times
-  const [initialized, setInitialized] = useState(false);
-  useEffect(() => setInitialized(true), []);
-
-  const initialGameState: GameState = (() => {
-    if (!initialized) {
-      const savedGameState = loadGameStateFromBrowser(jingleNumber);
-      if (savedGameState) return savedGameState;
-    }
-
-    return {
-      settings: {
-        hardMode: currentPreferences.preferHardMode,
-        oldAudio: currentPreferences.preferOldAudio,
-      },
-      status: GameStatus.Guessing,
-      round: 0,
-      songs: dailyChallenge.songs,
-      scores: [],
-      startTime: Date.now(),
-      timeTaken: null,
-      clickedPosition: null,
-    };
-  })();
-  const jingle = useGameLogic(initialGameState);
-  const gameState = jingle.gameState;
+  const initialGameState: GameState = loadGameStateFromBrowser(
+    jingleNumber,
+  ) || {
+    settings: {
+      hardMode: currentPreferences.preferHardMode,
+      oldAudio: currentPreferences.preferOldAudio,
+    },
+    status: GameStatus.Guessing,
+    round: 0,
+    songs: dailyChallenge.songs,
+    scores: [],
+    startTime: Date.now(),
+    timeTaken: null,
+    guess: null,
+  };
+  const jingle = useGameLogic(dailyChallenge, initialGameState);
 
   const saveGameState = (gameState: GameState) => {
     if (!gameState) {
@@ -82,7 +73,9 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
     );
   };
 
+  const gameState = jingle.gameState;
   const audioRef = useRef<HTMLAudioElement>(null);
+
   useEffect(() => {
     playSong(
       audioRef,
@@ -100,8 +93,7 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
     // update statistics
     incrementGlobalGuessCounter();
     const currentSong = gameState.songs[gameState.round];
-    const correct = gameState.scores[gameState.round] === 1000;
-    if (correct) {
+    if (gameState.guess!.correct) {
       incrementLocalGuessCount(true);
       incrementSongSuccessCount(currentSong);
       updateGuessStreak(true);
@@ -192,7 +184,7 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
                   return button({
                     label: 'Confirm guess',
                     onClick: () => confirmGuess(),
-                    disabled: !gameState.clickedPosition,
+                    disabled: !gameState.guess,
                   });
                 } else {
                   return (
@@ -234,8 +226,8 @@ export default function DailyJingle({ dailyChallenge }: DailyJingleProps) {
 
       <RunescapeMap
         gameState={gameState}
-        onMapClick={(clickedPosition) => {
-          const newGameState = jingle.setClickedPosition(clickedPosition);
+        onMapClick={(guess: Guess) => {
+          const newGameState = jingle.setGuess(guess);
           if (!currentPreferences.preferConfirmation) {
             confirmGuess(newGameState); // confirm immediately
           }

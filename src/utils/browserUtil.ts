@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
-import { GameState, isValidGameState, UserPreferences } from '../types/jingle';
+import { GameState, UserPreferences } from '../types/jingle';
 
 export const saveGameStateToBrowser = (
   jingleNumber: number,
@@ -36,11 +36,7 @@ export const loadGameStateFromBrowser = (
   try {
     const gameState = JSON.parse(gameStateJson ?? 'null') as unknown;
     if (!isValidGameState(gameState)) {
-      console.warn(
-        'Saved game state for Jingle #' + jingleNumber + ' is invalid.',
-        gameState,
-      );
-      return null;
+      throw new Error('invalid game state');
     }
     return gameState;
   } catch (e) {
@@ -49,6 +45,15 @@ export const loadGameStateFromBrowser = (
     );
     return null;
   }
+};
+
+const isValidGameState = (object: unknown): object is GameState => {
+  if (!object) return false;
+  if (typeof (object as any).status !== 'string') return false;
+  if (typeof (object as any).round !== 'number') return false;
+  if (!Array.isArray((object as any).songs)) return false;
+  if (!Array.isArray((object as any).scores)) return false;
+  return true;
 };
 
 export const loadPreferencesFromBrowser = () => {
