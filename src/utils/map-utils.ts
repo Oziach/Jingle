@@ -88,26 +88,98 @@ export const getDistanceToLine = (point: [number, number], line: Line) => {
   return Math.sqrt(dx * dx + dy * dy);
 };
 
-// export const isFeatureVisibleOnMap = (feature: Feature<Polygon>) =>
-//   feature.geometry.coordinates.some((polygon) =>
-//     polygon.every((point) => {
-//       const [, y] = toOurPixelCoordinates(point);
-//       return y > 0;
-//     }),
-//   );
+export const findNearestPolygonWhereSongPlays = (
+  song: string,
+  clickedPosition: ClickedPosition,
+): {
+  mapId: number;
+  feature: G.Feature<G.Polygon>;
+  panTo: Position;
+  distance: number; // 0 if clicked inside polygon
+} => {
+  const songFeature = geojsondata.features.find(featureMatchesSong(song))!;
 
-export const isFeatureVisibleOnMap = (feature: ConvertedFeature) => {
-  return feature.convertedGeometry.some(polyData => LINKLESS_MAP_IDS.includes(polyData.mapId)) == false 
-  && feature.convertedGeometry.length > 0
-}
+  //all polys for for current song as per our mapId priorities - needed for donut polys.
+  const { polygonCoords: songPolyCoords, mapId: songMapId } =
+    getClosestMapIdPolys(songFeature, clickedPosition);
+  const repairedPolygons = songPolyCoords.map((musicPoly) =>
+    closePolygon(musicPoly),
+  );
 
-const FindGaps = (repairedPolygons: Point[][]) => {
-  return repairedPolygons.filter(innerPolygon => 
-   repairedPolygons.find(outerPolygon =>
-     innerPolygon !== outerPolygon && booleanContains(polygon([outerPolygon]), polygon([innerPolygon]))
-   )
-  )
-}
+  //find nearest correct poly
+  const nearestPolgonCoords = repairedPolygons.sort((polygon1, polygon2) => {
+    const d1 = getTotalDistanceToPoly(clickedPosition, polygon1, songMapId);
+    const d2 = getTotalDistanceToPoly(clickedPosition, polygon2, songMapId);
+    return d1 - d2;
+  })[0];
+
+  const polyGroups = findPolyGroups(repairedPolygons);
+  const [outerPolygon, ...gaps] = polyGroups.find((polyGroup) =>
+    polyGroup.includes(nearestPolgonCoords),
+  ) ?? [nearestPolgonCoords];
+
+  //check if in outer poly
+  const inOuterPoly = booleanPointInPolygon(
+    clickedPosition.xy,
+    polygon([outerPolygon]),
+  );
+
+  // Check if the clicked point is inside any gap
+  const isInsideGap = gaps.some((gap) =>
+    booleanPointInPolygon(clickedPosition.xy, polygon([gap])),
+  );
+  //merge the two. mapId check needed to filter overlapping coords in diff mapIds.
+  const correct =
+    inOuterPoly && !isInsideGap && clickedPosition.mapId == songMapId;
+
+  const distance = correct
+    ? 0
+    : getTotalDistanceToPoly(clickedPosition, nearestPolgonCoords, songMapId);
+
+  return {
+    mapId: songMapId,
+    feature: {
+      type: 'Feature',
+      geometry: {
+        type: 'Polygon',
+        coordinates: repairedPolygons,
+      },
+    } as G.Feature<G.Polygon>,
+    panTo: getCenterOfPolygon(nearestPolgonCoords),
+    distance: distance,
+  };
+};
+
+export const switchLayer = (
+  map: L.Map,
+  tileLayer: L.TileLayer,
+  mapId: number,
+) => {
+  const padding = 256;
+  const { bounds } = mapMetadata[mapId];
+  const [min, max] = bounds;
+  map.setMaxBounds([
+    [min[1] - padding, min[0] - padding],
+    [max[1] + padding, max[0] + padding],
+  ]);
+
+  tileLayer.getTileUrl = (coords: L.Coords) => {
+    const { x, y, z } = coords;
+    const tmsY = -y - 1;
+    return `/rsmap-tiles/mapIdTiles/${mapId}/${z}/0_${x}_${tmsY}.png`;
+  };
+  tileLayer.redraw();
+};
+
+const findGaps = (repairedPolygons: Position[][]) => {
+  return repairedPolygons.filter((innerPolygon) =>
+    repairedPolygons.find(
+      (outerPolygon) =>
+        innerPolygon !== outerPolygon &&
+        booleanContains(polygon([outerPolygon]), polygon([innerPolygon])),
+    ),
+  );
+};
 
 const FindOuters = (repairedPolygons: Point[][]): Point[][] => {
  return repairedPolygons.filter(candidate =>

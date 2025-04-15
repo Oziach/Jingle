@@ -202,11 +202,20 @@ function RunescapeMap({
     },
   });
 
-  const [panToOnAnswerRevealed, setPanToOnAnswerRevealed] = useState(
-    {outerPolyCenter: [0,0] as Point, 
-    songMapId: 0}
-  );
+  const onGuessConfirmed = () => {
+    assertNotNil(gameState.clickedPosition, 'gameState.clickedPosition');
 
+    const song = gameState.songs[gameState.round];
+    const { mapId, panTo } = findNearestPolygonWhereSongPlays(
+      song,
+      gameState.clickedPosition,
+    );
+    if (currentMapId !== mapId) {
+      switchLayer(map, tileLayerRef.current!, mapId);
+    }
+    map.panTo(convert.xy_to_ll(panTo));
+    setCurrentMapId(mapId);
+  };
   useEffect(() => {
     if (
       panToOnAnswerRevealed &&
